@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, View, Image } from 'react-native';
 
 let WINDOW_WIDTH = Dimensions.get('window').width;
 let WINDOW_HEIGHT = Dimensions.get('window').height;
@@ -34,8 +34,26 @@ const styles = StyleSheet.create({
   userEditBtn: {
     width: '60%',
     height: 25,
-    marginRight: '7%',
+    marginRight: '6.5%',
     marginTop: -50
+  },
+  userName: {
+    fontWeight: 'bold'
+  },
+  userPhotoGrid: {
+    width: WINDOW_WIDTH / 3,
+    height: WINDOW_WIDTH / 3
+  },
+  userSubmissionPhoto: {
+    width: WINDOW_WIDTH / 3,
+    height: WINDOW_WIDTH / 3,
+  },
+
+  // Challenge Styles
+  challengeSubmissionPhoto: {
+    width: WINDOW_WIDTH,
+    aspectRatio: 1.28,
+    resizeMode: 'contain'
   }
 });
 

@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
-import { Flex, WhiteSpace, Button } from 'antd-mobile';
+import { Flex, WhiteSpace, WingBlank, Button } from 'antd-mobile';
 import styles from '../styles';
-
-import ProfilePhoto from '../assets/images/profile_photo.png';
 
 class UserInfo extends Component {
   render() {
     return (
-      <View>
+      <WingBlank>
         <Flex
           align="start"
         >
@@ -35,7 +33,6 @@ class UserInfo extends Component {
               <Text style={styles.userStatsNum}>11{"\n"}</Text>
               <Text style={styles.userStatsLabel}>following</Text>
             </Text>
-
           </Flex.Item>
         </Flex>
         <Flex
@@ -45,7 +42,16 @@ class UserInfo extends Component {
             <Text style={{fontSize: 14}}>Edit Profile</Text>
           </Button>
         </Flex>
-      </View>
+        <WhiteSpace />
+        <Flex
+          align="start"
+        >
+          <Flex.Item>
+            <Text style={styles.userName}>Username</Text>
+            <Text>Favorite Team</Text>
+          </Flex.Item>
+        </Flex>
+      </WingBlank>
     )
   }
 }
