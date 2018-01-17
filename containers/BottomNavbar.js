@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { TabBar, Icon, Flex } from 'antd-mobile';
 
+import GamePage from './GamePage';
+
 class BottomNavbar extends Component {
   constructor(props) {
     super(props);
@@ -12,10 +14,12 @@ class BottomNavbar extends Component {
     };
   }
 
-  renderContent(pageText) {
-    return (
-      <Text>Working</Text>
-    );
+  renderContent(pageKey) {
+    if (pageKey == 'game') {
+      return (
+        <GamePage />
+      );
+    }
   }
 
   render() {
@@ -28,7 +32,7 @@ class BottomNavbar extends Component {
             <TabBar.Item
 
               key="feed"
-              icon={require('../assets/images/feed.png')}
+              icon="down"
               selected={this.state.selectedTab === 'feedTab'}
 
               onPress={() => {
@@ -37,7 +41,7 @@ class BottomNavbar extends Component {
                 });
               }}
             >
-              {this.renderContent('Life')}
+              {this.renderContent('game')}
             </TabBar.Item>
             <TabBar.Item
               key="challenges"

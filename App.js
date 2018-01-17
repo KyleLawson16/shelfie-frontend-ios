@@ -6,8 +6,9 @@ import { Font, Components } from 'expo';
 
 import SignIn from './containers/SignIn';
 import SignUp from './containers/SignUp';
-import GamePage from './containers/GamePage';
 import UserPage from './containers/UserPage';
+import TopNavbar from './components/TopNavbar';
+import BottomNavbar from './containers/BottomNavbar';
 
 export default class App extends React.Component {
 
@@ -26,7 +27,8 @@ export default class App extends React.Component {
     else {
       return (
         <View style={styles.container}>
-          <GamePage />
+          <TopNavbar />
+          <BottomNavbar />
         </View>
       );
     }
