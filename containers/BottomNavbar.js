@@ -15,24 +15,29 @@ class BottomNavbar extends Component {
   }
 
   renderContent(pageKey) {
-    if (pageKey == 'game') {
+    if (pageKey == 'home') {
       return (
         <GamePage />
       );
+    }
+    else if (pageKey == 'notification') {
+      return (
+        <Text>Notifications</Text>
+      )
     }
   }
 
   render() {
     return (
         <TabBar
-            unselectedTintColor="#949494"
+            unselectedTintColor="#000"
             tintColor="#33A3F4"
             barTintColor="white"
           >
             <TabBar.Item
 
               key="feed"
-              icon="down"
+              icon={require('../assets/images/home.png')}
               selected={this.state.selectedTab === 'feedTab'}
 
               onPress={() => {
@@ -41,46 +46,22 @@ class BottomNavbar extends Component {
                 });
               }}
             >
-              {this.renderContent('game')}
+              {this.renderContent('home')}
             </TabBar.Item>
             <TabBar.Item
-              key="challenges"
-              icon={require('../assets/images/challenges.png')}
-              selected={this.state.selectedTab === 'challengesTab'}
+
+              key="notification"
+              icon={require('../assets/images/notification.png')}
+              iconStyle={{ width: 20, height: 20}}
+              selected={this.state.selectedTab === 'notificationTab'}
 
               onPress={() => {
                 this.setState({
-                  selectedTab: 'challengesTab',
+                  selectedTab: 'notificationTab',
                 });
               }}
             >
-              {this.renderContent('Life')}
-            </TabBar.Item>
-            <TabBar.Item
-              key="leaderboard"
-              icon={require('../assets/images/leaderboard.png')}
-              selected={this.state.selectedTab === 'leaderboardTab'}
-
-              onPress={() => {
-                this.setState({
-                  selectedTab: 'leaderboardTab',
-                });
-              }}
-            >
-              {this.renderContent('Life')}
-            </TabBar.Item>
-            <TabBar.Item
-              key="prizes"
-              icon={require('../assets/images/prizes.png')}
-              selected={this.state.selectedTab === 'prizesTab'}
-
-              onPress={() => {
-                this.setState({
-                  selectedTab: 'prizesTab',
-                });
-              }}
-            >
-              {this.renderContent('Life')}
+              {this.renderContent('notification')}
             </TabBar.Item>
           </TabBar>
 
