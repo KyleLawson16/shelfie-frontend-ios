@@ -7,7 +7,8 @@ class GameInfo extends Component {
   render() {
     return (
       <View>
-        <Text>Game info</Text>
+        <Text>Away Team @ Home Team</Text>
+        <Text>Date, Time</Text>
       </View>
     )
   }

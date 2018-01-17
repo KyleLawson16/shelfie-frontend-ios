@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { WhiteSpace } from 'antd-mobile';
 import styles from '../styles';
 
 import TopNavbar from '../components/TopNavbar';
@@ -11,10 +12,10 @@ class GamePage extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TopNavbar />
+        <WhiteSpace />
         <GameInfo />
-        <GameNavbar />
-        <BottomNavbar />
+        <WhiteSpace />
+        <GameNavbar activeTabColor="blue" />
       </View>
     )
   }

@@ -47,12 +47,16 @@ const styles = StyleSheet.create({
   userSubmissionPhoto: {
     width: WINDOW_WIDTH / 3,
     height: WINDOW_WIDTH / 3,
+    resizeMode: 'contain',
+    borderWidth: 1,
+    borderColor: 'white',
   },
 
   // Challenge Styles
   challengeSubmissionPhoto: {
     width: WINDOW_WIDTH,
-    aspectRatio: 1.28,
+    height: WINDOW_WIDTH / 1.116,
+    aspectRatio: 1.116,
     resizeMode: 'contain'
   }
 });
