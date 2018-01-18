@@ -4,6 +4,7 @@ import { Tabs, Icon, Flex } from 'antd-mobile';
 
 import ChallengeSubmissions from '../components/ChallengeSubmissions';
 import ChallengePage from './ChallengePage';
+import LeaderboardPage from './LeaderboardPage';
 
 // Props
 // inactiveTabColor : color of icon when not active
@@ -52,8 +53,8 @@ class GameNavbar extends Component {
           <ChallengePage />
         </View>
 
-        <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 250, backgroundColor: '#fff' }}>
-          <Text>Content of third tab</Text>
+        <View>
+          <LeaderboardPage />
         </View>
         <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 250, backgroundColor: '#fff' }}>
           <Text>Content of fourth tab</Text>
