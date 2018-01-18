@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Text, View, Image, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { Text, View, Image, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { Flex, WhiteSpace, WingBlank, Icon } from 'antd-mobile';
 import styles from '../styles';
 
 class ChallengeSubmissions extends Component {
   constructor(props) {
     super(props);
-    this.state = { lastPress: 0, liked: false, likes: 7 };
+    this.state = { lastPress: 0, liked: false, likes: 7, doubleTapOpacity: 1 };
 
     this.handleImagePress = this.handleImagePress.bind(this);
     this.handleLikePress = this.handleLikePress.bind(this);
@@ -17,10 +17,13 @@ class ChallengeSubmissions extends Component {
 
     if (delta < 300) { // If time is less than 300ms (indicating double tap)
       console.log('double tap');
+      this.setState({ doubleTapOpacity: 0.6 }); // Image opacity on double tap
       if (!this.state.liked) {
         this.like();
+        setTimeout(() => {this.setState({ doubleTapOpacity: 1 })}, 100); // Return image opacity to normal after double tap
       } else {
         this.unlike();
+        setTimeout(() => {this.setState({ doubleTapOpacity: 1 })}, 100);
       }
     }
 
@@ -56,12 +59,14 @@ class ChallengeSubmissions extends Component {
         </WingBlank>
         <WhiteSpace size="xs" />
         <Flex>
-          <TouchableOpacity onPress={this.handleImagePress}>
+          <TouchableWithoutFeedback
+            onPress={this.handleImagePress}
+          >
             <Image
               source={require('../assets/images/challenge_photo.jpg')}
-              style={styles.challengeSubmissionPhoto}
+              style={[styles.challengeSubmissionPhoto, {opacity: this.state.doubleTapOpacity}]}
             />
-          </TouchableOpacity>
+        </TouchableWithoutFeedback>
         </Flex>
         <WhiteSpace size="sm" />
         <WingBlank size="md">
