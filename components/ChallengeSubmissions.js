@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { Text, View, Image, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
-import { Flex, WhiteSpace, WingBlank, Icon } from 'antd-mobile';
+import { Flex, WhiteSpace, WingBlank, Icon, ActivityIndicator } from 'antd-mobile';
 import styles from '../styles';
 
 class ChallengeSubmissions extends Component {
   constructor(props) {
     super(props);
-    this.state = { lastPress: 0, liked: false, likes: 7, doubleTapOpacity: 1 };
+    this.state = { lastPress: 0, liked: false, likes: 7, doubleTapOpacity: 1, loaded: false };
 
     this.handleImagePress = this.handleImagePress.bind(this);
     this.handleLikePress = this.handleLikePress.bind(this);
+    this.onImageLoad = this.onImageLoad.bind(this);
   }
 
   handleImagePress() { // When image is double tapped
@@ -47,6 +48,12 @@ class ChallengeSubmissions extends Component {
     this.setState({ liked: false, likes: this.state.likes - 1 });
   }
 
+  onImageLoad() { // On image load get rid of loading spinner
+    this.setState({
+      loaded: true
+    })
+  }
+
   render() {
     return (
       <View>
@@ -59,12 +66,14 @@ class ChallengeSubmissions extends Component {
         </WingBlank>
         <WhiteSpace size="xs" />
         <Flex>
+          <ActivityIndicator animating={this.state.loaded ? false : true } />
           <TouchableWithoutFeedback
             onPress={this.handleImagePress}
           >
             <Image
               source={require('../assets/images/challenge_photo.jpg')}
               style={[styles.challengeSubmissionPhoto, {opacity: this.state.doubleTapOpacity}]}
+              onLoad={this.onImageLoad}
             />
         </TouchableWithoutFeedback>
         </Flex>
