@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { Button, ActivityIndicator } from 'antd-mobile';
+import { Button, ActivityIndicator, WhiteSpace } from 'antd-mobile';
 import styles from './styles.js';
 import { Font, Components } from 'expo';
 
@@ -27,6 +27,7 @@ export default class App extends React.Component {
     else {
       return (
         <View style={styles.container}>
+          <WhiteSpace size="lg" />
           <TopNavbar />
           <BottomNavbar />
         </View>

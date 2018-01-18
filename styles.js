@@ -2,13 +2,25 @@ import { Dimensions, StyleSheet, Text, View, Image } from 'react-native';
 
 let WINDOW_WIDTH = Dimensions.get('window').width;
 let WINDOW_HEIGHT = Dimensions.get('window').height;
+let THEME_COLOR = '#19e6a9';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    marginTop: 30,
+    marginTop: 10,
     height: WINDOW_HEIGHT
+  },
+
+  // GamePage Styles
+  gameInfoHeader: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  gameInfoDate: {
+    textAlign: 'center',
+    fontSize: 16
   },
 
   // UserPage Styles
@@ -18,6 +30,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 50,
     borderColor: '#fff',
+    zIndex: 9999,
   },
   userStats: {
     textAlign: 'center',
@@ -38,7 +51,8 @@ const styles = StyleSheet.create({
     marginTop: -50
   },
   userName: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize: 16
   },
   userPhotoGrid: {
     width: WINDOW_WIDTH / 3,
@@ -58,6 +72,27 @@ const styles = StyleSheet.create({
     height: WINDOW_WIDTH / 1.116,
     aspectRatio: 1.116,
     resizeMode: 'contain'
+  },
+  challengeHeader: {
+    textAlign: 'center',
+    fontSize: 20,
+  },
+  challengePointHeading: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+  challengeCarouselName: {
+    color: 'white',
+    fontSize: 25,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 70
+  },
+  challengeCarouselDescription: {
+    color: 'white',
+    fontSize: 16,
+    textAlign: 'center',
   }
 });
 

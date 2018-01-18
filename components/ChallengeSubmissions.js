@@ -6,21 +6,21 @@ import styles from '../styles';
 class ChallengeSubmissions extends Component {
   constructor(props) {
     super(props);
-    this.state = { lastPress: 0, liked: false };
+    this.state = { lastPress: 0, liked: false, likes: 7 };
 
     this.handleImagePress = this.handleImagePress.bind(this);
     this.handleLikePress = this.handleLikePress.bind(this);
   }
 
-  handleImagePress() {
+  handleImagePress() { // When image is double tapped
     var delta = new Date().getTime() - this.state.lastPress; // Calculating time since the image was last pressed
 
     if (delta < 300) { // If time is less than 300ms (indicating double tap)
       console.log('double tap');
       if (!this.state.liked) {
-        this.setState({ liked: true }); // Change state of liked
+        this.like();
       } else {
-        this.setState({ liked: false });
+        this.unlike();
       }
     }
 
@@ -29,13 +29,19 @@ class ChallengeSubmissions extends Component {
     })
   }
 
-  handleLikePress() {
+  handleLikePress() { // When like icon is pressed
     if (!this.state.liked) {
-      this.setState({ liked: true }); // Change state of liked when icon is pressed
+      this.like();
+    } else {
+      this.unlike();
     }
-    else {
-      this.setState({ liked: false });
-    }
+  }
+
+  like() { // Change state of like to true and add to # of likes
+    this.setState({ liked: true, likes: this.state.likes + 1 });
+  }
+  unlike() { // Change state of like to false and subtract from # of likes
+    this.setState({ liked: false, likes: this.state.likes - 1 });
   }
 
   render() {
@@ -65,7 +71,7 @@ class ChallengeSubmissions extends Component {
                 <Icon type={this.state.liked ? "\ue64c" : "\ue69d"} />
               </View>
             </TouchableOpacity>
-            <Text>7 likes</Text>
+            <Text>{this.state.likes} likes</Text>
           </Flex>
         </WingBlank>
       </View>

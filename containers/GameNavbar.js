@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Text, View, FlatList } from 'react-native';
 import { Tabs, Icon, Flex } from 'antd-mobile';
 
-import ChallengeSubmissions from './ChallengeSubmissions';
+import ChallengeSubmissions from '../components/ChallengeSubmissions';
+import ChallengePage from './ChallengePage';
 
 // Props
 // inactiveTabColor : color of icon when not active
@@ -36,6 +37,7 @@ class GameNavbar extends Component {
       <Tabs
         tabs={tabs}
         initialPage={0}
+        swipeable={false}
         tabBarUnderlineStyle={{ backgroundColor: this.props.activeTabColor, borderColor: this.props.activeTabColor }}
         onChange={(tab, index) => this.updateIconColor(tab, index)}
       >
@@ -46,9 +48,10 @@ class GameNavbar extends Component {
           />
         </View>
 
-        <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 250, backgroundColor: '#fff' }}>
-          <Text>Content of second tab</Text>
+        <View>
+          <ChallengePage />
         </View>
+
         <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 250, backgroundColor: '#fff' }}>
           <Text>Content of third tab</Text>
         </View>

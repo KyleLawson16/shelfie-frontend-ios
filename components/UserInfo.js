@@ -10,7 +10,7 @@ class UserInfo extends Component {
         <Flex
           align="start"
         >
-          <Flex.Item>
+          <Flex.Item style={{zIndex: 9999}}>
             <Image
               source={require('../assets/images/profile_photo.png')}
               style={styles.userPhoto}

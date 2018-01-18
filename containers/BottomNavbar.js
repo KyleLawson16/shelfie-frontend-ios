@@ -3,12 +3,13 @@ import { Text, View } from 'react-native';
 import { TabBar, Icon, Flex } from 'antd-mobile';
 
 import GamePage from './GamePage';
+import UserPage from './UserPage';
 
 class BottomNavbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'feedTab',
+      selectedTab: 'homeTab',
       hidden: false,
       fullScreen: false,
     };
@@ -19,6 +20,11 @@ class BottomNavbar extends Component {
       return (
         <GamePage />
       );
+    }
+    else if (pageKey == 'user') {
+      return (
+        <UserPage />
+      )
     }
     else if (pageKey == 'notification') {
       return (
@@ -36,13 +42,14 @@ class BottomNavbar extends Component {
           >
             <TabBar.Item
 
-              key="feed"
+              key="home"
               icon={require('../assets/images/home.png')}
-              selected={this.state.selectedTab === 'feedTab'}
+              iconStyle={{ width: 25, height: 25}}
+              selected={this.state.selectedTab === 'homeTab'}
 
               onPress={() => {
                 this.setState({
-                  selectedTab: 'feedTab',
+                  selectedTab: 'homeTab',
                 });
               }}
             >
@@ -50,9 +57,24 @@ class BottomNavbar extends Component {
             </TabBar.Item>
             <TabBar.Item
 
+              key="user"
+              icon={require('../assets/images/user.png')}
+              iconStyle={{ width: 19, height: 25}}
+              selected={this.state.selectedTab === 'userTab'}
+
+              onPress={() => {
+                this.setState({
+                  selectedTab: 'userTab',
+                });
+              }}
+            >
+              {this.renderContent('user')}
+            </TabBar.Item>
+            <TabBar.Item
+
               key="notification"
               icon={require('../assets/images/notification.png')}
-              iconStyle={{ width: 20, height: 20}}
+              iconStyle={{ width: 25, height: 25}}
               selected={this.state.selectedTab === 'notificationTab'}
 
               onPress={() => {

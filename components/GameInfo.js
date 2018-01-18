@@ -7,8 +7,8 @@ class GameInfo extends Component {
   render() {
     return (
       <View>
-        <Text>Away Team @ Home Team</Text>
-        <Text>Date, Time</Text>
+        <Text style={styles.gameInfoHeader}>{this.props.awayTeam} @ {this.props.homeTeam}</Text>
+        <Text style={styles.gameInfoDate}>{this.props.date}, {this.props.time}</Text>
       </View>
     )
   }

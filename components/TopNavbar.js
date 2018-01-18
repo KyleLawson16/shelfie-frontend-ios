@@ -10,7 +10,7 @@ class TopNavbar extends Component {
         <WingBlank size="md">
           <Flex>
             <Flex.Item>
-              <Text><Icon type={"\ue66a"} /></Text>
+              <Text><Icon type={"left"} /></Text>
             </Flex.Item>
             <Flex.Item>
               <Text style={{ textAlign: 'center' }}>SHELFIE</Text>
@@ -20,7 +20,6 @@ class TopNavbar extends Component {
             </Flex.Item>
           </Flex>
         </WingBlank>
-        <WhiteSpace />
       </View>
     )
   }
