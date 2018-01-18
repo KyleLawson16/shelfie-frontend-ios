@@ -17,7 +17,7 @@ class GamePage extends Component {
           date="February 21st"
           time="4:30pm"
         />
-      <WhiteSpace size="lg" />
+        <WhiteSpace size="lg" />
         <GameNavbar activeTabColor="#19e6a9" />
       </View>
     )

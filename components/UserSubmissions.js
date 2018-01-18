@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
-import { Flex, WhiteSpace, WingBlank, Grid } from 'antd-mobile';
+import { Flex, WhiteSpace, WingBlank, Grid, ActivityIndicator } from 'antd-mobile';
 import styles from '../styles';
+
+import UserSubmission from './UserSubmission';
 
 class UserSubmissions extends Component {
   render() {
@@ -27,15 +29,9 @@ class UserSubmissions extends Component {
           itemStyle={styles.userPhotoGrid}
           hasLine={false}
           renderItem={dataItem => (
-            <Flex>
-              <Image
-                source={require('../assets/images/image.jpg')}
-                style={styles.userSubmissionPhoto}
-              />
-            </Flex>
+            <UserSubmission />
           )}
         />
-
       </View>
     )
   }

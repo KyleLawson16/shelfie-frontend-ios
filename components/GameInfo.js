@@ -3,6 +3,12 @@ import { Text, View, Image } from 'react-native';
 import { Flex, WhiteSpace } from 'antd-mobile';
 import styles from '../styles';
 
+// Props
+// awayTeam : Away team
+// homeTeam : Home team
+// date : Game date
+// time : Game time
+
 class GameInfo extends Component {
   render() {
     return (
