@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { Flex, Icon, WingBlank, WhiteSpace } from 'antd-mobile';
+import styles from '../styles';
 
 class TopNavbar extends Component {
   render() {
     return (
-      <View>
+      <View style={styles.topNavbar}>
         <WhiteSpace />
         <WingBlank size="md">
           <Flex>
@@ -20,6 +21,7 @@ class TopNavbar extends Component {
             </Flex.Item>
           </Flex>
         </WingBlank>
+        <WhiteSpace />
       </View>
     )
   }

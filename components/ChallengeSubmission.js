@@ -3,7 +3,7 @@ import { Text, View, Image, TouchableWithoutFeedback, TouchableOpacity } from 'r
 import { Flex, WhiteSpace, WingBlank, Icon, ActivityIndicator } from 'antd-mobile';
 import styles from '../styles';
 
-class ChallengeSubmissions extends Component {
+class ChallengeSubmission extends Component {
   constructor(props) {
     super(props);
     this.state = { lastPress: 0, liked: false, likes: 7, doubleTapOpacity: 1, loaded: false };
@@ -57,7 +57,7 @@ class ChallengeSubmissions extends Component {
   render() {
     return (
       <View>
-        <WhiteSpace />
+        <WhiteSpace size="lg" />
         <WingBlank size="md">
           <View>
             <Text style={styles.userName}>KyleLawson16</Text>
@@ -88,9 +88,10 @@ class ChallengeSubmissions extends Component {
             <Text>{this.state.likes} likes</Text>
           </Flex>
         </WingBlank>
+        <WhiteSpace size="lg" />
       </View>
     )
   }
 }
 
-export default ChallengeSubmissions;
+export default ChallengeSubmission;

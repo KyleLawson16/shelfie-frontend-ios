@@ -3,7 +3,7 @@ import { View, Text, FlatList, ScrollView } from 'react-native';
 import { Flex } from 'antd-mobile';
 import styles from '../styles';
 
-import ChallengeSubmissions from '../components/ChallengeSubmissions';
+import ChallengeSubmission from '../components/ChallengeSubmission';
 
 class FeedPage extends Component {
   render() {
@@ -14,7 +14,7 @@ class FeedPage extends Component {
         </Flex>
         <FlatList
           data={[{key: 'a'}, {key: 'b'}, {key: 'c'}]}
-          renderItem={({item}) => <ChallengeSubmissions key={item.key} />}
+          renderItem={({item}) => <ChallengeSubmission key={item.key} />}
         />
       </ScrollView>
     )

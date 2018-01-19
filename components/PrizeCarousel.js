@@ -4,10 +4,9 @@ import { WhiteSpace, WingBlank, Flex, Carousel } from 'antd-mobile';
 import styles from '../styles';
 
 // Props
-// ptValue : The pt value of the group of challenges
-// challenges : A list of challenges with the same ptValue
-// challenges.name : The name of each challenge
-// challenges.description : The description of each challenge
+// prizes : A list of prizes
+// prizes.name : The name of each prize
+// prizes.description : The description of each prize
 
 class PrizeCarousel extends Component {
   constructor(props) {

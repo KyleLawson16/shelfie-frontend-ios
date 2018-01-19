@@ -17,6 +17,14 @@ const styles = StyleSheet.create({
     borderBottomWidth: .6,
     borderBottomColor: '#ddd',
   },
+  topNavbar: {
+    borderBottomColor: THEME_COLOR,
+    borderBottomWidth: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+  },
 
   // GamePage Styles
   gameInfoHeader: {
