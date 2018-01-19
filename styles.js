@@ -11,6 +11,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
     height: WINDOW_HEIGHT
   },
+  greyHeaderBar: {
+    backgroundColor: '#f5f5f9',
+    height: 43,
+    borderBottomWidth: .6,
+    borderBottomColor: '#ddd',
+  },
 
   // GamePage Styles
   gameInfoHeader: {
@@ -87,13 +93,39 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 70
+    marginTop: 60
   },
   challengeCarouselDescription: {
     color: 'white',
     fontSize: 16,
     textAlign: 'center',
-  }
+  },
+  challengeCarouselNumber: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'right',
+    marginTop: 2,
+    marginRight: 5
+  },
+
+  // Prize styles
+  prizeCarousel: {
+    height: WINDOW_HEIGHT,
+    backgroundColor: 'rgba(0,0,0,.3)'
+  },
+  prizeCarouselName: {
+    color: 'white',
+    fontSize: 25,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: (WINDOW_HEIGHT / 2) - 220
+  },
+  prizeCarouselDescription: {
+    color: 'white',
+    fontSize: 16,
+    textAlign: 'center',
+  },
 });
 
 export default styles;

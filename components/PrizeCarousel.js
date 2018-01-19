@@ -9,7 +9,7 @@ import styles from '../styles';
 // challenges.name : The name of each challenge
 // challenges.description : The description of each challenge
 
-class ChallengeCarousel extends Component {
+class PrizeCarousel extends Component {
   constructor(props) {
     super(props);
 
@@ -19,11 +19,8 @@ class ChallengeCarousel extends Component {
   }
 
   render() {
-    const totalChallenges = this.props.challenges.length;
+    const totalPrizes = this.props.prizes.length;
     return (
-      <View>
-        <WhiteSpace size="md" />
-        <Text style={styles.challengePointHeading}>{this.props.ptValue} Points</Text>
         <Carousel
           frameOverflow="visible"
           cellSpacing={20}
@@ -35,31 +32,27 @@ class ChallengeCarousel extends Component {
           beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
           afterChange={index => this.setState({ slideIndex: index })}
         >
-          {this.props.challenges.map((challenge) => (
+          {this.props.prizes.map((prize) => (
             <View
-              key={challenge.name}
+              key={prize.name}
             >
               <Flex
                 justify="center"
                 style={{width: '100%'}}
               >
                 <Flex.Item
-                  style={{
-                    height: 220,
-                    backgroundColor: 'rgba(0,0,0,.3)'
-                  }}
+                  style={styles.prizeCarousel}
                 >
-                  <Text style={styles.challengeCarouselNumber}>{this.state.slideIndex + 1} / {totalChallenges}</Text>
-                  <Text style={styles.challengeCarouselName}>{challenge.name}</Text>
-                  <Text style={styles.challengeCarouselDescription}>{challenge.description}</Text>
+                  <Text style={styles.challengeCarouselNumber}>{this.state.slideIndex + 1} / {totalPrizes}</Text>
+                  <Text style={styles.prizeCarouselName}>{prize.name}</Text>
+                  <Text style={styles.prizeCarouselDescription}>{prize.description}</Text>
                 </Flex.Item>
               </Flex>
             </View>
           ))}
         </Carousel>
-      </View>
     )
   }
 }
 
-export default ChallengeCarousel;
+export default PrizeCarousel;

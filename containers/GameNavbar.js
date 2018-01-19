@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { Text, View, FlatList } from 'react-native';
 import { Tabs, Icon, Flex } from 'antd-mobile';
 
-import ChallengeSubmissions from '../components/ChallengeSubmissions';
+import FeedPage from './FeedPage';
 import ChallengePage from './ChallengePage';
 import LeaderboardPage from './LeaderboardPage';
+import PrizePage from './PrizePage';
+
 
 // Props
 // inactiveTabColor : color of icon when not active
@@ -43,10 +45,7 @@ class GameNavbar extends Component {
         onChange={(tab, index) => this.updateIconColor(tab, index)}
       >
         <View>
-          <FlatList
-            data={[{key: 'a'}, {key: 'b'}, {key: 'c'}]}
-            renderItem={({item}) => <ChallengeSubmissions key={item.key} />}
-          />
+          <FeedPage />
         </View>
 
         <View>
@@ -56,8 +55,9 @@ class GameNavbar extends Component {
         <View>
           <LeaderboardPage />
         </View>
-        <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 250, backgroundColor: '#fff' }}>
-          <Text>Content of fourth tab</Text>
+
+        <View>
+          <PrizePage />
         </View>
       </Tabs>
     )

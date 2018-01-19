@@ -41,7 +41,7 @@ class LeaderboardItem extends Component {
       >
         {this.props.username}
         <Brief>
-          {this.props.points} of points
+          {this.props.points} points
         </Brief>
       </Item>
     )

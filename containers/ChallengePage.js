@@ -66,8 +66,7 @@ class ChallengePage extends Component {
     return (
       <View>
         <ScrollView>
-        <WhiteSpace size="sm" />
-        <Flex justify="center">
+        <Flex justify="center" style={styles.greyHeaderBar}>
           <Text style={styles.challengeHeader}>Challenges</Text>
         </Flex>
         <FlatList

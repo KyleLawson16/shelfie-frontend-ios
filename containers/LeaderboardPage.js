@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, ScrollView, FlatList } from 'react-native';
-import { WhiteSpace, List } from 'antd-mobile';
+import { View, ScrollView, FlatList, Text } from 'react-native';
+import { WhiteSpace, List, Flex } from 'antd-mobile';
 import styles from '../styles';
 
 import LeaderboardItem from '../components/LeaderboardItem';
@@ -27,7 +27,10 @@ class LeaderboardPage extends Component {
 
     return (
       <ScrollView>
-        <List renderHeader={() => 'Leaderboards'}>
+        <Flex justify="center" style={styles.greyHeaderBar}>
+          <Text style={styles.challengeHeader}>Leaderboards</Text>
+        </Flex>
+        <List>
           <FlatList
             data={data}
             renderItem={({item}) => <LeaderboardItem key={item.key} username={item.username} points={item.points} />}
