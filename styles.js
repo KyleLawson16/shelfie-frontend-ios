@@ -26,6 +26,39 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
   },
 
+  // GamesPage Styles
+  gameDivider: {
+    backgroundColor: '#f5f5f9',
+  },
+  gameDateShort: {
+    textAlign: 'left',
+    fontSize: 16,
+    marginLeft: 10,
+    marginTop: 8,
+  },
+  gameFans: {
+    textAlign: 'right',
+    fontSize: 16,
+    marginRight: 10,
+    marginTop: 8,
+  },
+  gameTeams: {
+    textAlign: 'center',
+    fontSize: 25,
+    fontWeight: 'bold',
+    marginTop: 15,
+  },
+  gameLocation: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  gameDateLong: {
+    textAlign: 'center',
+    fontSize: 18,
+    marginBottom: 20,
+  },
+
   // GamePage Styles
   gameInfoHeader: {
     textAlign: 'center',

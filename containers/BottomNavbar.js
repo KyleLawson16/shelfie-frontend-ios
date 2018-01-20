@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { TabBar, Icon, Flex } from 'antd-mobile';
 
+import GamesPage from './GamesPage';
 import GamePage from './GamePage';
 import UserPage from './UserPage';
 
@@ -18,7 +19,7 @@ class BottomNavbar extends Component {
   renderContent(pageKey) {
     if (pageKey == 'home') {
       return (
-        <GamePage />
+        <GamesPage />
       );
     }
     else if (pageKey == 'user') {
