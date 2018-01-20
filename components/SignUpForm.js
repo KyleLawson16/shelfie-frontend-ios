@@ -56,7 +56,8 @@ class SignUpForm extends Component {
 
     return (
       <View style={styles.container}>
-        <List style={{ width: '100%' }} renderHeader={() => 'Sign up for a free account'}>
+        <Text style={styles.authFormHeader}>Create an Account</Text>
+        <List style={styles.authForm}>
           <InputItem
             {...getFieldProps('name', {
               rules: [
@@ -133,6 +134,7 @@ class SignUpForm extends Component {
             }}
           >Password</InputItem>
           <Button
+            style={styles.authFormBtn}
             type="primary"
             onClick={() => this.handleSubmit()}
           >Sign Up</Button>

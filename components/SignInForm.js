@@ -52,7 +52,8 @@ class SignInForm extends Component {
 
     return (
       <View style={styles.container}>
-        <List style={{ width: '100%' }} renderHeader={() => 'Sign In to your account'}>
+        <Text style={styles.authFormHeader}>Sign In</Text>
+        <List style={styles.authForm}>
           <InputItem
             {...getFieldProps('usernameEmail', {
               rules: [
@@ -82,6 +83,7 @@ class SignInForm extends Component {
             }}
           >Password</InputItem>
           <Button
+            style={styles.authFormBtn}
             type="primary"
             onClick={() => this.handleSubmit()}
           >Sign In</Button>

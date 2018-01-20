@@ -11,6 +11,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     height: WINDOW_HEIGHT
   },
+  verticalCenter: {
+    justifyContent: 'center',
+  },
   greyHeaderBar: {
     backgroundColor: '#f5f5f9',
     height: 43,
@@ -24,6 +27,24 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
+  },
+
+  // Authentication Styles
+  authForm: {
+    width: '90%',
+    marginLeft: '5%',
+  },
+  authFormHeader: {
+    textAlign: 'center',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    marginTop: 30,
+  },
+  authFormBtn: {
+    marginTop: 15,
+    backgroundColor: THEME_COLOR,
+    borderColor: THEME_COLOR,
   },
 
   // GamesPage Styles

@@ -27,9 +27,7 @@ export default class App extends React.Component {
     else {
       return (
         <View style={styles.container}>
-          <WhiteSpace size="lg" />
-          <TopNavbar />
-          <BottomNavbar />
+          <SignIn />
         </View>
       );
     }
