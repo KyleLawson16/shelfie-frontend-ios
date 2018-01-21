@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, ScrollView, FlatList } from 'react-native';
+import { Text, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 import { WhiteSpace, Flex } from 'antd-mobile';
 import styles from '../styles';
 
@@ -18,7 +18,7 @@ class GamesPage extends Component {
         </Flex>
         <FlatList
           data={[{key: 'a'}, {key: 'b'}, {key: 'c'}]}
-          renderItem={({item}) => <GameItem key={item.key} />}
+          renderItem={({item}) => <TouchableOpacity onPress={() => {this.props.handleGame(item.key)}}><GameItem key={item.key} /></TouchableOpacity>}
         />
       </ScrollView>
     )

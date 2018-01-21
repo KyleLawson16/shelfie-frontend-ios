@@ -15,13 +15,19 @@ class BottomNavbar extends Component {
       fullScreen: false,
       game: false,
     };
+
+    this.getGame = this.getGame.bind(this);
+  }
+
+  getGame(game) {
+    this.setState({ game: game });
   }
 
   renderContent(pageKey) {
     if (pageKey == 'home') {
       if (!this.state.game) {
         return (
-          <GamesPage />
+          <GamesPage handleGame={this.getGame} />
         );
       }
       else {

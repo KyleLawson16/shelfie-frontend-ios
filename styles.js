@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet, Text, View, Image } from 'react-native';
 
 let WINDOW_WIDTH = Dimensions.get('window').width;
 let WINDOW_HEIGHT = Dimensions.get('window').height;
-let THEME_COLOR = '#19e6a9';
+let THEME_COLOR = 'rgb(93,188,210)';
 
 const styles = StyleSheet.create({
   container: {
