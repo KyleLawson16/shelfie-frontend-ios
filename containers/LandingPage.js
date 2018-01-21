@@ -4,7 +4,7 @@ import { Button, Flex, WhiteSpace } from 'antd-mobile';
 import styles from '../styles';
 
 import SignInForm from './SignIn';
-import SignUp from './SignUp';
+import SignUpForm from './SignUp';
 
 class LandingPage extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class LandingPage extends Component {
 
   getUser(user) {
     console.log(user, 'landing page');
-    this.props.handleSignInUser(user);
+    this.props.handleUser(user); // pass user data to parent component (App)
   }
 
   render() {
@@ -46,7 +46,7 @@ class LandingPage extends Component {
     else if (this.state.authType == 'signUp') {
       return (
         <View>
-          <SignUp />
+          <SignUpForm handleSignUp={this.getUser} />
           <TouchableOpacity
           onPress={this.handleSignIn}
           style={styles.authChangeSignUp}>

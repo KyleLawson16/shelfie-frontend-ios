@@ -40,7 +40,7 @@ class SignIn extends Component {
       } else if (formUser.password == value.password) {
         console.log(formUser, "Login");
         this.setState({ user: formUser });
-        this.props.handleSignIn(formUser);
+        this.props.handleSignIn(formUser); // pass user data to parent component (LandingPage)
       } else {
         alert("Incorrect password");
       }

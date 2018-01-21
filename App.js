@@ -37,7 +37,7 @@ class App extends React.Component {
       if (!this.state.user) {
         return (
           <View style={styles.container}>
-            <LandingPage handleSignInUser={this.getUser} />
+            <LandingPage handleUser={this.getUser} />
           </View>
         )
       }

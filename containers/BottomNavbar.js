@@ -13,14 +13,22 @@ class BottomNavbar extends Component {
       selectedTab: 'homeTab',
       hidden: false,
       fullScreen: false,
+      game: false,
     };
   }
 
   renderContent(pageKey) {
     if (pageKey == 'home') {
-      return (
-        <GamePage />
-      );
+      if (!this.state.game) {
+        return (
+          <GamesPage />
+        );
+      }
+      else {
+        return (
+          <GamePage game={this.state.game} />
+        );
+      }
     }
     else if (pageKey == 'user') {
       return (
