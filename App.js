@@ -14,8 +14,10 @@ class App extends React.Component {
     super(props);
 
     this.getUser = this.getUser.bind(this);
+    this.exitGame = this.exitGame.bind(this);
+    this.getGame = this.getGame.bind(this);
   }
-  state = { fontsAreLoaded: false, user: false };
+  state = { fontsAreLoaded: false, user: false, game: false };
 
   async componentDidMount() {
       await Font.loadAsync({
@@ -27,6 +29,12 @@ class App extends React.Component {
   getUser(user) {
     console.log(user, 'home');
     this.setState({ user: user });
+  }
+  exitGame(game) {
+    this.setState({ game: game });
+  }
+  getGame(game) {
+    this.setState({ game: game });
   }
 
   render() {
@@ -45,8 +53,8 @@ class App extends React.Component {
         return (
             <View style={styles.container}>
               <WhiteSpace size="lg" />
-              <TopNavbar />
-              <BottomNavbar />
+              <TopNavbar exitGame={this.exitGame} />
+              <BottomNavbar game={this.state.game} getGame={this.getGame} />
             </View>
         );
       }

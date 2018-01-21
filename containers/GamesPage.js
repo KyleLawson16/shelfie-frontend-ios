@@ -18,7 +18,10 @@ class GamesPage extends Component {
         </Flex>
         <FlatList
           data={[{key: 'a'}, {key: 'b'}, {key: 'c'}]}
-          renderItem={({item}) => <TouchableOpacity onPress={() => {this.props.handleGame(item.key)}}><GameItem key={item.key} /></TouchableOpacity>}
+          renderItem={({item}) =>
+          <TouchableOpacity onPress={() => {this.props.handleGame(item.key)}}>
+            <GameItem key={item.key} />
+          </TouchableOpacity>}
         />
       </ScrollView>
     )

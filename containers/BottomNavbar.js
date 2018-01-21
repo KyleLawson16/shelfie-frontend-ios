@@ -13,26 +13,25 @@ class BottomNavbar extends Component {
       selectedTab: 'homeTab',
       hidden: false,
       fullScreen: false,
-      game: false,
     };
 
     this.getGame = this.getGame.bind(this);
   }
 
   getGame(game) {
-    this.setState({ game: game });
+    this.props.getGame(game);
   }
 
   renderContent(pageKey) {
     if (pageKey == 'home') {
-      if (!this.state.game) {
+      if (!this.props.game) {
         return (
           <GamesPage handleGame={this.getGame} />
         );
       }
       else {
         return (
-          <GamePage game={this.state.game} />
+          <GamePage game={this.props.game} />
         );
       }
     }

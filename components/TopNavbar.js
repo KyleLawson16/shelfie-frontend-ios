@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { Flex, Icon, WingBlank, WhiteSpace } from 'antd-mobile';
 import styles from '../styles';
 
 class TopNavbar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleBack = this.handleBack.bind(this);
+  }
+
+  handleBack() {
+    this.props.exitGame(false);
+    console.log('working');
+  }
   render() {
     return (
       <View style={styles.topNavbar}>
@@ -11,7 +21,7 @@ class TopNavbar extends Component {
         <WingBlank size="md">
           <Flex>
             <Flex.Item>
-              <Text><Icon type={"left"} /></Text>
+              <TouchableOpacity onPress={() => {this.handleBack()}}><Icon type={"left"} /></TouchableOpacity>
             </Flex.Item>
             <Flex.Item>
               <Text style={{ textAlign: 'center' }}>SHELFIE</Text>

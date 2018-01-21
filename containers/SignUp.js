@@ -14,7 +14,7 @@ class SignUp extends Component {
   handleSubmit() {
     this.props.form.validateFields((error, value) => {
       console.log(value);
-      this.props.handleSignUp(value);
+      this.props.handleSignUp(value); // Pass user data to parent component (LandingPage)
     });
   }
 
