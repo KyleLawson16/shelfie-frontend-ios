@@ -30,6 +30,10 @@ const styles = StyleSheet.create({
   },
 
   // Authentication Styles
+  landingContent: {
+    width: '90%',
+    marginLeft: '5%',
+  },
   authForm: {
     width: '90%',
     marginLeft: '5%',
@@ -45,6 +49,18 @@ const styles = StyleSheet.create({
     marginTop: 15,
     backgroundColor: THEME_COLOR,
     borderColor: THEME_COLOR,
+  },
+  authChangeSignIn: {
+    marginTop: 230,
+    width: '90%',
+    marginLeft: '5%',
+    height: 20,
+  },
+  authChangeSignUp: {
+    marginTop: 364,
+    width: '90%',
+    marginLeft: '5%',
+    height: 20,
   },
 
   // GamesPage Styles

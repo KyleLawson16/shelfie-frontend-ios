@@ -19,7 +19,7 @@ class BottomNavbar extends Component {
   renderContent(pageKey) {
     if (pageKey == 'home') {
       return (
-        <GamesPage />
+        <GamePage />
       );
     }
     else if (pageKey == 'user') {

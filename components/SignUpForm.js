@@ -14,7 +14,7 @@ class SignUpForm extends Component {
 
   handleSubmit() {
     this.props.form.validateFields((error, value) => {
-      console.log(error, value);
+      console.log(value);
     });
   }
 

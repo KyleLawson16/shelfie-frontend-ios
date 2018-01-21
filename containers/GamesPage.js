@@ -6,6 +6,10 @@ import styles from '../styles';
 import GameItem from '../components/GameItem';
 
 class GamesPage extends Component {
+  constructor(props) {
+    super(props);
+
+  }
   render() {
     return (
       <ScrollView>
