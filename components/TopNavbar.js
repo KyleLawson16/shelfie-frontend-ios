@@ -21,7 +21,11 @@ class TopNavbar extends Component {
         <WingBlank size="md">
           <Flex>
             <Flex.Item>
-              <TouchableOpacity onPress={() => {this.handleBack()}}><Icon type={"left"} /></TouchableOpacity>
+              {this.props.backBtn ?
+              <TouchableOpacity onPress={() => {this.handleBack()}}>
+                <Icon type={"left"} />
+              </TouchableOpacity> :
+              false}
             </Flex.Item>
             <Flex.Item>
               <Text style={{ textAlign: 'center' }}>SHELFIE</Text>

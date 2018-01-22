@@ -16,8 +16,9 @@ class App extends React.Component {
     this.getUser = this.getUser.bind(this);
     this.exitGame = this.exitGame.bind(this);
     this.getGame = this.getGame.bind(this);
+    this.handleBackBtn = this.handleBackBtn.bind(this);
   }
-  state = { fontsAreLoaded: false, user: false, game: false };
+  state = { fontsAreLoaded: false, user: false, game: false, backBtn: false };
 
   async componentDidMount() {
       await Font.loadAsync({
@@ -30,34 +31,46 @@ class App extends React.Component {
     console.log(user, 'home');
     this.setState({ user: user });
   }
+  handleBackBtn(backBtn) {
+    this.setState({ backBtn: backBtn });
+  }
   exitGame(game) {
-    this.setState({ game: game });
+    this.setState({ game: game, backBtn: false });
   }
   getGame(game) {
-    this.setState({ game: game });
+    this.setState({ game: game, backBtn: true });
   }
+
 
   render() {
     if (!this.state.fontsAreLoaded) {
       return <ActivityIndicator />;
     }
     else {
-      if (!this.state.user) {
-        return (
-          <View style={styles.container}>
-            <LandingPage handleUser={this.getUser} />
-          </View>
-        )
-      }
-      else {
+      // if (!this.state.user) {
+      //   return (
+      //     <View style={styles.container}>
+      //       <LandingPage handleUser={this.getUser} />
+      //     </View>
+      //   )
+      // }
+      // else {
         return (
             <View style={styles.container}>
               <WhiteSpace size="lg" />
-              <TopNavbar exitGame={this.exitGame} />
-              <BottomNavbar game={this.state.game} getGame={this.getGame} />
+              <TopNavbar
+                exitGame={this.exitGame}
+                backBtn={this.state.backBtn}
+                SearchBtn={this.state.searchBtn}
+              />
+              <BottomNavbar
+                game={this.state.game}
+                getGame={this.getGame}
+                handleBackBtn={this.handleBackBtn}
+              />
             </View>
         );
-      }
+      // }
     }
   }
 }

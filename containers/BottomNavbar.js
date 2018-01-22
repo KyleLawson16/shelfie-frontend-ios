@@ -6,6 +6,10 @@ import GamesPage from './GamesPage';
 import GamePage from './GamePage';
 import UserPage from './UserPage';
 
+// Props
+// game : ID of the active game
+// getGame : Changes state of game
+
 class BottomNavbar extends Component {
   constructor(props) {
     super(props);
@@ -65,6 +69,7 @@ class BottomNavbar extends Component {
                 this.setState({
                   selectedTab: 'homeTab',
                 });
+                this.props.handleBackBtn(this.props.game);
               }}
             >
               {this.renderContent('home')}
@@ -80,6 +85,7 @@ class BottomNavbar extends Component {
                 this.setState({
                   selectedTab: 'userTab',
                 });
+                this.props.handleBackBtn(false);
               }}
             >
               {this.renderContent('user')}
@@ -95,6 +101,7 @@ class BottomNavbar extends Component {
                 this.setState({
                   selectedTab: 'notificationTab',
                 });
+                this.props.handleBackBtn(false);
               }}
             >
               {this.renderContent('notification')}

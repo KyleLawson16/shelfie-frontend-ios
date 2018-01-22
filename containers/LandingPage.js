@@ -65,9 +65,18 @@ class LandingPage extends Component {
           >
             <Flex.Item>
               <Text>SHELFIE</Text>
-              <Button onPressIn={this.handleSignIn} type="primary">Sign In</Button>
-              <WhiteSpace />
-              <Button onPressIn={this.handleSignUp} type="primary">Sign Up</Button>
+              <Button
+                style={styles.authFormBtn}
+                onPressIn={this.handleSignIn}
+                type="primary">
+                Sign In
+              </Button>
+              <Button
+                style={styles.authFormBtn}
+                onPressIn={this.handleSignUp}
+                type="primary">
+                Sign Up
+              </Button>
             </Flex.Item>
           </Flex>
         </View>

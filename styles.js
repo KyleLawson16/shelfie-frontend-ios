@@ -24,9 +24,10 @@ const styles = StyleSheet.create({
     borderBottomColor: THEME_COLOR,
     borderBottomWidth: 2,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
+    zIndex: 9999,
   },
 
   // Authentication Styles
