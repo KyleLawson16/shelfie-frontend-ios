@@ -3,7 +3,6 @@ import { Text, View } from 'react-native';
 import { Button, ActivityIndicator, WhiteSpace } from 'antd-mobile';
 
 import styles from './styles.js';
-import { Font, Components } from 'expo';
 
 import TopNavbar from './components/TopNavbar';
 import BottomNavbar from './containers/BottomNavbar';
@@ -20,14 +19,7 @@ class App extends React.Component {
     this.handleBackBtn = this.handleBackBtn.bind(this);
     this.beginSubmission = this.beginSubmission.bind(this);
   }
-  state = { fontsAreLoaded: false, user: false, game: false, backBtn: false, submission: false };
-
-  async componentDidMount() {
-      await Font.loadAsync({
-        'anticon': require('./assets/fonts/anticon.ttf'),
-      });
-      this.setState({fontsAreLoaded: true});
-  }
+  state = { user: false, game: false, backBtn: false, submission: false };
 
   getUser(user) {
     console.log(user, 'home');
@@ -47,10 +39,6 @@ class App extends React.Component {
   }
 
   render() {
-    if (!this.state.fontsAreLoaded) {
-      return <ActivityIndicator />;
-    }
-    else {
       // if (!this.state.user) {
       //   return (
       //     <View style={styles.container}>
@@ -60,14 +48,7 @@ class App extends React.Component {
       // }
       if (this.state.submission) {
         return (
-          <View style={styles.container}>
-            <WhiteSpace size="lg" />
-            <TopNavbar
-              backBtn={false}
-              SearchBtn={false}
-            />
-            <SubmissionPage challengeID={this.state.submission} />
-          </View>
+          <SubmissionPage challengeID={this.state.submission} />
         )
       }
       else {
@@ -89,7 +70,6 @@ class App extends React.Component {
         );
       }
     }
-  }
 }
 
 export default App;

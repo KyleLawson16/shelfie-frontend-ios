@@ -11,6 +11,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     height: WINDOW_HEIGHT
   },
+  cameraContainer: {
+    flex: 1,
+    marginTop: -10,
+    height: WINDOW_HEIGHT
+  },
   verticalCenter: {
     justifyContent: 'center',
   },
@@ -221,10 +226,6 @@ const styles = StyleSheet.create({
   },
   capture: {
     flex: 0,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    color: '#000',
-    padding: 10,
     margin: 40
   },
 });
