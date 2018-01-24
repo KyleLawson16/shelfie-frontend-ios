@@ -24,7 +24,7 @@ class GameItem extends Component {
             </Flex.Item>
           </Flex>
         </View>
-        <WhiteSpace style={styles.gameDivider} size="xl" />
+        
       </View>
     )
   }

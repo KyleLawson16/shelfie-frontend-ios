@@ -6,6 +6,16 @@ import styles from '../styles';
 import ChallengeCarousel from '../components/ChallengeCarousel';
 
 class ChallengePage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.beginSubmission = this.beginSubmission.bind(this);
+  }
+
+  beginSubmission(submission) {
+    this.props.submission(submission);
+  }
+
   render() {
     const sampleData = [
       {
@@ -71,7 +81,12 @@ class ChallengePage extends Component {
         </Flex>
         <FlatList
           data={sampleData}
-          renderItem={({item}) => <ChallengeCarousel key={item.key} ptValue={item.ptValue} challenges={item.challenges} />}
+          renderItem={({item}) =>
+          <ChallengeCarousel
+            key={item.key}
+            ptValue={item.ptValue}
+            challenges={item.challenges}
+            submission={this.beginSubmission} />}
         />
         </ScrollView>
       </View>

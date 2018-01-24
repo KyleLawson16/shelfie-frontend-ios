@@ -7,6 +7,16 @@ import GameInfo from '../components/GameInfo';
 import GameNavbar from './GameNavbar';
 
 class GamePage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.beginSubmission = this.beginSubmission.bind(this);
+  }
+
+  beginSubmission(submission) {
+    this.props.submission(submission);
+  }
+  
   render() {
     return (
       <View style={styles.container}>
@@ -18,7 +28,10 @@ class GamePage extends Component {
           time="4:30pm"
         />
         <WhiteSpace size="lg" />
-        <GameNavbar activeTabColor="rgb(93,188,210)" />
+        <GameNavbar
+          activeTabColor="rgb(93,188,210)"
+          submission={this.beginSubmission}
+        />
       </View>
     )
   }

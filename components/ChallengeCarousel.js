@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
-import { WhiteSpace, WingBlank, Flex, Carousel } from 'antd-mobile';
+import { WhiteSpace, WingBlank, Flex, Carousel, Button } from 'antd-mobile';
 import styles from '../styles';
 
 // Props
@@ -14,7 +14,7 @@ class ChallengeCarousel extends Component {
     super(props);
 
     this.state = {
-      slideIndex: 1,
+      slideIndex: 0,
     }
   }
 
@@ -24,13 +24,12 @@ class ChallengeCarousel extends Component {
       <View>
         <WhiteSpace size="md" />
         <Text style={styles.challengePointHeading}>{this.props.ptValue} Points</Text>
+        <WhiteSpace size="xs" />
         <Carousel
           frameOverflow="visible"
           cellSpacing={20}
           slideWidth={0.8}
           dots={false}
-          autoplay
-          autoplayInterval={4000}
           infinite
           beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
           afterChange={index => this.setState({ slideIndex: index })}
@@ -52,6 +51,13 @@ class ChallengeCarousel extends Component {
                   <Text style={styles.challengeCarouselNumber}>{this.state.slideIndex + 1} / {totalChallenges}</Text>
                   <Text style={styles.challengeCarouselName}>{challenge.name}</Text>
                   <Text style={styles.challengeCarouselDescription}>{challenge.description}</Text>
+                  <Button
+                    type="ghost"
+                    style={styles.challengeSubmissionBtn}
+                    onPressIn={() => {this.props.submission(challenge.name)}}
+                  >
+                    <Text style={{color: 'white'}}>Add Submission</Text>
+                  </Button>
                 </Flex.Item>
               </Flex>
             </View>

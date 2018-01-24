@@ -4,6 +4,10 @@ import { Flex, WhiteSpace, WingBlank, Button } from 'antd-mobile';
 import styles from '../styles';
 
 class UserInfo extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <WingBlank>
@@ -38,7 +42,10 @@ class UserInfo extends Component {
         <Flex
           justify="end"
         >
-          <Button style={styles.userEditBtn}>
+          <Button
+            onPressIn={() => {this.props.handleEditBtn(true);}}
+            style={styles.userEditBtn}
+          >
             <Text style={{fontSize: 14}}>Edit Profile</Text>
           </Button>
         </Flex>

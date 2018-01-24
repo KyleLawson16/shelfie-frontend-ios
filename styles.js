@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 60
+    marginTop: 40
   },
   challengeCarouselDescription: {
     color: 'white',
@@ -186,6 +186,13 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     marginTop: 2,
     marginRight: 5
+  },
+  challengeSubmissionBtn: {
+    width: '50%',
+    height: 35,
+    marginLeft: '25%',
+    marginTop: 10,
+    borderColor: 'white',
   },
 
   // Prize styles
@@ -204,6 +211,21 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     textAlign: 'center',
+  },
+
+  // Submission styles
+  preview: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
+  capture: {
+    flex: 0,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    color: '#000',
+    padding: 10,
+    margin: 40
   },
 });
 

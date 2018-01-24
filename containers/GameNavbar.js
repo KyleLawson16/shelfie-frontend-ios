@@ -17,6 +17,8 @@ class GameNavbar extends Component {
     super(props);
 
     this.state = { activeIconColor: [this.props.activeTabColor, this.props.inactiveTabColor, this.props.inactiveTabColor, this.props.inactiveTabColor]} // Initial state of icon colors
+
+    this.beginSubmission = this.beginSubmission.bind(this);
   }
   updateIconColor(tab, index) {
     var tabColorList = [
@@ -29,6 +31,11 @@ class GameNavbar extends Component {
     console.log(tabColorList);
     this.setState({ activeIconColor: tabColorList }); // Add array of tab colors to state
   }
+
+  beginSubmission(submission) {
+    this.props.submission(submission);
+  }
+
   render() {
     const tabs = [
       { title: <Text><Icon type={'\ue695'} color={this.state.activeIconColor[0]} /></Text> },
@@ -49,7 +56,7 @@ class GameNavbar extends Component {
         </View>
 
         <View>
-          <ChallengePage />
+          <ChallengePage submission={this.beginSubmission} />
         </View>
 
         <View>

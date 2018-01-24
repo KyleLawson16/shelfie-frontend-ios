@@ -20,10 +20,15 @@ class BottomNavbar extends Component {
     };
 
     this.getGame = this.getGame.bind(this);
+    this.beginSubmission = this.beginSubmission.bind(this);
   }
 
   getGame(game) {
     this.props.getGame(game);
+  }
+
+  beginSubmission(submission) {
+    this.props.submission(submission);
   }
 
   renderContent(pageKey) {
@@ -35,7 +40,10 @@ class BottomNavbar extends Component {
       }
       else {
         return (
-          <GamePage game={this.props.game} />
+          <GamePage
+            game={this.props.game}
+            submission={this.beginSubmission}
+          />
         );
       }
     }
@@ -55,14 +63,13 @@ class BottomNavbar extends Component {
     return (
         <TabBar
             unselectedTintColor="#000"
-            tintColor="#33A3F4"
+            tintColor="rgb(93,188,210)"
             barTintColor="white"
           >
             <TabBar.Item
 
               key="home"
               icon={require('../assets/images/home.png')}
-              iconStyle={{ width: 25, height: 25}}
               selected={this.state.selectedTab === 'homeTab'}
 
               onPress={() => {
@@ -78,7 +85,6 @@ class BottomNavbar extends Component {
 
               key="user"
               icon={require('../assets/images/user.png')}
-              iconStyle={{ width: 19, height: 25}}
               selected={this.state.selectedTab === 'userTab'}
 
               onPress={() => {
@@ -94,7 +100,6 @@ class BottomNavbar extends Component {
 
               key="notification"
               icon={require('../assets/images/notification.png')}
-              iconStyle={{ width: 25, height: 25}}
               selected={this.state.selectedTab === 'notificationTab'}
 
               onPress={() => {

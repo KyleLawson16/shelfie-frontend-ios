@@ -24,14 +24,16 @@ class TopNavbar extends Component {
               {this.props.backBtn ?
               <TouchableOpacity onPress={() => {this.handleBack()}}>
                 <Icon type={"left"} />
-              </TouchableOpacity> :
-              false}
+              </TouchableOpacity>
+              : false}
             </Flex.Item>
             <Flex.Item>
               <Text style={{ textAlign: 'center' }}>SHELFIE</Text>
             </Flex.Item>
             <Flex.Item>
+              {this.props.searchBtn ?
               <Text style={{ textAlign: 'right' }}><Icon type={"\ue670"} /></Text>
+              : false}
             </Flex.Item>
           </Flex>
         </WingBlank>

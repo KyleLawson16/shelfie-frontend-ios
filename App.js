@@ -8,6 +8,7 @@ import { Font, Components } from 'expo';
 import TopNavbar from './components/TopNavbar';
 import BottomNavbar from './containers/BottomNavbar';
 import LandingPage from './containers/LandingPage';
+import SubmissionPage from './containers/SubmissionPage';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,8 +18,9 @@ class App extends React.Component {
     this.exitGame = this.exitGame.bind(this);
     this.getGame = this.getGame.bind(this);
     this.handleBackBtn = this.handleBackBtn.bind(this);
+    this.beginSubmission = this.beginSubmission.bind(this);
   }
-  state = { fontsAreLoaded: false, user: false, game: false, backBtn: false };
+  state = { fontsAreLoaded: false, user: false, game: false, backBtn: false, submission: false };
 
   async componentDidMount() {
       await Font.loadAsync({
@@ -40,7 +42,9 @@ class App extends React.Component {
   getGame(game) {
     this.setState({ game: game, backBtn: true });
   }
-
+  beginSubmission(submission) {
+    this.setState({ submission: submission });
+  }
 
   render() {
     if (!this.state.fontsAreLoaded) {
@@ -54,7 +58,19 @@ class App extends React.Component {
       //     </View>
       //   )
       // }
-      // else {
+      if (this.state.submission) {
+        return (
+          <View style={styles.container}>
+            <WhiteSpace size="lg" />
+            <TopNavbar
+              backBtn={false}
+              SearchBtn={false}
+            />
+            <SubmissionPage challengeID={this.state.submission} />
+          </View>
+        )
+      }
+      else {
         return (
             <View style={styles.container}>
               <WhiteSpace size="lg" />
@@ -67,10 +83,11 @@ class App extends React.Component {
                 game={this.state.game}
                 getGame={this.getGame}
                 handleBackBtn={this.handleBackBtn}
+                submission={this.beginSubmission}
               />
             </View>
         );
-      // }
+      }
     }
   }
 }
