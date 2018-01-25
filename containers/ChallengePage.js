@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, FlatList, ScrollView } from 'react-native';
 import { WhiteSpace, Flex } from 'antd-mobile';
 import styles from '../styles';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import ChallengeCarousel from '../components/ChallengeCarousel';
 
@@ -78,6 +79,7 @@ class ChallengePage extends Component {
         <ScrollView>
         <Flex justify="center" style={styles.greyHeaderBar}>
           <Text style={styles.challengeHeader}>Challenges</Text>
+          <Icon name="ios-radio-button-on" size={30} color="white" />
         </Flex>
         <FlatList
           data={sampleData}

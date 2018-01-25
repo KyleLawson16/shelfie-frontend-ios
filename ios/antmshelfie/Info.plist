@@ -44,7 +44,7 @@
 		<string>Ionicons.ttf</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
@@ -57,7 +57,7 @@
 		</dict>
 	</dict>
 	<key>LSApplicationCategoryType</key>
-	<string></string>
+	<string/>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME).needs to save photos</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

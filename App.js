@@ -19,7 +19,7 @@ class App extends React.Component {
     this.handleBackBtn = this.handleBackBtn.bind(this);
     this.beginSubmission = this.beginSubmission.bind(this);
   }
-  state = { user: false, game: false, backBtn: false, submission: false };
+  state = { user: false, game: false, backBtn: false, submission: true };
 
   getUser(user) {
     console.log(user, 'home');

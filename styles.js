@@ -11,11 +11,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     height: WINDOW_HEIGHT
   },
-  cameraContainer: {
-    flex: 1,
-    marginTop: -10,
-    height: WINDOW_HEIGHT
-  },
   verticalCenter: {
     justifyContent: 'center',
   },
@@ -219,15 +214,29 @@ const styles = StyleSheet.create({
   },
 
   // Submission styles
-  preview: {
+  cameraContainer: {
     flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center'
+    marginTop: -10,
+    height: WINDOW_HEIGHT
   },
-  capture: {
-    flex: 0,
-    margin: 40
+  cameraBox: {
+    flex: 1,
   },
+  iconBackground: {
+    backgroundColor: 'transparent',
+  },
+  cameraSwitch: {
+    justifyContent: 'flex-start',
+    alignItems: 'flex-end',
+    marginTop: 25,
+    marginRight: 15,
+    marginLeft: 15,
+    flex: 1,
+  },
+  cameraBottomNav: {
+    alignItems: 'center',
+    height: 120,
+  }
 });
 
 export default styles;
