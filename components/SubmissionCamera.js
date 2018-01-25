@@ -1,8 +1,9 @@
 'use strict';
 import React, { Component } from 'react';
-import { StyleSheet, Text, TouchableOpacity, TouchableHighlight, View, Image, Video } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, TouchableHighlight, View, Image } from 'react-native';
 import { Flex } from 'antd-mobile';
 import Camera from 'react-native-camera';
+import Video from 'react-native-video';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../styles';
 
@@ -18,6 +19,7 @@ class SubmissionCamera extends Component {
       elapsedTenSeconds: false,
       capture: false,
       captureType: "photo",
+      handleSave: false,
     };
   }
   componentWillUnmount() {
@@ -33,6 +35,10 @@ class SubmissionCamera extends Component {
   }
   deleteCapture() {
     this.setState({ capture: false });
+  }
+  saveCapture() {
+    console.log('saved photo');
+    this.setState({ saveCapture: false });
   }
 
   recordVideo() {
@@ -76,37 +82,57 @@ class SubmissionCamera extends Component {
     console.log(this.state.cameraDirection);
   }
 
-  // {this.state.captureType == "photo"
-  //   ?
-  //   <Image
-  //     source={{uri: this.state.capture.path, isStatic:true}}
-  //     style={{ flex: 1}}
-  //   />
-  //   :
-  //   <Video source={{uri: this.state.capture.path, mainVer: 1, patchVer: 0}}
-  //     style={{ flex: 1}}
-  //   />
-  // }
+
 
   render() {
     if (this.state.capture) {
         return (
           <View style={styles.cameraContainer}>
+            {this.state.captureType == "photo"
+              ?
               <Image
                 source={{uri: this.state.capture.path, isStatic:true}}
                 style={{ flex: 1}}
               />
-
+              :
+              <Video source={{uri: this.state.capture.path, mainVer: 1, patchVer: 0}}
+                ref={(ref) => {
+                  this.player = ref
+                }}
+                rate={1.0}
+                volume={1.0}
+                muted={false}
+                paused={false}
+                resizeMode="cover"
+                repeat={true}
+                style={{ flex: 1}}
+              />
+            }
             <TouchableOpacity
               style={{position: 'absolute', top: 20, right: 20}}
               onPress={this.deleteCapture.bind(this)}
             >
-                <Icon
-                  style={styles.iconBackground}
-                  name="ios-close"
-                  size={50}
-                  color="white"
-                />
+              <Icon
+                style={styles.iconBackground}
+                name="ios-close"
+                size={50}
+                color="white"
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{position: 'absolute', bottom: 20, right: 20}}
+              onPressIn={() => {this.setState({ saveCapture: true })}}
+              onPress={this.saveCapture.bind(this)}
+            >
+              <Icon
+                style={styles.iconBackground}
+                name={this.state.saveCapture ? "ios-send" : "ios-send-outline"}
+                size={50}
+                color="white"
+              />
+              <Text style={[styles.iconBackground, {color: "white", marginTop: -10}]}>
+                Save
+              </Text>
             </TouchableOpacity>
           </View>
         )
@@ -123,6 +149,7 @@ class SubmissionCamera extends Component {
             style={styles.cameraBox}
             aspect={Camera.constants.Aspect.fill}
             captureTarget={Camera.constants.CaptureTarget.disk}
+            captureAudio={true}
             captureMode={this.state.recording ? Camera.constants.CaptureMode.video : Camera.constants.CaptureMode.still}>
             <Flex alignItems="flex-start" direction="row" style={styles.cameraSwitch}>
               <Flex.Item>
@@ -161,7 +188,7 @@ class SubmissionCamera extends Component {
                 underlayColor={'transparent'}
               >
                 <Icon
-                  name={this.state.recording ? "md-radio-button-off" : "ios-radio-button-off" }
+                  name="ios-radio-button-off"
                   size={90}
                   style={styles.iconBackground}
                   color={this.state.recording ? "red" : "white"}
