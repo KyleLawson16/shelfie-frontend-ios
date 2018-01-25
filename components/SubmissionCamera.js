@@ -4,8 +4,11 @@ import { StyleSheet, Text, TouchableOpacity, TouchableHighlight, View, Image } f
 import { Flex } from 'antd-mobile';
 import Camera from 'react-native-camera';
 import Video from 'react-native-video';
+import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../styles';
+
+import SubmissionPost from './SubmissionPost';
 
 class SubmissionCamera extends Component {
   constructor(props) {
@@ -20,6 +23,7 @@ class SubmissionCamera extends Component {
       capture: false,
       captureType: "photo",
       handleSave: false,
+      saved: false,
     };
   }
   componentWillUnmount() {
@@ -30,22 +34,39 @@ class SubmissionCamera extends Component {
     const options = {};
     //options.location = ...
     this.camera.capture({metadata: options})
-      .then((data) => this.setState({capture: data}))
+      .then((data) => this.setState({capture: data.path}))
       .catch(err => console.error(err));
   }
+  choosePhoto() {
+    var options = {
+      title: 'Select Avatar',
+      customButtons: [
+        {name: 'fb', title: 'Choose Photo from Facebook'},
+      ],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images'
+      }
+    };
+    ImagePicker.launchImageLibrary(options, (response)  => {
+      // Same code as in above section!
+      this.setState({capture: response.uri});
+    });
+  }
+
   deleteCapture() {
     this.setState({ capture: false });
   }
   saveCapture() {
     console.log('saved photo');
-    this.setState({ saveCapture: false });
+    this.setState({ handleSave: false, saved: true });
   }
 
   recordVideo() {
     this.setState({ recording: true, elapsedSeconds: 0, captureType: "video" });
     const options = {};
     this.camera.capture({metadata: options})
-      .then((data) => this.setState({capture: data}))
+      .then((data) => this.setState({capture: data.path}))
       .catch(err => console.error(err));
     this.timer = setInterval(this.tick.bind(this), 1000)
     console.log('start record');
@@ -86,16 +107,27 @@ class SubmissionCamera extends Component {
 
   render() {
     if (this.state.capture) {
+      if (this.state.saved) {
+        return (
+          <View style={styles.container}>
+            <SubmissionPost
+              path={this.state.capture}
+              type={this.state.captureType}
+            />
+          </View>
+        )
+      }
+      else {
         return (
           <View style={styles.cameraContainer}>
             {this.state.captureType == "photo"
               ?
               <Image
-                source={{uri: this.state.capture.path, isStatic:true}}
+                source={{uri: this.state.capture, isStatic:true}}
                 style={{ flex: 1}}
               />
               :
-              <Video source={{uri: this.state.capture.path, mainVer: 1, patchVer: 0}}
+              <Video source={{uri: this.state.capture, mainVer: 1, patchVer: 0}}
                 ref={(ref) => {
                   this.player = ref
                 }}
@@ -109,7 +141,7 @@ class SubmissionCamera extends Component {
               />
             }
             <TouchableOpacity
-              style={{position: 'absolute', top: 20, right: 20}}
+              style={{position: 'absolute', top: 25, left: 20}}
               onPress={this.deleteCapture.bind(this)}
             >
               <Icon
@@ -137,7 +169,7 @@ class SubmissionCamera extends Component {
           </View>
         )
       }
-
+    }
     else {
       return (
         <View style={styles.cameraContainer}>
@@ -155,7 +187,7 @@ class SubmissionCamera extends Component {
               <Flex.Item>
               </Flex.Item>
               <Flex.Item>
-                <Text style={{color: 'red', backgroundColor: 'transparent', textAlign: 'center', marginTop: 15}}>
+                <Text style={{color: 'red', backgroundColor: 'transparent', textAlign: 'center', marginTop: 15, fontSize: 16}}>
                   {this.state.elapsedSeconds
                     ? (this.state.elapsedTenSeconds
                       ? this.state.elapsedMinutes + `:${this.state.elapsedSeconds}`
@@ -194,6 +226,17 @@ class SubmissionCamera extends Component {
                   color={this.state.recording ? "red" : "white"}
                 />
               </TouchableHighlight>
+              <TouchableOpacity
+                style={{position: 'absolute', bottom: 15, left: 20}}
+                onPress={this.choosePhoto.bind(this)}
+              >
+                <Icon
+                  style={styles.iconBackground}
+                  name="ios-images"
+                  size={30}
+                  color="white"
+                />
+              </TouchableOpacity>
             </View>
           </Camera>
         </View>
