@@ -8,7 +8,8 @@ import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../styles';
 
-import SubmissionPost from './SubmissionPost';
+import SubmissionPostWrapper from './SubmissionPost';
+import TopNavbar from './TopNavbar';
 
 class SubmissionCamera extends Component {
   constructor(props) {
@@ -16,159 +17,171 @@ class SubmissionCamera extends Component {
 
     this.state = {
       cameraDirection: "back",
+      path: false,
+      captureType: "photo",
       recording: false,
       elapsedSeconds: false,
-      elapsedMinutes: 0,
       elapsedTenSeconds: false,
-      capture: false,
-      captureType: "photo",
+      elapsedMinutes: 0,
       handleSave: false,
       saved: false,
     };
   }
-  componentWillUnmount() {
-    clearInterval(this.timer)
-  }
 
-  takePicture() {
-    const options = {};
-    //options.location = ...
-    this.camera.capture({metadata: options})
-      .then((data) => this.setState({capture: data.path}))
-      .catch(err => console.error(err));
-  }
-  choosePhoto() {
-    var options = {
-      title: 'Select Avatar',
-      customButtons: [
-        {name: 'fb', title: 'Choose Photo from Facebook'},
-      ],
-      storageOptions: {
-        skipBackup: true,
-        path: 'images'
-      }
-    };
-    ImagePicker.launchImageLibrary(options, (response)  => {
-      // Same code as in above section!
-      this.setState({capture: response.uri});
-    });
-  }
-
-  deleteCapture() {
-    this.setState({ capture: false });
-  }
-  saveCapture() {
-    console.log('saved photo');
-    this.setState({ handleSave: false, saved: true });
-  }
-
-  recordVideo() {
-    this.setState({ recording: true, elapsedSeconds: 0, captureType: "video" });
-    const options = {};
-    this.camera.capture({metadata: options})
-      .then((data) => this.setState({capture: data.path}))
-      .catch(err => console.error(err));
-    this.timer = setInterval(this.tick.bind(this), 1000)
-    console.log('start record');
-  }
-  stopVideo() {
-    if (this.state.recording) {
-      this.camera.stopCapture();
-      console.log('stop record');
-      this.setState({ elapsedSeconds: false, recording: false });
-      clearInterval(this.timer);
-    }
-  }
-
-  tick () {
-    console.log(this.state.elapsedTenSeconds);
-    if (this.state.elapsedSeconds == 9) {
-      this.setState({ elapsedSeconds: (this.state.elapsedSeconds + 1), elapsedTenSeconds: true });
-    }
-    else if (this.state.elapsedSeconds == 59) {
-      this.setState({ elapsedSeconds: 0, elapsedMinutes: (this.state.elapsedMinutes + 1), elapsedTenSeconds: false });
-    }
-    else {
-      this.setState({ elapsedSeconds: (this.state.elapsedSeconds + 1) });
-    }
-
-  }
-
-  switchCamera() {
-    if (this.state.cameraDirection == "back") {
+  // Camera functions
+  switchCamera() { // Called when camera direction button is pressed
+    if (this.state.cameraDirection == "back") { // Set camera direction to opposite of what it currently is
       this.setState({ cameraDirection: "front" });
     } else {
       this.setState({ cameraDirection: "back" });
     }
-    console.log(this.state.cameraDirection);
   }
 
+  deleteCapture() { // Called when user taps X button
+    this.setState({ path: false }); // Delete photo path
+  }
 
+  saveCapture() { // Callend when user taps save arrow button
+    this.setState({
+      handleSave: false, // Set the process of handling save to finished (* will be called after getting callback from database)
+      saved: true // Acknowledge that a photo/video has been saved
+    });
+    this.props.saved(true); // Pass saved to parent SubmissionPage
+  }
+
+  // Photo functions
+  takePhoto() { // Called on a press of the capture button
+    const options = {};
+    this.camera.capture({metadata: options}) // Capture a photo
+      .then((data) => { // On image capture
+        this.setState({
+          path: data.path, // Save photo path to
+          captureType: "photo" // Set type to photo
+        });
+        this.props.path(data.path); // Pass path to parent SubmissionPage
+        this.props.type("photo"); // Pass type to parent SubmissionPage
+      })
+      .catch(err => console.error(err)); // Log an error
+  }
+
+  choosePhoto() { // Called when user taps the photo library button
+    var options = {};
+    ImagePicker.launchImageLibrary(options, (response)  => { // Launch photo library
+      this.setState({
+        path: response.uri, // Record path of chosen photo
+        captureType: "photo" // Set type to photo
+      });
+      this.props.path(response.uri); // Pass path to parent SubmissionPage
+      this.props.type("photo"); // Pass type to parent SubmissionPage
+    });
+  }
+
+  // Video functions
+  startVideoRecord() { // Called on a long press of the capture button
+    this.setState({
+      recording: true, // Set recording to true
+      elapsedSeconds: 0, // Set the video length to 0
+      captureType: "video" // Set the type to video
+    });
+    const options = {};
+    this.camera.capture({metadata: options}) // Start video capture
+      .then((data) => {
+        this.setState({ path: data.path }); // Save the path of the video
+        this.props.path(data.path); // Pass path to parent SubmissionPage
+        this.props.type("video"); // Pass type to parent SubmissionPage
+      })
+      .catch(err => console.error(err)); // Log an error
+    this.timer = setInterval(this.tick.bind(this), 1000) // Start timer and call tick function on 1 second intervals
+  }
+
+  stopVideoRecord() { // Called on let go of long press
+    if (this.state.recording) { // Only if recording...
+      this.camera.stopCapture(); // Stop video record
+      this.setState({
+        elapsedSeconds: false, // Set Video length back to false
+        recording: false // Set recording to false
+      });
+      clearInterval(this.timer); // Stop timer intervals
+    }
+  }
+
+  // Timer functions
+  componentWillUnmount() { // End timer on component unmounting
+    clearInterval(this.timer)
+  }
+
+  tick() { // Called every 1 second interval
+    console.log(this.state.elapsedTenSeconds);
+    if (this.state.elapsedSeconds == 9) { // If seconds value is less than 10
+      this.setState({
+        elapsedSeconds: (this.state.elapsedSeconds + 1), // Add 1 second to total elapsed seconds
+        elapsedTenSeconds: true // Acknowledge that ten or more seconds have elapsed
+      });
+    } else if (this.state.elapsedSeconds == 59) { // If seconds value is about to reach 1 minute
+      this.setState({
+        elapsedSeconds: 0, // Reset total elapsed seconds to zero
+        elapsedMinutes: (this.state.elapsedMinutes + 1), // Add 1 minute to total elapsed minutes
+        elapsedTenSeconds: false // Reset tens value to false
+      });
+    } else { // Otherwise
+      this.setState({
+        elapsedSeconds: (this.state.elapsedSeconds + 1) // Just add 1 second to total elapsed seconds
+      });
+    }
+  }
 
   render() {
-    if (this.state.capture) {
-      if (this.state.saved) {
-        return (
-          <View style={styles.container}>
-            <SubmissionPost
-              path={this.state.capture}
-              type={this.state.captureType}
+    if (this.state.path) {
+      return (
+        <View style={styles.cameraContainer}>
+          {this.state.captureType == "photo"
+            ?
+            <Image
+              source={{uri: this.state.path, isStatic:true}}
+              style={{ flex: 1}}
             />
-          </View>
-        )
-      }
-      else {
-        return (
-          <View style={styles.cameraContainer}>
-            {this.state.captureType == "photo"
-              ?
-              <Image
-                source={{uri: this.state.capture, isStatic:true}}
-                style={{ flex: 1}}
-              />
-              :
-              <Video source={{uri: this.state.capture, mainVer: 1, patchVer: 0}}
-                ref={(ref) => {
-                  this.player = ref
-                }}
-                rate={1.0}
-                volume={1.0}
-                muted={false}
-                paused={false}
-                resizeMode="cover"
-                repeat={true}
-                style={{ flex: 1}}
-              />
-            }
-            <TouchableOpacity
-              style={{position: 'absolute', top: 25, left: 20}}
-              onPress={this.deleteCapture.bind(this)}
-            >
-              <Icon
-                style={styles.iconBackground}
-                name="ios-close"
-                size={50}
-                color="white"
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{position: 'absolute', bottom: 20, right: 20}}
-              onPressIn={() => {this.setState({ saveCapture: true })}}
-              onPress={this.saveCapture.bind(this)}
-            >
-              <Icon
-                style={styles.iconBackground}
-                name={this.state.saveCapture ? "ios-send" : "ios-send-outline"}
-                size={50}
-                color="white"
-              />
-              <Text style={[styles.iconBackground, {color: "white", marginTop: -10}]}>
-                Save
-              </Text>
-            </TouchableOpacity>
-          </View>
-        )
-      }
+            :
+            <Video source={{uri: this.state.path, mainVer: 1, patchVer: 0}}
+              ref={(ref) => {
+                this.player = ref
+              }}
+              rate={1.0}
+              volume={1.0}
+              muted={false}
+              paused={false}
+              resizeMode="cover"
+              repeat={true}
+              style={{ flex: 1}}
+            />
+          }
+          <TouchableOpacity
+            style={{position: 'absolute', top: 25, left: 20}}
+            onPress={this.deleteCapture.bind(this)}
+          >
+            <Icon
+              style={styles.iconBackground}
+              name="ios-close"
+              size={50}
+              color="white"
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{position: 'absolute', bottom: 20, right: 20}}
+            onPressIn={() => {this.setState({ saveCapture: true })}}
+            onPress={this.saveCapture.bind(this)}
+          >
+            <Icon
+              style={styles.iconBackground}
+              name={this.state.saveCapture ? "ios-send" : "ios-send-outline"}
+              size={50}
+              color="white"
+            />
+            <Text style={[styles.iconBackground, {color: "white", marginTop: -10}]}>
+              Save
+            </Text>
+          </TouchableOpacity>
+        </View>
+      )
     }
     else {
       return (
@@ -208,14 +221,12 @@ class SubmissionCamera extends Component {
                   />
                 </TouchableOpacity>
               </Flex.Item>
-
-
             </Flex>
             <View style={styles.cameraBottomNav}>
               <TouchableHighlight
-                onPress={this.takePicture.bind(this)}
-                onLongPress={this.recordVideo.bind(this)}
-                onPressOut={this.stopVideo.bind(this)}
+                onPress={this.takePhoto.bind(this)}
+                onLongPress={this.startVideoRecord.bind(this)}
+                onPressOut={this.stopVideoRecord.bind(this)}
                 activeOpacity={0.5}
                 underlayColor={'transparent'}
               >

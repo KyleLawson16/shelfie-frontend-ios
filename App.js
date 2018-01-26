@@ -19,7 +19,7 @@ class App extends React.Component {
     this.handleBackBtn = this.handleBackBtn.bind(this);
     this.beginSubmission = this.beginSubmission.bind(this);
   }
-  state = { user: false, game: false, backBtn: false, submission: true };
+  state = { user: false, game: false, backBtn: false, submission: false };
 
   getUser(user) {
     console.log(user, 'home');
@@ -39,34 +39,34 @@ class App extends React.Component {
   }
 
   render() {
-      // if (!this.state.user) {
-      //   return (
-      //     <View style={styles.container}>
-      //       <LandingPage handleUser={this.getUser} />
-      //     </View>
-      //   )
-      // }
-      if (this.state.submission) {
+      if (!this.state.user) {
+        return (
+          <View style={styles.container}>
+            <LandingPage handleUser={this.getUser} />
+          </View>
+        )
+      }
+      else if (this.state.submission) {
         return (
           <SubmissionPage challengeID={this.state.submission} />
         )
       }
       else {
         return (
-            <View style={styles.container}>
-              <WhiteSpace size="lg" />
-              <TopNavbar
-                exitGame={this.exitGame}
-                backBtn={this.state.backBtn}
-                SearchBtn={this.state.searchBtn}
-              />
-              <BottomNavbar
-                game={this.state.game}
-                getGame={this.getGame}
-                handleBackBtn={this.handleBackBtn}
-                submission={this.beginSubmission}
-              />
-            </View>
+          <View style={styles.container}>
+            <WhiteSpace size="lg" />
+            <TopNavbar
+              exitGame={this.exitGame}
+              backBtn={this.state.backBtn}
+              SearchBtn={this.state.searchBtn}
+            />
+            <BottomNavbar
+              game={this.state.game}
+              getGame={this.getGame}
+              handleBackBtn={this.handleBackBtn}
+              submission={this.beginSubmission}
+            />
+          </View>
         );
       }
     }
