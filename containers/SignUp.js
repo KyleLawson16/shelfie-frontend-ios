@@ -1,21 +1,57 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import { List, InputItem, Button } from 'antd-mobile';
+import { List, InputItem, Button, ActivityIndicator } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import styles from '../styles';
+
+import { connect } from 'react-redux';
+import { createUser } from '../actions';
 
 class SignUp extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      loading: false,
+      errorMessage: false
+    }
+
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.navigate = this.navigate.bind(this);
   }
 
   handleSubmit() {
+    this.setState({ loading: true });
     this.props.form.validateFields((error, value) => {
-      console.log(value);
-      this.props.handleSignUp(value); // Pass user data to parent component (LandingPage)
+      var firstName = value.name.split(" ")[0]; // Separate first & last name from full name
+      var lastName = value.name.split(" ")[1];
+      this.props.createUser( // Send new user to API
+        firstName,
+        lastName,
+        value.username,
+        value.email,
+        value.password,
+        value.confirm
+      ).then((response) => { // Get response
+        this.setState({ loading: false });
+        this.navigate(response); // Call navigate function
+      });
     });
+  }
+
+  navigate(response) {
+    if (!response.payload.response) { // If no response (success)
+      this.setState({ errorMessage: false });
+      this.props.handleSignUp(response.payload.data); // Send response data to parent LandingPage and navigate
+    }
+    else {
+      var errorList = [];
+      var errors = response.payload.response.data;
+      for (key in errors) { // for each item in response object
+        errorList.push(errors[key]); // add error description to list
+      }
+      this.setState({ errorMessage: errorList }); // Set the list of errors as errorMessage
+    }
   }
 
   checkName = (rule, value, callback) => {
@@ -57,6 +93,10 @@ class SignUp extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.authFormHeader}>Create an Account</Text>
+          {this.state.loading
+            ? <ActivityIndicator style={{ marginTop: 300 }} toast text="loading" />
+            : null
+          }
         <List style={styles.authForm}>
           <InputItem
             {...getFieldProps('name', {
@@ -133,17 +173,27 @@ class SignUp extends Component {
               alert(getFieldError('confirm'));
             }}
           >Password</InputItem>
+          {this.state.errorMessage
+            ? <Text style={{ color: 'red' }}>{this.state.errorMessage}</Text>
+            : null
+          }
           <Button
             style={styles.authFormBtn}
             type="primary"
-            onClick={() => this.handleSubmit()}
+            onClick={this.handleSubmit}
           >Sign Up</Button>
         </List>
+
       </View>
     )
   }
 }
 
+
+function mapStateToProps(state) {
+  return { pitches: state.pitches };
+}
+
 const SignUpForm = createForm()(SignUp);
 
-export default SignUpForm;
+export default connect(mapStateToProps, { createUser })(SignUpForm);

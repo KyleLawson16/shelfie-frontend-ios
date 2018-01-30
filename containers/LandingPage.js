@@ -30,7 +30,6 @@ class LandingPage extends Component {
   }
 
   render() {
-    console.log(this.state.authType);
     if (this.state.authType == 'signIn') {
       return (
         <View>

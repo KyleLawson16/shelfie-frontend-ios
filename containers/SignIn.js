@@ -4,24 +4,12 @@ import { List, InputItem, Button } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import styles from '../styles';
 
+import { connect } from 'react-redux';
+import { loginUser } from '../actions';
+
 class SignIn extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      users: [
-        {
-          username: "KyleLawson16",
-          email: "kyle.lawson7@yahoo.com",
-          password: "password"
-        },
-        {
-          username: "ToughGuy",
-          email: "brendan@shelfiechallenge.com",
-          password: "password"
-        }
-      ]
-    }
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -29,21 +17,10 @@ class SignIn extends Component {
   handleSubmit() {
     this.props.form.validateFields((error, value) => {
       console.log(value);
-      let formUser;
-      for (i=0; i < this.state.users.length; i++) {
-        if (this.state.users[i].username == value.usernameEmail) {
-          formUser = this.state.users[i];
-        }
-      }
-      if (!formUser) {
-        alert("The username you entered is not valid");
-      } else if (formUser.password == value.password) {
-        console.log(formUser, "Login");
-        this.setState({ user: formUser });
-        this.props.handleSignIn(formUser); // pass user data to parent component (LandingPage)
-      } else {
-        alert("Incorrect password");
-      }
+      this.props.loginUser(value.username, value.password)
+      .then ((response) => {
+        console.log(response, 'login');
+      })
     });
   }
 
@@ -56,17 +33,17 @@ class SignIn extends Component {
         <Text style={styles.authFormHeader}>Sign In</Text>
         <List style={styles.authForm}>
           <InputItem
-            {...getFieldProps('usernameEmail', {
+            {...getFieldProps('username', {
               rules: [
                 {required: true, message: 'Please enter a username'},
               ],
             })}
             type="text"
-            placeholder="Username or email"
+            placeholder="Username"
             labelNumber={5}
-            error={getFieldError('usernameEmail')}
+            error={getFieldError('username')}
             onErrorClick={() => {
-              alert(getFieldError('usernameEmail'));
+              alert(getFieldError('username'));
             }}
           >Username</InputItem>
           <InputItem
@@ -94,6 +71,10 @@ class SignIn extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return { pitches: state.pitches };
+}
+
 const SignInForm = createForm()(SignIn);
 
-export default SignInForm;
+export default connect(mapStateToProps, { loginUser })(SignInForm);
