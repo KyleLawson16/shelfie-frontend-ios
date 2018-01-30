@@ -52,13 +52,13 @@ const styles = StyleSheet.create({
     borderColor: THEME_COLOR,
   },
   authChangeSignIn: {
-    marginTop: 230,
+    marginTop: 10,
     width: '90%',
     marginLeft: '5%',
     height: 20,
   },
   authChangeSignUp: {
-    marginTop: 364,
+    marginTop: 10,
     width: '90%',
     marginLeft: '5%',
     height: 20,

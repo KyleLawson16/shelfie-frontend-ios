@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-import { List, InputItem, Button } from 'antd-mobile';
+import { Text, View, TouchableOpacity } from 'react-native';
+import { List, InputItem, Button, ActivityIndicator, Flex } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import styles from '../styles';
 
@@ -11,17 +11,45 @@ class SignIn extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      loading: false,
+      errorMessage: false
+    }
+
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.navigate = this.navigate.bind(this);
+  }
+
+  handleSignUp() {
+    this.props.handleSignUp();
   }
 
   handleSubmit() {
+    this.setState({ loading: true });
     this.props.form.validateFields((error, value) => {
       console.log(value);
       this.props.loginUser(value.username, value.password)
       .then ((response) => {
         console.log(response, 'login');
+        this.setState({ loading: false });
+        this.navigate(response);
       })
     });
+  }
+
+  navigate(response) {
+    if (!response.payload.response) { // If no response (success)
+      this.setState({ errorMessage: false });
+      this.props.getUser(response.payload.data); // Send response data to parent LandingPage and navigate
+    }
+    else {
+      var errorList = [];
+      var errors = response.payload.response.data;
+      for (key in errors) { // for each item in response object
+        errorList.push(errors[key]); // add error description to list
+      }
+      this.setState({ errorMessage: errorList }); // Set the list of errors as errorMessage
+    }
   }
 
   render() {
@@ -60,12 +88,26 @@ class SignIn extends Component {
               alert(getFieldError('password'));
             }}
           >Password</InputItem>
+          {this.state.errorMessage
+            ? <Text style={{ color: 'red' }}>{this.state.errorMessage}</Text>
+            : null
+          }
           <Button
             style={styles.authFormBtn}
             type="primary"
             onClick={() => this.handleSubmit()}
           >Sign In</Button>
         </List>
+        <TouchableOpacity
+          onPress={this.handleSignUp.bind(this)}
+          style={styles.authChangeSignIn}
+        >
+          <Text style={{textAlign: 'center'}}>Don&rsquo;t have an account? Tap here to create one</Text>
+        </TouchableOpacity>
+          {this.state.loading
+            ? <ActivityIndicator toast text="loading" />
+            : null
+          }
       </View>
     )
   }

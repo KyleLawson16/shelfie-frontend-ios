@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { List, InputItem, Button, ActivityIndicator } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import styles from '../styles';
@@ -18,6 +18,10 @@ class SignUp extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.navigate = this.navigate.bind(this);
+  }
+
+  handleSignIn() {
+    this.props.handleSignIn();
   }
 
   handleSubmit() {
@@ -42,7 +46,7 @@ class SignUp extends Component {
   navigate(response) {
     if (!response.payload.response) { // If no response (success)
       this.setState({ errorMessage: false });
-      this.props.handleSignUp(response.payload.data); // Send response data to parent LandingPage and navigate
+      this.props.getUser(response.payload.data); // Send response data to parent LandingPage and navigate
     }
     else {
       var errorList = [];
@@ -183,7 +187,16 @@ class SignUp extends Component {
             onClick={this.handleSubmit}
           >Sign Up</Button>
         </List>
-
+        <TouchableOpacity
+          onPress={this.handleSignIn.bind(this)}
+          style={styles.authChangeSignUp}
+        >
+          <Text style={{textAlign: 'center'}}>Already have an account? Tap here to sign in</Text>
+        </TouchableOpacity>
+        {this.state.loading
+          ? <ActivityIndicator toast text="loading" />
+          : null
+        }
       </View>
     )
   }

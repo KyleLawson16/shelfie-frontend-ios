@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, AsyncStorage } from 'react-native';
 import { TabBar, Icon, Flex } from 'antd-mobile';
 
 import GamesPage from './GamesPage';

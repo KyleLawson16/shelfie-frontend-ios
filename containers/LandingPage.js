@@ -20,7 +20,7 @@ class LandingPage extends Component {
   handleSignIn() {
     this.setState({ authType: 'signIn' });
   }
-  handleSignUp() {
+  handleSignUp(value) {
     this.setState({ authType: 'signUp' });
   }
 
@@ -32,26 +32,12 @@ class LandingPage extends Component {
   render() {
     if (this.state.authType == 'signIn') {
       return (
-        <View>
-          <SignInForm handleSignIn={this.getUser} />
-          <TouchableOpacity
-          onPress={this.handleSignUp}
-          style={styles.authChangeSignIn}>
-            <Text style={{textAlign: 'center'}}>Don&rsquo;t have an account? Tap here to create one</Text>
-          </TouchableOpacity>
-        </View>
+        <SignInForm getUser={this.getUser} handleSignUp={this.handleSignUp} />
       )
     }
     else if (this.state.authType == 'signUp') {
       return (
-        <View>
-          <SignUpForm handleSignUp={this.getUser} />
-          <TouchableOpacity
-          onPress={this.handleSignIn}
-          style={styles.authChangeSignUp}>
-            <Text style={{textAlign: 'center'}}>Already have an account? Tap here to sign in</Text>
-          </TouchableOpacity>
-        </View>
+        <SignUpForm getUser={this.getUser} handleSignIn={this.handleSignIn} />
       )
     }
     else {
