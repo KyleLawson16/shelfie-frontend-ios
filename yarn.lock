@@ -3815,6 +3815,10 @@ react-native-remote-svg@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-native-remote-svg/-/react-native-remote-svg-1.0.1.tgz#9e4c7b00cd6f102b073f59d97bfa33e95af0b754"
 
+react-native-storage@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-storage/-/react-native-storage-0.2.2.tgz#4449197f122b2da0650e3704e1f050260ed58d9f"
+
 react-native-swipeout@^2.2.2:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/react-native-swipeout/-/react-native-swipeout-2.3.3.tgz#3b99db845ef75f0bfa467f1d8de0b7f7946326bd"

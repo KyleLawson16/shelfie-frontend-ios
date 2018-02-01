@@ -1,11 +1,10 @@
 import axios from 'axios';
-axios.defaults.xsrfCookieName = 'csrftoken'
-axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
-const ROOT_URL = `https://49d6746f.ngrok.io/`;
+const ROOT_URL = `https://e56f39ab.ngrok.io/`;
 
 export const CREATE_USER = 'CREATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';
+export const FETCH_USER = 'FETCH_USER';
 
 export function createUser(firstName, lastName, username, email, password, confirmPassword) {
   const url = `${ROOT_URL}api/v1/users/create`;
@@ -35,6 +34,18 @@ export function loginUser(username, password) {
 
   return {
     type: LOGIN_USER,
+    payload: request
+  };
+}
+
+export function fetchUser(token, userID) {
+  const url = `${ROOT_URL}api/v1/users/${userID}/`;
+  const request = axios.get(url,
+    { headers: { Authorization: `Token ${token}` }}
+  );
+
+  return {
+    type: FETCH_USER,
     payload: request
   };
 }
