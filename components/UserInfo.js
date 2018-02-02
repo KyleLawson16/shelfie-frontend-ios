@@ -54,7 +54,7 @@ class UserInfo extends Component {
           align="start"
         >
           <Flex.Item>
-            <Text style={styles.userName}>Username</Text>
+            <Text style={styles.userName}>{this.props.user.first_name} {this.props.user.last_name}</Text>
             <Text>Favorite Team</Text>
           </Flex.Item>
         </Flex>

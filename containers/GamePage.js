@@ -16,16 +16,16 @@ class GamePage extends Component {
   beginSubmission(submission) {
     this.props.submission(submission);
   }
-  
+
   render() {
     return (
       <View style={styles.container}>
         <WhiteSpace size="md" />
         <GameInfo
-          awayTeam="Boston Red Sox"
-          homeTeam="San Francisco Giants"
-          date="February 21st"
-          time="4:30pm"
+          awayTeam={this.props.game.team_2}
+          homeTeam={this.props.game.home_team}
+          date={this.props.game.date}
+          time={this.props.game.date}
         />
         <WhiteSpace size="lg" />
         <GameNavbar

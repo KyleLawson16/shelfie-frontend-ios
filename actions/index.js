@@ -1,10 +1,11 @@
 import axios from 'axios';
 
-const ROOT_URL = `https://e56f39ab.ngrok.io/`;
+const ROOT_URL = `https://35574a39.ngrok.io/`;
 
 export const CREATE_USER = 'CREATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 export const FETCH_USER = 'FETCH_USER';
+export const FETCH_GAMES = 'FETCH_GAMES';
 
 export function createUser(firstName, lastName, username, email, password, confirmPassword) {
   const url = `${ROOT_URL}api/v1/users/create`;
@@ -46,6 +47,18 @@ export function fetchUser(token, userID) {
 
   return {
     type: FETCH_USER,
+    payload: request
+  };
+}
+
+export function fetchGames(token) {
+  const url = `${ROOT_URL}api/v1/games/`;
+  const request = axios.get(url,
+    { headers: { Authorization: `Token ${token}` }}
+  );
+
+  return {
+    type: FETCH_GAMES,
     payload: request
   };
 }

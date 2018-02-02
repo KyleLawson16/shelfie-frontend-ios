@@ -35,12 +35,15 @@ class BottomNavbar extends Component {
     if (pageKey == 'home') {
       if (!this.props.game) {
         return (
-          <GamesPage handleGame={this.getGame} />
+          <GamesPage
+            token={this.props.token}
+            handleGame={this.getGame} />
         );
       }
       else {
         return (
           <GamePage
+            token={this.props.token}
             game={this.props.game}
             submission={this.beginSubmission}
           />
@@ -49,7 +52,9 @@ class BottomNavbar extends Component {
     }
     else if (pageKey == 'user') {
       return (
-        <UserPage />
+        <UserPage
+          user={this.props.user}
+        />
       )
     }
     else if (pageKey == 'notification') {

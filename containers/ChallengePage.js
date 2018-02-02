@@ -79,7 +79,6 @@ class ChallengePage extends Component {
         <ScrollView>
         <Flex justify="center" style={styles.greyHeaderBar}>
           <Text style={styles.challengeHeader}>Challenges</Text>
-          <Icon name="ios-radio-button-on" size={30} color="white" />
         </Flex>
         <FlatList
           data={sampleData}

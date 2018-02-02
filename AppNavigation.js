@@ -22,22 +22,22 @@ class AppNavigation extends React.Component {
     this.beginSubmission = this.beginSubmission.bind(this);
   }
 
-  state = { user: false, game: false, backBtn: false, submission: false, loading: true };
+  state = { user: false, token: false, game: false, backBtn: false, submission: false, loading: true };
 
   componentDidMount = async () => {
     console.log("did mount");
     try {
       const token = await AsyncStorage.getItem('@MySuperStore:token');
       const userID = await AsyncStorage.getItem('@MySuperStore:user');
-      console.log(token);
-      console.log(userID);
+      this.setState({ token: token });
+
       if (userID !== null){
         this.props.fetchUser(token, userID)
         .then((res) => {
-          console.log(res);
-          this.setState({ user: res, loading: false });
+          console.log(res.payload.data);
+          this.setState({ user: res.payload.data, loading: false });
         })
-        this.setState({ knoxToken: token });
+
       }
     } catch (error) {
       // Error retrieving data
@@ -94,6 +94,8 @@ class AppNavigation extends React.Component {
               SearchBtn={this.state.searchBtn}
             />
             <BottomNavbar
+              user={this.state.user}
+              token={this.state.token}
               game={this.state.game}
               getGame={this.getGame}
               handleBackBtn={this.handleBackBtn}

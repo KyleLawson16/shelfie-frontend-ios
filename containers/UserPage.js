@@ -28,13 +28,17 @@ class UserPage extends Component {
     return (
       <View style={styles.container}>
           {
-            this.state.editMode ?
+            this.state.editMode
+            ?
             <ScrollView>
               <UserFormWrapper handleSave={this.handleSave} />
             </ScrollView>
             :
             <ScrollView>
-              <UserInfo handleEditBtn={this.handleEditBtn} />
+              <UserInfo
+                user={this.props.user}
+                handleEditBtn={this.handleEditBtn}
+              />
               <WhiteSpace />
               <UserSubmissions />
             </ScrollView>
