@@ -56,7 +56,10 @@ class GameNavbar extends Component {
         </View>
 
         <View>
-          <ChallengePage submission={this.beginSubmission} />
+          <ChallengePage
+            challenges={this.props.challenges}
+            submission={this.beginSubmission}
+          />
         </View>
 
         <View>

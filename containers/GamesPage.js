@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, FlatList, TouchableOpacity } from 'react-native';
-import { WhiteSpace, Flex } from 'antd-mobile';
+import { WhiteSpace, Flex, ActivityIndicator } from 'antd-mobile';
 import styles from '../styles';
 
 import { connect } from 'react-redux';
@@ -36,9 +36,10 @@ class GamesPage extends Component {
                 <GameItem
                   key={item.random_game_id}
                   homeTeam={item.home_team}
-                  awayTeam={item.team_2}
+                  awayTeam={item.away_team}
                   date={item.date}
                   location={item.location}
+                  challenges={item.challenges}
                 />
               </TouchableOpacity>
               <WhiteSpace style={styles.gameDivider} size="sm" />
@@ -51,7 +52,7 @@ class GamesPage extends Component {
     }
     else {
       return (
-        <Text>working</Text>
+        <ActivityIndicator toast text="loading" />
 
       )
     }
