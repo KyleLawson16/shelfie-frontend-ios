@@ -52,7 +52,10 @@ class GameNavbar extends Component {
         onChange={(tab, index) => this.updateIconColor(tab, index)}
       >
         <View>
-          <FeedPage />
+          <FeedPage
+            token={this.props.token}
+            gameID={this.props.gameID}
+          />
         </View>
 
         <View>

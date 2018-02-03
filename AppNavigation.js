@@ -45,7 +45,7 @@ class AppNavigation extends React.Component {
   }
 
   getUser = async (obj) => {
-    this.setState({ user: obj.user });
+    this.setState({ user: obj.user, token: obj.token });
     try {
       await AsyncStorage.setItem('@MySuperStore:token', obj.token);
       await AsyncStorage.setItem('@MySuperStore:user', obj.user.random_user_id);

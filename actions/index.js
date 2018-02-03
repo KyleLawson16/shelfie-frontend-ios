@@ -6,6 +6,7 @@ export const CREATE_USER = 'CREATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 export const FETCH_USER = 'FETCH_USER';
 export const FETCH_GAMES = 'FETCH_GAMES';
+export const FETCH_POSTS = 'FETCH_POSTS';
 
 export function createUser(firstName, lastName, username, email, password, confirmPassword) {
   const url = `${ROOT_URL}api/v1/users/create`;
@@ -61,4 +62,16 @@ export function fetchGames(token) {
     type: FETCH_GAMES,
     payload: request
   };
+}
+
+export function fetchPosts(token, gameID) {
+  const url = `${ROOT_URL}api/v1/posts/?game=${gameID}`;
+  const request =  axios.get(url,
+    { headers: { Authorization: `Token ${token}` }}
+  );
+
+  return {
+    type: FETCH_POSTS,
+    payload: request,
+  }
 }

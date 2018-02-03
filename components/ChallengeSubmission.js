@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, Image, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { Flex, WhiteSpace, WingBlank, Icon, ActivityIndicator } from 'antd-mobile';
+import { Dimensions } from 'react-native';
+import Image from 'react-native-scalable-image';
 import styles from '../styles';
 
 class ChallengeSubmission extends Component {
@@ -60,19 +62,20 @@ class ChallengeSubmission extends Component {
         <WhiteSpace size="lg" />
         <WingBlank size="md">
           <View>
-            <Text style={styles.userName}>KyleLawson16</Text>
-            <Text style={styles.challengeName}>Challenge Name</Text>
+            <Text style={styles.userName}>{this.props.username}</Text>
+            <Text style={styles.challengeName}>{this.props.challenge}</Text>
           </View>
         </WingBlank>
         <WhiteSpace size="xs" />
-        <Flex>
+        <Flex justifyContent="center" style={{backgroundColor: 'darkgrey'}}>
           <ActivityIndicator animating={this.state.loaded ? false : true } />
           <TouchableWithoutFeedback
             onPress={this.handleImagePress}
           >
             <Image
-              source={require('../assets/images/challenge_photo.jpg')}
-              style={[styles.challengeSubmissionPhoto, {opacity: this.state.doubleTapOpacity}]}
+              source={{ uri: this.props.mediaUrl }}
+              width={Dimensions.get('window').width}
+              height={(Dimensions.get('window').height * .4)}
               onLoad={this.onImageLoad}
             />
         </TouchableWithoutFeedback>
@@ -86,6 +89,9 @@ class ChallengeSubmission extends Component {
               </View>
             </TouchableOpacity>
             <Text>{this.state.likes} likes</Text>
+          </Flex>
+          <Flex>
+            <Text>{this.props.caption}</Text>
           </Flex>
         </WingBlank>
         <WhiteSpace size="lg" />

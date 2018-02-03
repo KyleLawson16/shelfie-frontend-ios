@@ -18,62 +18,6 @@ class ChallengePage extends Component {
   }
 
   render() {
-    const sampleData = [
-      {
-        key: 'a',
-        ptValue: '10',
-        challenges: [
-          {
-            name: 'Cheer on your team',
-            description: 'this is sample filler text'
-          },
-          {
-            name: 'Player photo',
-            description: 'Take a photo with a player on the bench'
-          },
-          {
-            name: 'Autograph',
-            description: 'Get an autograph from a player'
-          }
-        ]
-      },
-      {
-        key: 'b',
-        ptValue: '5',
-        challenges: [
-          {
-            name: 'Cheer on your team',
-            description: 'this is sample filler text'
-          },
-          {
-            name: 'Player photo',
-            description: 'Take a photo with a player on the bench'
-          },
-          {
-            name: 'Autograph',
-            description: 'Get an autograph from a player'
-          }
-        ]
-      },
-      {
-        key: 'c',
-        ptValue: '1',
-        challenges: [
-          {
-            name: 'Cheer on your team',
-            description: 'this is sample filler text'
-          },
-          {
-            name: 'Player photo',
-            description: 'Take a photo with a player on the bench'
-          },
-          {
-            name: 'Autograph',
-            description: 'Get an autograph from a player'
-          }
-        ]
-      }
-    ]
     return (
       <View>
         <ScrollView>
@@ -81,13 +25,15 @@ class ChallengePage extends Component {
           <Text style={styles.challengeHeader}>Challenges</Text>
         </Flex>
         <FlatList
-          data={sampleData}
+          data={this.props.challenges}
           renderItem={({item}) =>
           <ChallengeCarousel
-            key={item.key}
-            ptValue={item.ptValue}
+            key={item.point_value}
+            ptValue={item.point_value}
             challenges={item.challenges}
-            submission={this.beginSubmission} />}
+            submission={this.beginSubmission} />
+          }
+          keyExtractor={(item, index) => index}
         />
         </ScrollView>
       </View>
