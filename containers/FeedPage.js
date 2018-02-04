@@ -33,11 +33,15 @@ class FeedPage extends Component {
           data={this.state.posts}
           renderItem={({item}) =>
             <ChallengeSubmission
+              token={this.props.token}
+              user={this.props.user}
+              postID={item.random_post_id}
               key={item.random_post_id}
               username={item.user.username}
               challenge={item.challenge.name}
               caption={item.caption}
               mediaUrl={item.media_url}
+              likes={item.likes}
             />
           }
           keyExtractor={(item, index) => index}

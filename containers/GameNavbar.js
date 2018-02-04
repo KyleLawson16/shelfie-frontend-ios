@@ -54,6 +54,7 @@ class GameNavbar extends Component {
         <View>
           <FeedPage
             token={this.props.token}
+            user={this.props.user}
             gameID={this.props.gameID}
           />
         </View>

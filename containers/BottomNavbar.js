@@ -44,6 +44,7 @@ class BottomNavbar extends Component {
         return (
           <GamePage
             token={this.props.token}
+            user={this.props.user}
             game={this.props.game}
             submission={this.beginSubmission}
           />

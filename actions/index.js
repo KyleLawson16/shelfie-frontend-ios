@@ -7,6 +7,8 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const FETCH_USER = 'FETCH_USER';
 export const FETCH_GAMES = 'FETCH_GAMES';
 export const FETCH_POSTS = 'FETCH_POSTS';
+export const ADD_LIKE = 'ADD_LIKE';
+export const DELETE_LIKE = 'DELETE_LIKE';
 
 export function createUser(firstName, lastName, username, email, password, confirmPassword) {
   const url = `${ROOT_URL}api/v1/users/create`;
@@ -72,6 +74,42 @@ export function fetchPosts(token, gameID) {
 
   return {
     type: FETCH_POSTS,
+    payload: request,
+  }
+}
+
+export function addLike(token, random_user_id, random_post_id) {
+  const url = `${ROOT_URL}api/v1/posts/${random_post_id}/like/add/`;
+  const request =  axios.post(url,
+    {
+      headers: {
+        Authorization: `Token ${token}`
+      },
+      random_user_id: random_user_id,
+      random_post_id: random_post_id,
+    }
+  );
+
+  return {
+    type: ADD_LIKE,
+    payload: request,
+  }
+}
+
+export function deleteLike(token, random_user_id, random_post_id) {
+  const url = `${ROOT_URL}api/v1/posts/${random_post_id}/like/delete/`;
+  const request =  axios.post(url,
+    {
+      headers: {
+        Authorization: `Token ${token}`
+      },
+      random_user_id: random_user_id,
+      random_post_id: random_post_id,
+    }
+  );
+
+  return {
+    type: DELETE_LIKE,
     payload: request,
   }
 }

@@ -5,14 +5,25 @@ import { Dimensions } from 'react-native';
 import Image from 'react-native-scalable-image';
 import styles from '../styles';
 
+import { connect } from 'react-redux';
+import { addLike, deleteLike } from '../actions';
+
 class ChallengeSubmission extends Component {
   constructor(props) {
     super(props);
-    this.state = { lastPress: 0, liked: false, likes: 7, doubleTapOpacity: 1, loaded: false };
+    this.state = { lastPress: 0, liked: false, likes: 0, doubleTapOpacity: 1, loaded: false };
 
     this.handleImagePress = this.handleImagePress.bind(this);
     this.handleLikePress = this.handleLikePress.bind(this);
     this.onImageLoad = this.onImageLoad.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.likes.forEach(like => {
+      if (this.props.user.random_user_id == like.random_user_id) {
+        this.setState({ liked: true });
+      }
+    })
   }
 
   handleImagePress() { // When image is double tapped
@@ -45,9 +56,17 @@ class ChallengeSubmission extends Component {
 
   like() { // Change state of like to true and add to # of likes
     this.setState({ liked: true, likes: this.state.likes + 1 });
+    this.props.addLike(this.props.token, this.props.user.random_user_id, this.props.postID)
+    .then((res) => {
+      console.log(res);
+    })
   }
   unlike() { // Change state of like to false and subtract from # of likes
     this.setState({ liked: false, likes: this.state.likes - 1 });
+    this.props.deleteLike(this.props.token, this.props.user.random_user_id, this.props.postID)
+    .then((res) => {
+      console.log(res);
+    })
   }
 
   onImageLoad() { // On image load get rid of loading spinner
@@ -88,7 +107,7 @@ class ChallengeSubmission extends Component {
                 <Icon type={this.state.liked ? "\ue64c" : "\ue69d"} />
               </View>
             </TouchableOpacity>
-            <Text>{this.state.likes} likes</Text>
+            <Text>{this.props.likes.length + this.state.likes} likes</Text>
           </Flex>
           <Flex>
             <Text>{this.props.caption}</Text>
@@ -100,4 +119,8 @@ class ChallengeSubmission extends Component {
   }
 }
 
-export default ChallengeSubmission;
+function mapStateToProps(state) {
+  return { pitches: state.pitches };
+}
+
+export default connect(mapStateToProps, { addLike, deleteLike })(ChallengeSubmission);

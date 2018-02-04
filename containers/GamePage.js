@@ -56,6 +56,7 @@ class GamePage extends Component {
         <WhiteSpace size="lg" />
         <GameNavbar
           token={this.props.token}
+          user={this.props.user}
           gameID={this.props.game.random_game_id}
           challenges={this.state.sorted_challenges}
           activeTabColor="rgb(93,188,210)"
