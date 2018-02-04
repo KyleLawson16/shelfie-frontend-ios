@@ -78,6 +78,18 @@ export function fetchPosts(token, gameID) {
   }
 }
 
+export function fetchPrizes(token, gameID) {
+  const url = `${ROOT_URL}api/v1/prizes/?game=${gameID}`;
+  const request =  axios.get(url,
+    { headers: { Authorization: `Token ${token}` }}
+  );
+
+  return {
+    type: FETCH_PRIZES,
+    payload: request,
+  }
+}
+
 export function addLike(token, random_user_id, random_post_id) {
   const url = `${ROOT_URL}api/v1/posts/${random_post_id}/like/add/`;
   const request =  axios.post(url,
@@ -92,24 +104,6 @@ export function addLike(token, random_user_id, random_post_id) {
 
   return {
     type: ADD_LIKE,
-    payload: request,
-  }
-}
-
-export function deleteLike(token, random_user_id, random_post_id) {
-  const url = `${ROOT_URL}api/v1/posts/${random_post_id}/like/delete/`;
-  const request =  axios.post(url,
-    {
-      headers: {
-        Authorization: `Token ${token}`
-      },
-      random_user_id: random_user_id,
-      random_post_id: random_post_id,
-    }
-  );
-
-  return {
-    type: DELETE_LIKE,
     payload: request,
   }
 }

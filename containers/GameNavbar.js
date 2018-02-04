@@ -71,7 +71,9 @@ class GameNavbar extends Component {
         </View>
 
         <View>
-          <PrizePage />
+          <PrizePage
+            prizes={this.props.prizes}
+          />
         </View>
       </Tabs>
     )

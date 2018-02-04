@@ -59,6 +59,7 @@ class GamePage extends Component {
           user={this.props.user}
           gameID={this.props.game.random_game_id}
           challenges={this.state.sorted_challenges}
+          prizes={this.props.game.prizes}
           activeTabColor="rgb(93,188,210)"
           submission={this.beginSubmission}
         />

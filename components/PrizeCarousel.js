@@ -13,7 +13,7 @@ class PrizeCarousel extends Component {
     super(props);
 
     this.state = {
-      slideIndex: 1,
+      slideIndex: 0,
     }
   }
 
