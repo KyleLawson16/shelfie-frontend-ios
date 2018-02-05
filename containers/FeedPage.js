@@ -41,6 +41,7 @@ class FeedPage extends Component {
               challenge={item.challenge.name}
               caption={item.caption}
               mediaUrl={item.media_url}
+              isVideo={item.is_video}
               likes={item.likes}
             />
           }

@@ -3,6 +3,7 @@ import { Text, View, TouchableWithoutFeedback, TouchableOpacity } from 'react-na
 import { Flex, WhiteSpace, WingBlank, Icon, ActivityIndicator } from 'antd-mobile';
 import { Dimensions } from 'react-native';
 import Image from 'react-native-scalable-image';
+import Video from 'react-native-video';
 import styles from '../styles';
 
 import { connect } from 'react-redux';
@@ -11,7 +12,7 @@ import { addLike, deleteLike } from '../actions';
 class ChallengeSubmission extends Component {
   constructor(props) {
     super(props);
-    this.state = { lastPress: 0, liked: false, likes: 0, doubleTapOpacity: 1, loaded: false };
+    this.state = { lastPress: 0, liked: false, likes: 0, doubleTapOpacity: 1, loaded: false, screenWidth: Dimensions.get('window').width };
 
     this.handleImagePress = this.handleImagePress.bind(this);
     this.handleLikePress = this.handleLikePress.bind(this);
@@ -91,12 +92,43 @@ class ChallengeSubmission extends Component {
           <TouchableWithoutFeedback
             onPress={this.handleImagePress}
           >
+            {this.props.isVideo
+            ?
+            <Video
+              source={{uri: this.props.mediaUrl, mainVer: 1, patchVer: 0}}
+              ref={(ref) => {
+                this.player = ref
+              }}
+              rate={1.0}
+              volume={1.0}
+              muted={false}
+              paused={false}
+              resizeMode="cover"
+              repeat={true}
+              onLoad={response => {
+                const { width, height } = response.naturalSize;
+                const heightScaled = 1.5 * height * (this.state.screenWidth / width);
+
+                this.setState({
+                  heightScaled: heightScaled,
+                  videoPaused: false,
+                  loaded: true,
+                });
+              }}
+              style={{
+                width: this.state.screenWidth,
+                height: this.state.heightScaled
+              }}
+            />
+            :
             <Image
               source={{ uri: this.props.mediaUrl }}
               width={Dimensions.get('window').width}
               height={(Dimensions.get('window').height * .4)}
               onLoad={this.onImageLoad}
             />
+            }
+
         </TouchableWithoutFeedback>
         </Flex>
         <WhiteSpace size="sm" />

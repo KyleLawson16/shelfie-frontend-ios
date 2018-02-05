@@ -30,7 +30,6 @@ class GameItem extends Component {
             </Flex.Item>
           </Flex>
         </View>
-
       </View>
     )
   }
