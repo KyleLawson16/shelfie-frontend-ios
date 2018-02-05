@@ -20,6 +20,7 @@ class AppNavigation extends React.Component {
     this.getGame = this.getGame.bind(this);
     this.handleBackBtn = this.handleBackBtn.bind(this);
     this.beginSubmission = this.beginSubmission.bind(this);
+    this.submitPost = this.submitPost.bind(this);
   }
 
   state = { user: false, token: false, game: false, backBtn: false, submission: false, loading: true };
@@ -66,6 +67,9 @@ class AppNavigation extends React.Component {
   beginSubmission(submission) {
     this.setState({ submission: submission });
   }
+  submitPost() {
+    this.setState({ submission: false });
+  }
 
   render() {
       if (!this.state.user) {
@@ -81,7 +85,13 @@ class AppNavigation extends React.Component {
       }
       else if (this.state.submission) {
         return (
-          <SubmissionPage challengeID={this.state.submission} />
+          <SubmissionPage
+            submitPost={this.submitPost}
+            userID={this.state.user.random_user_id}
+            token={this.state.token}
+            challenge={this.state.submission}
+            gameID={this.state.game.random_game_id}
+          />
         )
       }
       else {

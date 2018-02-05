@@ -54,7 +54,7 @@ class ChallengeCarousel extends Component {
                   <Button
                     type="ghost"
                     style={styles.challengeSubmissionBtn}
-                    onPressIn={() => {this.props.submission(challenge.name)}}
+                    onPressIn={() => {this.props.submission(challenge)}}
                   >
                     <Text style={{color: 'white'}}>Add Submission</Text>
                   </Button>

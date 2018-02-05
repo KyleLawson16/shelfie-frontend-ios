@@ -15,6 +15,7 @@ class SubmissionPage extends Component {
       path: false,
       type: "photo",
       saved: false,
+      mediaObject: false,
     };
   }
 
@@ -37,6 +38,14 @@ class SubmissionPage extends Component {
     this.setState({ saved: saved });
   }
 
+  getMedia(mediaObject) {
+    this.setState({ mediaObject: mediaObject });
+  }
+
+  submitPost() {
+    this.props.submitPost();
+  }
+
   render() {
     if (this.state.saved) {
       return (
@@ -46,8 +55,14 @@ class SubmissionPage extends Component {
             backBtn={true}
           />
           <SubmissionPostWrapper
+            submitPost={this.submitPost.bind(this)}
+            userID={this.props.userID}
+            token={this.props.token}
+            gameID={this.props.gameID}
             path={this.state.path}
             type={this.state.captureType}
+            challenge={this.props.challenge}
+            mediaObject={this.state.mediaObject}
           />
         </View>
       )
@@ -59,6 +74,8 @@ class SubmissionPage extends Component {
             path={this.getPath.bind(this)}
             type={this.getType.bind(this)}
             saved={this.getSaved.bind(this)}
+            mediaObject={this.getMedia.bind(this)}
+            gameID={this.props.gameID}
           />
         </View>
       )

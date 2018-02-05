@@ -1,18 +1,43 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, Image } from 'react-native';
-import { WhiteSpace, List, InputItem, Button } from 'antd-mobile';
+import { WhiteSpace, List, InputItem, Button, ActivityIndicator } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import Video from 'react-native-video';
 import styles from '../styles';
+
+import { connect } from 'react-redux';
+import { createPost } from '../actions';
 
 class SubmissionPost extends Component {
   constructor(props) {
     super(props);
 
+    this.state = { loading: false };
   }
 
   handleSubmit() {
-    console.log('submit');
+    this.setState({ loading: true });
+    this.props.form.validateFields((error, value) => {
+      var is_video = false;
+      if (this.props.type == "video") {
+        is_video = true;
+      }
+      this.props.createPost(
+        this.props.token,
+        this.props.userID,
+        this.props.gameID,
+        this.props.challenge.random_challenge_id,
+        is_video,
+        this.props.mediaObject.postResponse.location,
+        value.caption
+      ).then((res) => {
+        if (res.payload.status == 201) {
+          this.setState({ loading: false });
+          this.props.submitPost();
+        }
+        console.log(res);
+      });
+    });
   }
 
   render() {
@@ -45,7 +70,7 @@ class SubmissionPost extends Component {
         }
         <List style={styles.authForm}>
           <InputItem
-            {...getFieldProps('team', {
+            {...getFieldProps('caption', {
             })}
             type="text"
             placeholder="Wooooo..."
@@ -58,6 +83,10 @@ class SubmissionPost extends Component {
             onClick={() => this.handleSubmit()}
           >Submit Post</Button>
         </List>
+        {this.state.loading
+          ? <ActivityIndicator toast text="loading" />
+          : null
+        }
       </ScrollView>
     )
   }
@@ -65,4 +94,8 @@ class SubmissionPost extends Component {
 
 const SubmissionPostWrapper = createForm()(SubmissionPost);
 
-export default SubmissionPostWrapper;
+function mapStateToProps(state) {
+  return { pitches: state.pitches };
+}
+
+export default connect(mapStateToProps, { createPost })(SubmissionPostWrapper);

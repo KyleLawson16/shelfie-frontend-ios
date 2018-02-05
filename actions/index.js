@@ -9,6 +9,7 @@ export const FETCH_GAMES = 'FETCH_GAMES';
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const ADD_LIKE = 'ADD_LIKE';
 export const DELETE_LIKE = 'DELETE_LIKE';
+export const CREATE_POST = 'CREATE_POST';
 
 export function createUser(firstName, lastName, username, email, password, confirmPassword) {
   const url = `${ROOT_URL}api/v1/users/create`;
@@ -104,6 +105,36 @@ export function addLike(token, random_user_id, random_post_id) {
 
   return {
     type: ADD_LIKE,
+    payload: request,
+  }
+}
+
+export function createPost(
+    token,
+    random_user_id,
+    random_game_id,
+    random_challenge_id,
+    is_video,
+    media_url,
+    caption,
+  ) {
+  const url = `${ROOT_URL}api/v1/posts/create/`;
+  const request =  axios.post(url,
+    {
+      headers: {
+        Authorization: `Token ${token}`
+      },
+      user: random_user_id,
+      game: random_game_id,
+      challenge: random_challenge_id,
+      is_video: is_video,
+      media_url: media_url,
+      caption: caption,
+    }
+  );
+
+  return {
+    type: CREATE_POST,
     payload: request,
   }
 }

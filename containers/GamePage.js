@@ -51,7 +51,6 @@ class GamePage extends Component {
           awayTeam={this.props.game.away_team}
           homeTeam={this.props.game.home_team}
           date={this.props.game.date}
-          time={this.props.game.date}
         />
         <WhiteSpace size="lg" />
         <GameNavbar

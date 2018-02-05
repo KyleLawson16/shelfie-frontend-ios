@@ -1,7 +1,7 @@
 'use strict';
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, TouchableHighlight, View, Image } from 'react-native';
-import { Flex } from 'antd-mobile';
+import { Flex, ActivityIndicator } from 'antd-mobile';
 import Camera from 'react-native-camera';
 import Video from 'react-native-video';
 import ImagePicker from 'react-native-image-picker';
@@ -10,6 +10,11 @@ import styles from '../styles';
 
 import SubmissionPostWrapper from './SubmissionPost';
 import TopNavbar from './TopNavbar';
+
+import { RNS3 } from 'react-native-aws3';
+
+const ACCESS_KEY = 'AKIAJJ2VBIDH6Z4LWTEA';
+const SECRET_ACCESS_KEY = '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';
 
 class SubmissionCamera extends Component {
   constructor(props) {
@@ -25,6 +30,7 @@ class SubmissionCamera extends Component {
       elapsedMinutes: 0,
       handleSave: false,
       saved: false,
+      loading: false,
     };
   }
 
@@ -42,11 +48,51 @@ class SubmissionCamera extends Component {
   }
 
   saveCapture() { // Callend when user taps save arrow button
-    this.setState({
-      handleSave: false, // Set the process of handling save to finished (* will be called after getting callback from database)
-      saved: true // Acknowledge that a photo/video has been saved
+    this.setState({ loading: true });
+    const name = this.makeid();
+    var type = "image/png";
+    if (this.state.captureType == "video") {
+      type = "video/mp4"
+    }
+    const file = {
+      // `uri` can also be a file system path (i.e. file://)
+      uri: this.state.path,
+      name: `${this.props.gameID}-${name}`,
+      type: type
+    };
+
+    const options = {
+      keyPrefix: `posts/${this.state.captureType}s/`,
+      bucket: "shelfie-challenge",
+      region: "us-west-1",
+      accessKey: ACCESS_KEY,
+      secretKey: SECRET_ACCESS_KEY,
+      successActionStatus: 201
+    };
+
+    RNS3.put(file, options).then(response => {
+      if (response.status !== 201)
+        throw new Error("Failed to upload image to S3");
+      else {
+        this.setState({
+          handleSave: false, // Set the process of handling save to finished (* will be called after getting callback from database)
+          saved: true, // Acknowledge that a photo/video has been saved
+          loading: false,
+        });
+        this.props.mediaObject(response.body);
+        this.props.saved(true); // Pass saved to parent SubmissionPage
+      }
     });
-    this.props.saved(true); // Pass saved to parent SubmissionPage
+
+
+  }
+
+  makeid() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (var i = 0; i < 7; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    return text;
   }
 
   // Photo functions
@@ -66,8 +112,10 @@ class SubmissionCamera extends Component {
 
   choosePhoto() { // Called when user taps the photo library button
     var options = {};
+    this.setState({ loading: true });
     ImagePicker.launchImageLibrary(options, (response)  => { // Launch photo library
       this.setState({
+        loading: false,
         path: response.uri, // Record path of chosen photo
         captureType: "photo" // Set type to photo
       });
@@ -180,6 +228,10 @@ class SubmissionCamera extends Component {
               Save
             </Text>
           </TouchableOpacity>
+          {this.state.loading
+            ? <ActivityIndicator toast text="loading" />
+            : null
+          }
         </View>
       )
     }
@@ -250,6 +302,10 @@ class SubmissionCamera extends Component {
               </TouchableOpacity>
             </View>
           </Camera>
+          {this.state.loading
+            ? <ActivityIndicator toast text="loading" />
+            : null
+          }
         </View>
       );
     }
