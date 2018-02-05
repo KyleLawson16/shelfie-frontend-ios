@@ -101,8 +101,8 @@ class ChallengeSubmission extends Component {
               }}
               rate={1.0}
               volume={1.0}
-              muted={false}
-              paused={false}
+              muted={true}
+              paused={true}
               resizeMode="cover"
               repeat={true}
               onLoad={response => {

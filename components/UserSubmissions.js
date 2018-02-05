@@ -6,30 +6,25 @@ import styles from '../styles';
 import UserSubmission from './UserSubmission';
 
 class UserSubmissions extends Component {
-  render() {
-    const data = [
-      'post1',
-      'post2',
-      'post3',
-      'post1',
-      'post2',
-      'post3',
-      'post1',
-      'post2',
-      'post3',
-      'post1',
-      'post2',
-      'post3',
-    ]
+  constructor(props) {
+    super(props);
 
+  }
+
+  render() {
     return (
       <View>
-        <Grid data={data}
+        <Grid
           columnNum={3}
           itemStyle={styles.userPhotoGrid}
           hasLine={false}
-          renderItem={dataItem => (
-            <UserSubmission />
+          data={this.props.userPosts}
+          renderItem={item => (
+            <UserSubmission
+              key={item.random_post_id}
+              isVideo={item.is_video}
+              path={item.media_url}
+            />
           )}
         />
       </View>

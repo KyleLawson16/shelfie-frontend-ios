@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Image, View } from 'react-native';
 import { Flex, ActivityIndicator } from 'antd-mobile';
+import Video from 'react-native-video';
 import styles from '../styles';
 
 class UserSubmission extends Component {
@@ -23,11 +24,28 @@ class UserSubmission extends Component {
         <View>
           <ActivityIndicator animating={this.state.loaded ? false : true } />
           <Flex>
+            {this.props.isVideo
+            ?
+            <Video source={{uri: this.props.path, mainVer: 1, patchVer: 0}}
+              ref={(ref) => {
+                this.player = ref
+              }}
+              rate={1.0}
+              volume={1.0}
+              muted={true}
+              paused={true}
+              resizeMode="cover"
+              repeat={true}
+              style={styles.userSubmissionVideo}
+              onLoad={this.onLoad.bind(this)}
+            />
+            :
             <Image
-              source={require('../assets/images/image.jpg')}
+              source={{uri: this.props.path}}
               style={styles.userSubmissionPhoto}
               onLoad={this.onLoad.bind(this)}
             />
+            }
           </Flex>
         </View>
       )

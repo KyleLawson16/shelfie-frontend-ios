@@ -67,8 +67,8 @@ export function fetchGames(token) {
   };
 }
 
-export function fetchPosts(token, gameID) {
-  const url = `${ROOT_URL}api/v1/posts/?game=${gameID}`;
+export function fetchPosts(token, filterBy, gameID) {
+  const url = `${ROOT_URL}api/v1/posts/?${filterBy}=${gameID}`;
   const request =  axios.get(url,
     { headers: { Authorization: `Token ${token}` }}
   );

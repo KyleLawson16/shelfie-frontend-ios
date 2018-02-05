@@ -19,7 +19,9 @@ class GameItem extends Component {
               <Text style={styles.gameDateShort}>{moment.parseZone(this.props.date).format('MM/DD/YY')}</Text>
             </Flex.Item>
             <Flex.Item>
-              <Text style={styles.gameFans}># of fans</Text>
+              <Text style={styles.gameFans}>
+                {this.props.fans == 1 ? `${this.props.fans} fan` : `${this.props.fans} fans`}
+              </Text>
             </Flex.Item>
           </Flex>
           <Flex>

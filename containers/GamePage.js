@@ -52,7 +52,7 @@ class GamePage extends Component {
           homeTeam={this.props.game.home_team}
           date={this.props.game.date}
         />
-        <WhiteSpace size="lg" />
+      <WhiteSpace size="md" />
         <GameNavbar
           token={this.props.token}
           user={this.props.user}

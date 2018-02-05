@@ -22,7 +22,7 @@ class UserInfo extends Component {
           </Flex.Item>
           <Flex.Item>
             <Text style={styles.userStats}>
-              <Text style={styles.userStatsNum}>11{"\n"}</Text>
+              <Text style={styles.userStatsNum}>{this.props.totalPoints}{"\n"}</Text>
               <Text style={styles.userStatsLabel}>points</Text>
             </Text>
           </Flex.Item>

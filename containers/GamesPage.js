@@ -40,9 +40,10 @@ class GamesPage extends Component {
                   date={item.date}
                   location={item.location}
                   challenges={item.challenges}
+                  fans={item.fans}
                 />
               </TouchableOpacity>
-              <WhiteSpace style={styles.gameDivider} size="sm" />
+              <WhiteSpace style={styles.gameDivider} size="xs" />
             </View>
             }
             keyExtractor={(item, index) => index}

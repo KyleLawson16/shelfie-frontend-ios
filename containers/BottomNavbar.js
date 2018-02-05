@@ -54,6 +54,7 @@ class BottomNavbar extends Component {
     else if (pageKey == 'user') {
       return (
         <UserPage
+          token={this.props.token}
           user={this.props.user}
         />
       )

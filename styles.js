@@ -146,8 +146,14 @@ const styles = StyleSheet.create({
   userSubmissionPhoto: {
     width: WINDOW_WIDTH / 3,
     height: WINDOW_WIDTH / 3,
-    resizeMode: 'contain',
-    borderWidth: 1,
+    resizeMode: 'cover',
+    borderWidth: .5,
+    borderColor: 'white',
+  },
+  userSubmissionVideo: {
+    width: WINDOW_WIDTH / 3,
+    height: WINDOW_WIDTH / 3,
+    borderWidth: .5,
     borderColor: 'white',
   },
 
