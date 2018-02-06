@@ -7,6 +7,8 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const FETCH_USER = 'FETCH_USER';
 export const FETCH_GAMES = 'FETCH_GAMES';
 export const FETCH_POSTS = 'FETCH_POSTS';
+export const FETCH_PRIZES = 'FETCH_PRIZES';
+export const FETCH_LEADERBOARD = 'FETCH_LEADERBOARD';
 export const ADD_LIKE = 'ADD_LIKE';
 export const DELETE_LIKE = 'DELETE_LIKE';
 export const CREATE_POST = 'CREATE_POST';
@@ -75,6 +77,18 @@ export function fetchPosts(token, filterBy, gameID) {
 
   return {
     type: FETCH_POSTS,
+    payload: request,
+  }
+}
+
+export function fetchLeaderboard(token, gameID) {
+  const url = `${ROOT_URL}api/v1/games/${gameID}/leaderboard`;
+  const request =  axios.get(url,
+    { headers: { Authorization: `Token ${token}` }}
+  );
+
+  return {
+    type: FETCH_LEADERBOARD,
     payload: request,
   }
 }

@@ -1,30 +1,29 @@
 import React, { Component } from 'react';
 import { View, ScrollView, FlatList, Text } from 'react-native';
-import { WhiteSpace, List, Flex } from 'antd-mobile';
+import { WhiteSpace, List, Flex, ActivityIndicator } from 'antd-mobile';
 import styles from '../styles';
+
+import { connect } from 'react-redux';
+import { fetchLeaderboard } from '../actions';
 
 import LeaderboardItem from '../components/LeaderboardItem';
 
 class LeaderboardPage extends Component {
-  render() {
-    const data = [
-      {
-        key: 1,
-        username: 'KyleLawson16',
-        points: 175
-      },
-      {
-        key: 2,
-        username: 'ToughGuy',
-        points: 153
-      },
-      {
-        key: 3,
-        username: 'SportsFan',
-        points: 78
-      }
-    ];
+  constructor(props) {
+    super(props);
 
+    this.state = { leaderboard: false, loading: true };
+  }
+
+  componentDidMount() {
+    this.props.fetchLeaderboard(this.props.token, this.props.gameID)
+    .then((res) => {
+      console.log(res);
+      this.setState({ leaderboard: res.payload.data.leaderboard, loading: false });
+    });
+  }
+
+  render() {
     return (
       <ScrollView>
         <Flex justify="center" style={styles.greyHeaderBar}>
@@ -32,13 +31,28 @@ class LeaderboardPage extends Component {
         </Flex>
         <List>
           <FlatList
-            data={data}
-            renderItem={({item}) => <LeaderboardItem key={item.key} username={item.username} points={item.points} />}
+            data={this.state.leaderboard}
+            renderItem={({item}) =>
+              <LeaderboardItem
+                key={item.random_user_id}
+                username={item.username}
+                points={item.points}
+              />
+            }
+            keyExtractor={(item, index) => index}
           />
         </List>
+        {this.state.loading
+          ? <ActivityIndicator toast text="loading" />
+          : null
+        }
       </ScrollView>
     )
   }
 }
 
-export default LeaderboardPage;
+function mapStateToProps(state) {
+  return { pitches: state.pitches };
+}
+
+export default connect(mapStateToProps, { fetchLeaderboard })(LeaderboardPage);

@@ -67,7 +67,10 @@ class GameNavbar extends Component {
         </View>
 
         <View>
-          <LeaderboardPage />
+          <LeaderboardPage
+            token={this.props.token}
+            gameID={this.props.gameID}
+          />
         </View>
 
         <View>
