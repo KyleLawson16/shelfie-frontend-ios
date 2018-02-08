@@ -5,7 +5,7 @@ import { createForm } from 'rc-form';
 import styles from '../styles';
 
 import { connect } from 'react-redux';
-import { createUser } from '../actions';
+import { createUser, loginUser } from '../actions';
 
 class SignUp extends Component {
   constructor(props) {
@@ -38,16 +38,20 @@ class SignUp extends Component {
         value.confirm,
       ).then((response) => { // Get response
         this.setState({ loading: false });
-        this.navigate(response); // Call navigate function
+        this.navigate(response, value.username, value.password); // Call navigate function
       });
     });
   }
 
-  navigate(response) {
+  navigate(response, username, password) {
     if (!response.payload.response) { // If no response (success)
       console.log(response.payload.response);
       this.setState({ errorMessage: false });
-      this.props.getUser(response.payload.data); // Send response data to parent LandingPage and navigate
+      this.props.loginUser(username, password)
+      .then ((response) => {
+        console.log(response, 'login');
+        this.props.getUser(response.payload.data); // Send response data to parent LandingPage and navigate
+      });
     }
     else {
       console.log(response.payload.response);
@@ -211,4 +215,4 @@ function mapStateToProps(state) {
 
 const SignUpForm = createForm()(SignUp);
 
-export default connect(mapStateToProps, { createUser })(SignUpForm);
+export default connect(mapStateToProps, { createUser, loginUser })(SignUpForm);

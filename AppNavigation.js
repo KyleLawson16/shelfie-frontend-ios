@@ -30,29 +30,29 @@ class AppNavigation extends React.Component {
     game: false,
     backBtn: false,
     submission: false,
-    loading: false,
+    loading: true,
     postUser: false
   };
 
-  // componentDidMount = async () => {
-  //   console.log("did mount");
-  //   try {
-  //     const token = await AsyncStorage.getItem('@MySuperStore:token');
-  //     const userID = await AsyncStorage.getItem('@MySuperStore:user');
-  //     this.setState({ token: token });
-  //
-  //     if (userID !== null){
-  //       this.props.fetchUser(token, userID)
-  //       .then((res) => {
-  //         console.log(res.payload.data);
-  //         this.setState({ user: res.payload.data, loading: false });
-  //       })
-  //
-  //     }
-  //   } catch (error) {
-  //     // Error retrieving data
-  //   }
-  // }
+  componentDidMount = async () => {
+    console.log("did mount");
+    try {
+      const token = await AsyncStorage.getItem('@MySuperStore:token');
+      const userID = await AsyncStorage.getItem('@MySuperStore:user');
+      this.setState({ token: token });
+
+      if (userID !== null){
+        this.props.fetchUser(token, userID)
+        .then((res) => {
+          console.log(res.payload.data);
+          this.setState({ user: res.payload.data, loading: false });
+        })
+
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  }
 
   getUser = async (obj) => {
     this.setState({ user: obj.user, token: obj.token });

@@ -14,7 +14,7 @@ export const DELETE_LIKE = 'DELETE_LIKE';
 export const CREATE_POST = 'CREATE_POST';
 
 export function createUser(firstName, lastName, username, email, password, confirmPassword) {
-  const url = `${ROOT_URL}api/v1/users/create/`;
+  const url = `${ROOT_URL}api/v1/create-user/`;
   const request = axios.post(url, {
     first_name: firstName,
     last_name: lastName,

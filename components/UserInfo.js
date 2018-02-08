@@ -9,6 +9,7 @@ class UserInfo extends Component {
   }
 
   render() {
+    console.log(this.props.user);
     return (
       <WingBlank>
         <Flex
