@@ -5,6 +5,7 @@ import styles from '../styles';
 
 import GameInfo from '../components/GameInfo';
 import GameNavbar from './GameNavbar';
+import UserPage from './UserPage';
 
 class GamePage extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class GamePage extends Component {
     this.state = { sorted_challenges: false }
 
     this.beginSubmission = this.beginSubmission.bind(this);
+    this.getPostUser = this.getPostUser.bind(this);
   }
 
   componentWillMount() {
@@ -42,28 +44,45 @@ class GamePage extends Component {
   beginSubmission(submission) {
     this.props.submission(submission);
   }
+  getPostUser(user) {
+    this.props.getPostUser(user);
+  }
 
   render() {
-    return (
-      <View style={styles.container}>
+    if (this.props.postUser) {
+      return (
+        <View style={styles.container}>
+          <UserPage
+            token={this.props.token}
+            user={this.props.postUser}
+            other={true}
+          />
+        </View>
+      )
+    }
+    else {
+      return (
+        <View style={styles.container}>
+          <WhiteSpace size="md" />
+          <GameInfo
+            awayTeam={this.props.game.away_team}
+            homeTeam={this.props.game.home_team}
+            date={this.props.game.date}
+          />
         <WhiteSpace size="md" />
-        <GameInfo
-          awayTeam={this.props.game.away_team}
-          homeTeam={this.props.game.home_team}
-          date={this.props.game.date}
-        />
-      <WhiteSpace size="md" />
-        <GameNavbar
-          token={this.props.token}
-          user={this.props.user}
-          gameID={this.props.game.random_game_id}
-          challenges={this.state.sorted_challenges}
-          prizes={this.props.game.prizes}
-          activeTabColor="rgb(93,188,210)"
-          submission={this.beginSubmission}
-        />
-      </View>
-    )
+          <GameNavbar
+            token={this.props.token}
+            user={this.props.user}
+            gameID={this.props.game.random_game_id}
+            challenges={this.state.sorted_challenges}
+            prizes={this.props.game.prizes}
+            activeTabColor="rgb(93,188,210)"
+            submission={this.beginSubmission}
+            getPostUser={this.getPostUser}
+          />
+        </View>
+      )
+    }
   }
 }
 

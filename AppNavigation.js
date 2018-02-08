@@ -21,29 +21,38 @@ class AppNavigation extends React.Component {
     this.handleBackBtn = this.handleBackBtn.bind(this);
     this.beginSubmission = this.beginSubmission.bind(this);
     this.submitPost = this.submitPost.bind(this);
+    this.getPostUser = this.getPostUser.bind(this);
   }
 
-  state = { user: false, token: false, game: false, backBtn: false, submission: false, loading: true };
+  state = {
+    user: false,
+    token: false,
+    game: false,
+    backBtn: false,
+    submission: false,
+    loading: false,
+    postUser: false
+  };
 
-  componentDidMount = async () => {
-    console.log("did mount");
-    try {
-      const token = await AsyncStorage.getItem('@MySuperStore:token');
-      const userID = await AsyncStorage.getItem('@MySuperStore:user');
-      this.setState({ token: token });
-
-      if (userID !== null){
-        this.props.fetchUser(token, userID)
-        .then((res) => {
-          console.log(res.payload.data);
-          this.setState({ user: res.payload.data, loading: false });
-        })
-
-      }
-    } catch (error) {
-      // Error retrieving data
-    }
-  }
+  // componentDidMount = async () => {
+  //   console.log("did mount");
+  //   try {
+  //     const token = await AsyncStorage.getItem('@MySuperStore:token');
+  //     const userID = await AsyncStorage.getItem('@MySuperStore:user');
+  //     this.setState({ token: token });
+  //
+  //     if (userID !== null){
+  //       this.props.fetchUser(token, userID)
+  //       .then((res) => {
+  //         console.log(res.payload.data);
+  //         this.setState({ user: res.payload.data, loading: false });
+  //       })
+  //
+  //     }
+  //   } catch (error) {
+  //     // Error retrieving data
+  //   }
+  // }
 
   getUser = async (obj) => {
     this.setState({ user: obj.user, token: obj.token });
@@ -59,7 +68,12 @@ class AppNavigation extends React.Component {
     this.setState({ backBtn: backBtn });
   }
   exitGame(game) {
-    this.setState({ game: game, backBtn: false });
+    if (this.state.postUser) {
+      this.setState({ postUser: false });
+    }
+    else {
+      this.setState({ game: game, backBtn: false });
+    }
   }
   getGame(game) {
     this.setState({ game: game, backBtn: true });
@@ -69,6 +83,9 @@ class AppNavigation extends React.Component {
   }
   submitPost() {
     this.setState({ submission: false });
+  }
+  getPostUser(value) {
+    this.setState({ postUser: value });
   }
 
   render() {
@@ -107,9 +124,11 @@ class AppNavigation extends React.Component {
               user={this.state.user}
               token={this.state.token}
               game={this.state.game}
+              postUser={this.state.postUser}
               getGame={this.getGame}
               handleBackBtn={this.handleBackBtn}
               submission={this.beginSubmission}
+              getPostUser={this.getPostUser}
             />
           </View>
         );

@@ -21,6 +21,7 @@ class BottomNavbar extends Component {
 
     this.getGame = this.getGame.bind(this);
     this.beginSubmission = this.beginSubmission.bind(this);
+    this.getPostUser = this.getPostUser.bind(this);
   }
 
   getGame(game) {
@@ -29,6 +30,10 @@ class BottomNavbar extends Component {
 
   beginSubmission(submission) {
     this.props.submission(submission);
+  }
+
+  getPostUser(value) {
+    this.props.getPostUser(value);
   }
 
   renderContent(pageKey) {
@@ -46,7 +51,9 @@ class BottomNavbar extends Component {
             token={this.props.token}
             user={this.props.user}
             game={this.props.game}
+            postUser={this.props.postUser}
             submission={this.beginSubmission}
+            getPostUser={this.getPostUser}
           />
         );
       }

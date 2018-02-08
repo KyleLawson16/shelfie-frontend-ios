@@ -16,9 +16,17 @@ class GameNavbar extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { activeIconColor: [this.props.activeTabColor, this.props.inactiveTabColor, this.props.inactiveTabColor, this.props.inactiveTabColor]} // Initial state of icon colors
+    this.state = {
+      activeIconColor: [
+        this.props.activeTabColor,
+        this.props.inactiveTabColor,
+        this.props.inactiveTabColor,
+        this.props.inactiveTabColor
+      ],
+    } // Initial state of icon colors
 
     this.beginSubmission = this.beginSubmission.bind(this);
+    this.getPostUser = this.getPostUser.bind(this);
   }
   updateIconColor(tab, index) {
     var tabColorList = [
@@ -34,6 +42,9 @@ class GameNavbar extends Component {
 
   beginSubmission(submission) {
     this.props.submission(submission);
+  }
+  getPostUser(user) {
+    this.props.getPostUser(user);
   }
 
   render() {
@@ -56,6 +67,7 @@ class GameNavbar extends Component {
             token={this.props.token}
             user={this.props.user}
             gameID={this.props.gameID}
+            getPostUser={this.props.getPostUser.bind(this)}
           />
         </View>
 

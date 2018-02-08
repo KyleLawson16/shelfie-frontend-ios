@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ROOT_URL = `https://967011b1.ngrok.io/`;
+const ROOT_URL = `https://d26416d2.ngrok.io/`;
 
 export const CREATE_USER = 'CREATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';
@@ -14,7 +14,7 @@ export const DELETE_LIKE = 'DELETE_LIKE';
 export const CREATE_POST = 'CREATE_POST';
 
 export function createUser(firstName, lastName, username, email, password, confirmPassword) {
-  const url = `${ROOT_URL}api/v1/users/create`;
+  const url = `${ROOT_URL}api/v1/users/create/`;
   const request = axios.post(url, {
     first_name: firstName,
     last_name: lastName,
@@ -23,7 +23,7 @@ export function createUser(firstName, lastName, username, email, password, confi
     password: password,
     confirm_password: confirmPassword,
     is_staff: false,
-    is_superuser: false
+    is_superuser: false,
   });
 
   return {
@@ -119,6 +119,24 @@ export function addLike(token, random_user_id, random_post_id) {
 
   return {
     type: ADD_LIKE,
+    payload: request,
+  }
+}
+
+export function deleteLike(token, random_user_id, random_post_id) {
+  const url = `${ROOT_URL}api/v1/posts/${random_post_id}/like/delete/`;
+  const request =  axios.post(url,
+    {
+      headers: {
+        Authorization: `Token ${token}`
+      },
+      random_user_id: random_user_id,
+      random_post_id: random_post_id,
+    }
+  );
+
+  return {
+    type: DELETE_LIKE,
     payload: request,
   }
 }

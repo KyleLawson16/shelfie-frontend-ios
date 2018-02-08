@@ -35,7 +35,7 @@ class SignUp extends Component {
         value.username,
         value.email,
         value.password,
-        value.confirm
+        value.confirm,
       ).then((response) => { // Get response
         this.setState({ loading: false });
         this.navigate(response); // Call navigate function
@@ -45,10 +45,12 @@ class SignUp extends Component {
 
   navigate(response) {
     if (!response.payload.response) { // If no response (success)
+      console.log(response.payload.response);
       this.setState({ errorMessage: false });
       this.props.getUser(response.payload.data); // Send response data to parent LandingPage and navigate
     }
     else {
+      console.log(response.payload.response);
       var errorList = [];
       var errors = response.payload.response.data;
       for (key in errors) { // for each item in response object

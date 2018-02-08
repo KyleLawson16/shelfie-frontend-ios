@@ -9,20 +9,24 @@ class UserSubmission extends Component {
     super(props);
 
     this.state = {
-      loaded: false
+      loading: true
     }
   }
 
   onLoad() { // On image load get rid of loading spinner
     this.setState({
-      loaded: true
+      loading: false
     })
   }
 
   render() {
       return (
         <View>
-          <ActivityIndicator animating={this.state.loaded ? false : true } />
+          <ActivityIndicator
+            animating={this.state.loading}
+            size="small"
+            color="rgb(93,188,210)"
+          />
           <Flex>
             {this.props.isVideo
             ?

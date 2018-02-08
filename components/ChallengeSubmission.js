@@ -12,11 +12,21 @@ import { addLike, deleteLike } from '../actions';
 class ChallengeSubmission extends Component {
   constructor(props) {
     super(props);
-    this.state = { lastPress: 0, liked: false, likes: 0, doubleTapOpacity: 1, loaded: false, screenWidth: Dimensions.get('window').width };
+    this.state = {
+      lastPress: 0,
+      liked: false,
+      likes: 0,
+      doubleTapOpacity: 1,
+      loaded: false,
+      muted: true,
+      paused: true,
+      screenWidth: Dimensions.get('window').width
+    };
 
     this.handleImagePress = this.handleImagePress.bind(this);
     this.handleLikePress = this.handleLikePress.bind(this);
     this.onImageLoad = this.onImageLoad.bind(this);
+    this.handleUserPress = this.handleUserPress.bind(this);
   }
 
   componentDidMount() {
@@ -35,15 +45,15 @@ class ChallengeSubmission extends Component {
       this.setState({ doubleTapOpacity: 0.6 }); // Image opacity on double tap
       if (!this.state.liked) {
         this.like();
-        setTimeout(() => {this.setState({ doubleTapOpacity: 1 })}, 100); // Return image opacity to normal after double tap
+        setTimeout(() => {this.setState({ doubleTapOpacity: 1 })}, 200); // Return image opacity to normal after double tap
       } else {
         this.unlike();
-        setTimeout(() => {this.setState({ doubleTapOpacity: 1 })}, 100);
+        setTimeout(() => {this.setState({ doubleTapOpacity: 1 })}, 200);
       }
     }
 
     this.setState({
-      lastPress: new Date().getTime() // Reset the time of the last image press
+      lastPress: new Date().getTime(), // Reset the time of the last image press
     })
   }
 
@@ -76,56 +86,66 @@ class ChallengeSubmission extends Component {
     })
   }
 
+  handleUserPress() {
+    this.props.getPostUser(this.props.postUser);
+  }
+
   render() {
     return (
       <View>
         <WhiteSpace size="lg" />
         <WingBlank size="md">
           <View>
-            <Text style={styles.userName}>{this.props.username}</Text>
+            <TouchableOpacity onPress={this.handleUserPress}>
+              <Text style={styles.userName}>{this.props.postUser.username}</Text>
+            </TouchableOpacity>
             <Text style={styles.challengeName}>{this.props.challenge}</Text>
           </View>
         </WingBlank>
         <WhiteSpace size="xs" />
-        <Flex justifyContent="center" style={{backgroundColor: 'darkgrey'}}>
+        <Flex justifyContent="center" style={{backgroundColor: 'darkgrey', opacity: this.state.doubleTapOpacity}}>
           <ActivityIndicator animating={this.state.loaded ? false : true } />
           <TouchableWithoutFeedback
             onPress={this.handleImagePress}
           >
             {this.props.isVideo
             ?
-            <Video
-              source={{uri: this.props.mediaUrl, mainVer: 1, patchVer: 0}}
-              ref={(ref) => {
-                this.player = ref
-              }}
-              rate={1.0}
-              volume={1.0}
-              muted={true}
-              paused={true}
-              resizeMode="cover"
-              repeat={true}
-              onLoad={response => {
-                const { width, height } = response.naturalSize;
-                const heightScaled = 1.5 * height * (this.state.screenWidth / width);
+            <View>
+              <Video
+                source={{uri: this.props.mediaUrl, mainVer: 1, patchVer: 0}}
+                ref={(ref) => {
+                  this.player = ref
+                }}
+                rate={1.0}
+                volume={1.0}
+                muted={this.state.muted}
+                paused={this.state.paused}
+                resizeMode="cover"
+                repeat={true}
+                onLoad={response => {
+                  const { width, height } = response.naturalSize;
+                  const heightScaled = 1.5 * height * (this.state.screenWidth / width);
 
-                this.setState({
-                  heightScaled: heightScaled,
-                  videoPaused: false,
-                  loaded: true,
-                });
-              }}
-              style={{
-                width: this.state.screenWidth,
-                height: this.state.heightScaled
-              }}
-            />
+                  this.setState({
+                    heightScaled: heightScaled,
+                    videoPaused: false,
+                    loaded: true,
+                  });
+                }}
+                style={{
+                  width: this.state.screenWidth,
+                  height: this.state.heightScaled,
+                  opacity: this.state.doubleTapOpacity,
+                }}
+              />
+            </View>
             :
             <Image
               source={{ uri: this.props.mediaUrl }}
               width={Dimensions.get('window').width}
               height={(Dimensions.get('window').height * .4)}
               onLoad={this.onImageLoad}
+              style={{ opacity: this.state.doubleTapOpacity }}
             />
             }
 
