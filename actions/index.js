@@ -4,6 +4,7 @@ const ROOT_URL = `https://d26416d2.ngrok.io/`;
 
 export const CREATE_USER = 'CREATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';
 export const FETCH_USER = 'FETCH_USER';
 export const FETCH_GAMES = 'FETCH_GAMES';
 export const FETCH_POSTS = 'FETCH_POSTS';
@@ -44,6 +45,18 @@ export function loginUser(username, password) {
     payload: request
   };
 }
+
+export function logoutUser(token) {
+  const url = `${ROOT_URL}api/v1/logout/`;
+  const request = axios.post(url, '', {headers: { Authorization: `Token ${token}` }}
+  );
+
+  return {
+    type: LOGOUT_USER,
+    payload: request
+  };
+}
+
 
 export function fetchUser(token, userID) {
   const url = `${ROOT_URL}api/v1/users/${userID}/`;

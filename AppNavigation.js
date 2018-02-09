@@ -22,6 +22,7 @@ class AppNavigation extends React.Component {
     this.beginSubmission = this.beginSubmission.bind(this);
     this.submitPost = this.submitPost.bind(this);
     this.getPostUser = this.getPostUser.bind(this);
+    this.getSelectedPost = this.getSelectedPost.bind(this);
   }
 
   state = {
@@ -31,7 +32,8 @@ class AppNavigation extends React.Component {
     backBtn: false,
     submission: false,
     loading: true,
-    postUser: false
+    postUser: false,
+    selectedPost: false,
   };
 
   componentDidMount = async () => {
@@ -71,6 +73,9 @@ class AppNavigation extends React.Component {
     if (this.state.postUser) {
       this.setState({ postUser: false });
     }
+    else if (this.state.selectedPost) {
+      this.setState({ selectedPost: false, backBtn: false });
+    }
     else {
       this.setState({ game: game, backBtn: false });
     }
@@ -86,6 +91,9 @@ class AppNavigation extends React.Component {
   }
   getPostUser(value) {
     this.setState({ postUser: value });
+  }
+  getSelectedPost(post) {
+    this.setState({ selectedPost: post, backBtn: true });
   }
 
   render() {
@@ -116,19 +124,23 @@ class AppNavigation extends React.Component {
           <View style={styles.container}>
             <WhiteSpace size="lg" />
             <TopNavbar
+              token={this.state.token}
               exitGame={this.exitGame}
               backBtn={this.state.backBtn}
               SearchBtn={this.state.searchBtn}
+              logoutBtn={true}
             />
             <BottomNavbar
               user={this.state.user}
               token={this.state.token}
               game={this.state.game}
               postUser={this.state.postUser}
+              selectedPost={this.state.selectedPost}
               getGame={this.getGame}
               handleBackBtn={this.handleBackBtn}
               submission={this.beginSubmission}
               getPostUser={this.getPostUser}
+              getSelectedPost={this.getSelectedPost}
             />
           </View>
         );

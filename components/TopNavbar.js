@@ -3,16 +3,27 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { Flex, Icon, WingBlank, WhiteSpace } from 'antd-mobile';
 import styles from '../styles';
 
+import { connect } from 'react-redux';
+import { logoutUser } from '../actions';
+
 class TopNavbar extends Component {
   constructor(props) {
     super(props);
 
     this.handleBack = this.handleBack.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   handleBack() {
     this.props.exitGame(false);
     console.log('working');
+  }
+
+  handleLogout() {
+    this.props.logoutUser(this.props.token)
+    .then((res) => {
+      console.log(res);
+    })
   }
   render() {
     return (
@@ -34,6 +45,11 @@ class TopNavbar extends Component {
               {this.props.searchBtn ?
               <Text style={{ textAlign: 'right' }}><Icon type={"\ue670"} /></Text>
               : false}
+              {this.props.logoutBtn ?
+              <TouchableOpacity onPress={this.handleLogout}>
+                <Text style={{ textAlign: 'right' }}><Icon type={"\ue670"} /></Text>
+              </TouchableOpacity>
+              : false}
             </Flex.Item>
           </Flex>
         </WingBlank>
@@ -43,4 +59,8 @@ class TopNavbar extends Component {
   }
 }
 
-export default TopNavbar;
+function mapStateToProps(state) {
+  return { pitches: state.pitches };
+}
+
+export default connect(mapStateToProps, { logoutUser })(TopNavbar);

@@ -47,7 +47,12 @@ class UserInfo extends Component {
             onPressIn={() => {this.props.handleEditBtn(true);}}
             style={styles.userEditBtn}
           >
-            <Text style={{fontSize: 14}}>Edit Profile</Text>
+            <Text style={{fontSize: 14}}>
+              {this.props.other
+                ? 'Follow'
+                : 'Edit Profile'
+              }
+            </Text>
           </Button>
         </Flex>
         <WhiteSpace />
