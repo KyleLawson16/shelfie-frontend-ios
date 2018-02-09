@@ -96,12 +96,17 @@ class UserPage extends Component {
                   other={this.props.other}
                 />
                 <WhiteSpace />
+                {this.state.userPosts
+                ?
                 <UserSubmissions
                   token={this.props.token}
                   user={this.props.user}
                   userPosts={this.state.userPosts}
                   getSelectedPost={this.getSelectedPost}
                 />
+                :
+                null
+                }
               </ScrollView>
             }
         </View>

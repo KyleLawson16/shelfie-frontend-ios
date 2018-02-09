@@ -20,7 +20,7 @@ class GameItem extends Component {
             </Flex.Item>
             <Flex.Item>
               <Text style={styles.gameFans}>
-                {this.props.fans == 1 ? `${this.props.fans} fan` : `${this.props.fans} fans`}
+                {this.props.fans.length == 1 ? `${this.props.fans.length} fan` : `${this.props.fans.length} fans`}
               </Text>
             </Flex.Item>
           </Flex>

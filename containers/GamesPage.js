@@ -41,7 +41,7 @@ class GamesPage extends Component {
                   date={item.date}
                   location={item.location}
                   challenges={item.challenges}
-                  fans={item.fans}
+                  fans={item.fans_ids}
                 />
               </TouchableOpacity>
               <WhiteSpace style={styles.gameDivider} size="xs" />

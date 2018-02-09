@@ -45,7 +45,7 @@ class GamePage extends Component {
       })
       sorted_challenges.push(sorted_challenge); // Add the object to the list of sorted challenges
     })
-    console.log(sorted_challenges, 'sorted');
+    // console.log(sorted_challenges, 'sorted');
     this.setState({ sorted_challenges: sorted_challenges });
   }
 

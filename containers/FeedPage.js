@@ -18,7 +18,7 @@ class FeedPage extends Component {
   componentWillMount() {
     this.props.fetchPosts(this.props.token, 'game', this.props.gameID)
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       this.setState({ posts: res.payload.data, loading: false });
     });
   }
