@@ -19,12 +19,12 @@ class ChallengePage extends Component {
 
   render() {
     return (
-      <View>
-        <ScrollView>
+      <ScrollView>
         <Flex justify="center" style={styles.greyHeaderBar}>
           <Text style={styles.challengeHeader}>Challenges</Text>
         </Flex>
         <FlatList
+          style={styles.container}
           data={this.props.challenges}
           renderItem={({item}) =>
           <ChallengeCarousel
@@ -35,8 +35,7 @@ class ChallengePage extends Component {
           }
           keyExtractor={(item, index) => index}
         />
-        </ScrollView>
-      </View>
+      </ScrollView>
     )
   }
 }

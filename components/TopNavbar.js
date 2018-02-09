@@ -21,7 +21,9 @@ class TopNavbar extends Component {
   render() {
     return (
       <View style={styles.topNavbar}>
-        <WhiteSpace />
+        <WhiteSpace size="lg"/>
+        <WhiteSpace size="lg"/>
+        <WhiteSpace size="lg"/>
         <WingBlank size="md">
           <Flex>
             <Flex.Item>
@@ -35,14 +37,6 @@ class TopNavbar extends Component {
               <Text style={{ textAlign: 'center' }}>SHELFIE</Text>
             </Flex.Item>
             <Flex.Item>
-              {this.props.searchBtn ?
-              <Text style={{ textAlign: 'right' }}><Icon type={"\ue670"} /></Text>
-              : false}
-              {this.props.logoutBtn ?
-              <TouchableOpacity onPress={this.handleLogout}>
-                <Text style={{ textAlign: 'right' }}><Icon type={"\ue670"} /></Text>
-              </TouchableOpacity>
-              : false}
             </Flex.Item>
           </Flex>
         </WingBlank>
@@ -51,6 +45,15 @@ class TopNavbar extends Component {
     )
   }
 }
+
+// {this.props.logoutBtn ?
+// <TouchableOpacity onPress={this.handleLogout}>
+//   <Text style={{ textAlign: 'right' }}><Icon type={"\ue670"} /></Text>
+// </TouchableOpacity>
+// : false}
+// {this.props.searchBtn ?
+// <Text style={{ textAlign: 'right' }}><Icon type={"\ue670"} /></Text>
+// : false}
 
 function mapStateToProps(state) {
   return { pitches: state.pitches };

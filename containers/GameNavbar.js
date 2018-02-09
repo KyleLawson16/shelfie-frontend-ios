@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList } from 'react-native';
 import { Tabs, Icon, Flex } from 'antd-mobile';
+import styles from '../styles';
 
 import FeedPage from './FeedPage';
 import ChallengePage from './ChallengePage';
@@ -62,7 +63,7 @@ class GameNavbar extends Component {
         tabBarUnderlineStyle={{ backgroundColor: this.props.activeTabColor, borderColor: this.props.activeTabColor }}
         onChange={(tab, index) => this.updateIconColor(tab, index)}
       >
-        <View>
+        <View style={styles.containerBackground}>
           <FeedPage
             token={this.props.token}
             user={this.props.user}
@@ -71,14 +72,14 @@ class GameNavbar extends Component {
           />
         </View>
 
-        <View>
+        <View style={styles.containerBackground}>
           <ChallengePage
             challenges={this.props.challenges}
             submission={this.beginSubmission}
           />
         </View>
 
-        <View>
+        <View style={styles.containerBackground}>
           <LeaderboardPage
             token={this.props.token}
             gameID={this.props.gameID}

@@ -24,11 +24,12 @@ class GamesPage extends Component {
   render() {
     if (this.state.games) {
       return (
-        <ScrollView>
+        <ScrollView style={styles.containerBackground}>
           <Flex justify="center" style={styles.greyHeaderBar}>
             <Text style={styles.challengeHeader}>Games</Text>
           </Flex>
           <FlatList
+            style={styles.container}
             data={this.state.games}
             renderItem={({item}) =>
             <View>

@@ -29,7 +29,7 @@ class FeedPage extends Component {
 
   render() {
     return (
-      <ScrollView>
+      <ScrollView style={styles.containerBackground}>
         <Flex justify="center" style={styles.greyHeaderBar}>
           <Text style={styles.challengeHeader}>Game Feed</Text>
         </Flex>
@@ -51,7 +51,7 @@ class FeedPage extends Component {
             />
           }
           keyExtractor={(item, index) => index}
-          style={{ marginBottom: 100}}
+          style={{ marginBottom: 83}}
         />
         <ActivityIndicator
           animating={this.state.loading}

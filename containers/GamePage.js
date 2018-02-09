@@ -3,6 +3,9 @@ import { View } from 'react-native';
 import { WhiteSpace } from 'antd-mobile';
 import styles from '../styles';
 
+import { connect } from 'react-redux';
+import { joinGame } from '../actions';
+
 import GameInfo from '../components/GameInfo';
 import GameNavbar from './GameNavbar';
 import UserPage from './UserPage';
@@ -19,6 +22,10 @@ class GamePage extends Component {
   }
 
   componentWillMount() {
+    // this.props.joinGame(this.props.token, this.props.user.random_user_id, this.props.game.random_game_id)
+    // .then((res) => {
+    //   console.log(res);
+    // });
     var challenges = this.props.game.challenges;
     var pt_values = [];
     for (i=0; i < challenges.length; i++) {
@@ -92,4 +99,8 @@ class GamePage extends Component {
   }
 }
 
-export default GamePage;
+function mapStateToProps(state) {
+  return { pitches: state.pitches };
+}
+
+export default connect(mapStateToProps, { joinGame })(GamePage);

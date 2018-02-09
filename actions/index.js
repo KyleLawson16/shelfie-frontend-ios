@@ -13,6 +13,7 @@ export const FETCH_LEADERBOARD = 'FETCH_LEADERBOARD';
 export const ADD_LIKE = 'ADD_LIKE';
 export const DELETE_LIKE = 'DELETE_LIKE';
 export const CREATE_POST = 'CREATE_POST';
+export const JOIN_GAME = 'JOIN_GAME';
 
 export function createUser(firstName, lastName, username, email, password, confirmPassword) {
   const url = `${ROOT_URL}api/v1/create-user/`;
@@ -180,6 +181,23 @@ export function createPost(
 
   return {
     type: CREATE_POST,
+    payload: request,
+  }
+}
+
+export function joinGame(token, random_user_id, random_game_id) {
+  const url = `${ROOT_URL}api/v1/games/${random_game_id}/`;
+  const request =  axios.put(url,
+    {
+      headers: {
+        Authorization: `Token ${token}`
+      },
+      fans: random_user_id,
+    }
+  );
+
+  return {
+    type: JOIN_GAME,
     payload: request,
   }
 }

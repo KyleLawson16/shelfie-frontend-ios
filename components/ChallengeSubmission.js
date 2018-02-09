@@ -92,7 +92,7 @@ class ChallengeSubmission extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{ backgroundColor: '#fff' }}>
         <WhiteSpace size="lg" />
         <WingBlank size="md">
           <View>

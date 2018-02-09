@@ -106,7 +106,7 @@ class AppNavigation extends React.Component {
   render() {
       if (!this.state.user) {
         return (
-          <View style={styles.container}>
+          <View style={styles.containerBackground}>
             <LandingPage handleUser={this.getUser} />
             {this.state.loading
               ? <ActivityIndicator toast text="loading" />
@@ -128,8 +128,7 @@ class AppNavigation extends React.Component {
       }
       else {
         return (
-          <View style={styles.container}>
-            <WhiteSpace size="lg" />
+          <View style={styles.containerBackground}>
             <TopNavbar
               token={this.state.token}
               exitGame={this.exitGame}
