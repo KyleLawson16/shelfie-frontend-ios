@@ -24,6 +24,7 @@ class UserInfo extends Component {
     console.log(this.props.user);
     return (
       <WingBlank>
+        <WhiteSpace size="md" />
         <Flex
           align="start"
         >

@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ddd',
   },
   topNavbar: {
-    backgroundColor: '#fff',
+    backgroundColor: '#f9f9f9',
     borderBottomColor: THEME_COLOR,
     borderBottomWidth: 2,
     shadowColor: '#000',
@@ -90,6 +90,10 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     marginTop: 15,
+  },
+  gameLogoColumn: {
+    width: '20%',
+    alignItems: 'center',
   },
   gameLocation: {
     textAlign: 'center',

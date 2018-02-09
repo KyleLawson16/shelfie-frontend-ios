@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList } from 'react-native';
+import { Text, View, FlatList, Image } from 'react-native';
 import { WhiteSpace, Flex } from 'antd-mobile';
 import moment from 'moment';
 import styles from '../styles';
@@ -25,11 +25,23 @@ class GameItem extends Component {
             </Flex.Item>
           </Flex>
           <Flex>
-            <Flex.Item>
-              <Text style={styles.gameTeams}>{this.props.awayTeam} @ {this.props.homeTeam}</Text>
+            <View style={styles.gameLogoColumn}>
+              <Image
+                source={{ uri: this.props.awayTeam.logo_url }}
+                style={{ width: 50, height: 50 }}
+              />
+            </View>
+            <View style={{ width: '60%' }}>
+              <Text style={styles.gameTeams}>{this.props.awayTeam.name} @ {this.props.homeTeam.name}</Text>
               <Text style={styles.gameLocation}>{this.props.location}</Text>
               <Text style={styles.gameDateLong}>{moment.parseZone(this.props.date).calendar()}</Text>
-            </Flex.Item>
+            </View>
+            <View style={styles.gameLogoColumn}>
+              <Image
+                source={{ uri: this.props.homeTeam.logo_url }}
+                style={{ width: 50, height: 50 }}
+              />
+            </View>
           </Flex>
         </View>
       </View>

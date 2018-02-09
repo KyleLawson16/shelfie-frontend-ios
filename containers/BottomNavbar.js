@@ -92,8 +92,9 @@ class BottomNavbar extends Component {
     return (
         <TabBar
             unselectedTintColor="#000"
-            tintColor="rgb(93,188,210)"
+            tintColor="#000"
             barTintColor="white"
+            style={{ backgroundColor: '#f9f9f9' }}
           >
             <TabBar.Item
 

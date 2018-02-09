@@ -22,10 +22,10 @@ class GamePage extends Component {
   }
 
   componentWillMount() {
-    // this.props.joinGame(this.props.token, this.props.user.random_user_id, this.props.game.random_game_id)
-    // .then((res) => {
-    //   console.log(res);
-    // });
+    this.props.joinGame(this.props.token, this.props.user.random_user_id, this.props.game.random_game_id)
+    .then((res) => {
+      console.log(res);
+    });
     var challenges = this.props.game.challenges;
     var pt_values = [];
     for (i=0; i < challenges.length; i++) {
@@ -76,13 +76,13 @@ class GamePage extends Component {
     else {
       return (
         <View style={styles.container}>
-          <WhiteSpace size="md" />
+          <WhiteSpace size="lg" />
           <GameInfo
-            awayTeam={this.props.game.away_team}
-            homeTeam={this.props.game.home_team}
+            awayTeam={this.props.game.away_team.name}
+            homeTeam={this.props.game.home_team.name}
             date={this.props.game.date}
           />
-        <WhiteSpace size="md" />
+          <WhiteSpace size="md" />
           <GameNavbar
             token={this.props.token}
             user={this.props.user}

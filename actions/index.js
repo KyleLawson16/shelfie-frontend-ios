@@ -192,7 +192,7 @@ export function joinGame(token, random_user_id, random_game_id) {
       headers: {
         Authorization: `Token ${token}`
       },
-      fans: random_user_id,
+      random_user_id: random_user_id,
     }
   );
 
