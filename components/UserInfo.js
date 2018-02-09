@@ -3,9 +3,21 @@ import { Text, View, Image } from 'react-native';
 import { Flex, WhiteSpace, WingBlank, Button } from 'antd-mobile';
 import styles from '../styles';
 
+import { connect } from 'react-redux';
+import { logoutUser } from '../actions';
+
 class UserInfo extends Component {
   constructor(props) {
     super(props);
+
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  handleLogout() {
+    this.props.logoutUser(this.props.token)
+    .then((res) => {
+      this.props.handleLogout();
+    })
   }
 
   render() {
@@ -54,6 +66,19 @@ class UserInfo extends Component {
               }
             </Text>
           </Button>
+          {!this.props.other
+          ?
+          <Button
+            onPressIn={this.handleLogout}
+            style={styles.userEditBtn}
+          >
+            <Text style={{fontSize: 14}}>
+              Logout
+            </Text>
+          </Button>
+          :
+          null
+          }
         </Flex>
         <WhiteSpace />
         <Flex
@@ -69,4 +94,8 @@ class UserInfo extends Component {
   }
 }
 
-export default UserInfo;
+function mapStateToProps(state) {
+  return { pitches: state.pitches };
+}
+
+export default connect(mapStateToProps, { logoutUser })(UserInfo);

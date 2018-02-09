@@ -25,6 +25,7 @@ class UserPage extends Component {
     this.handleEditBtn = this.handleEditBtn.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.getSelectedPost = this.getSelectedPost.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   componentWillMount() {
@@ -52,6 +53,9 @@ class UserPage extends Component {
   }
   getSelectedPost(post) {
     this.props.getSelectedPost(post);
+  }
+  handleLogout() {
+    this.props.handleLogout();
   }
 
   render() {
@@ -84,8 +88,10 @@ class UserPage extends Component {
               :
               <ScrollView>
                 <UserInfo
+                  token={this.props.token}
                   user={this.props.user}
                   handleEditBtn={this.handleEditBtn}
+                  handleLogout={this.handleLogout}
                   totalPoints={this.state.totalPoints}
                   other={this.props.other}
                 />

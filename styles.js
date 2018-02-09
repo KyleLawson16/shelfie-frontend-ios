@@ -130,9 +130,9 @@ const styles = StyleSheet.create({
     color: 'grey'
   },
   userEditBtn: {
-    width: '60%',
+    width: '30%',
     height: 25,
-    marginRight: '6.5%',
+    marginRight: '4%',
     marginTop: -50
   },
   userName: {

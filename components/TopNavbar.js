@@ -11,7 +11,6 @@ class TopNavbar extends Component {
     super(props);
 
     this.handleBack = this.handleBack.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
   }
 
   handleBack() {
@@ -19,12 +18,6 @@ class TopNavbar extends Component {
     console.log('working');
   }
 
-  handleLogout() {
-    this.props.logoutUser(this.props.token)
-    .then((res) => {
-      console.log(res);
-    })
-  }
   render() {
     return (
       <View style={styles.topNavbar}>

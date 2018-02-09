@@ -23,6 +23,7 @@ class AppNavigation extends React.Component {
     this.submitPost = this.submitPost.bind(this);
     this.getPostUser = this.getPostUser.bind(this);
     this.getSelectedPost = this.getSelectedPost.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   state = {
@@ -95,6 +96,9 @@ class AppNavigation extends React.Component {
   getSelectedPost(post) {
     this.setState({ selectedPost: post, backBtn: true });
   }
+  handleLogout() {
+    this.setState({ user: false });
+  }
 
   render() {
       if (!this.state.user) {
@@ -141,6 +145,7 @@ class AppNavigation extends React.Component {
               submission={this.beginSubmission}
               getPostUser={this.getPostUser}
               getSelectedPost={this.getSelectedPost}
+              handleLogout={this.handleLogout}
             />
           </View>
         );
