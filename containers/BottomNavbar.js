@@ -64,6 +64,8 @@ class BottomNavbar extends Component {
             postUser={this.props.postUser}
             submission={this.beginSubmission}
             getPostUser={this.getPostUser}
+            selectedPost={this.props.selectedPost}
+            getSelectedPost={this.getSelectedPost}
           />
         );
       }

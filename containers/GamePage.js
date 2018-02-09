@@ -15,6 +15,7 @@ class GamePage extends Component {
 
     this.beginSubmission = this.beginSubmission.bind(this);
     this.getPostUser = this.getPostUser.bind(this);
+    this.getSelectedPost = this.getSelectedPost.bind(this);
   }
 
   componentWillMount() {
@@ -47,6 +48,9 @@ class GamePage extends Component {
   getPostUser(user) {
     this.props.getPostUser(user);
   }
+  getSelectedPost(post) {
+    this.props.getSelectedPost(post);
+  }
 
   render() {
     if (this.props.postUser) {
@@ -55,6 +59,8 @@ class GamePage extends Component {
           <UserPage
             token={this.props.token}
             user={this.props.postUser}
+            selectedPost={this.props.selectedPost}
+            getSelectedPost={this.getSelectedPost}
             other={true}
           />
         </View>

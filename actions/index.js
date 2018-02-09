@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ROOT_URL = `https://d26416d2.ngrok.io/`;
+const ROOT_URL = `https://2e0f36eb.ngrok.io/`;
 
 export const CREATE_USER = 'CREATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';

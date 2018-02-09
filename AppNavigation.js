@@ -71,7 +71,10 @@ class AppNavigation extends React.Component {
     this.setState({ backBtn: backBtn });
   }
   exitGame(game) {
-    if (this.state.postUser) {
+    if (this.state.postUser && this.state.selectedPost) {
+      this.setState({ selectedPost: false });
+    }
+    else if (this.state.postUser) {
       this.setState({ postUser: false });
     }
     else if (this.state.selectedPost) {
