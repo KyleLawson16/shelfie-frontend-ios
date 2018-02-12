@@ -75,19 +75,19 @@ const styles = StyleSheet.create({
   },
   gameDateShort: {
     textAlign: 'left',
-    fontSize: 16,
+    fontSize: 14,
     marginLeft: 10,
     marginTop: 8,
   },
   gameFans: {
     textAlign: 'right',
-    fontSize: 16,
+    fontSize: 14,
     marginRight: 10,
     marginTop: 8,
   },
   gameTeams: {
     textAlign: 'center',
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: 'bold',
     marginTop: 15,
   },
@@ -97,12 +97,12 @@ const styles = StyleSheet.create({
   },
   gameLocation: {
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold',
   },
   gameDateLong: {
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 14,
     marginBottom: 20,
   },
 
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   },
   challengeHeader: {
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 18,
   },
   challengePointHeading: {
     textAlign: 'center',

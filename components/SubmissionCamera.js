@@ -4,7 +4,7 @@ import { StyleSheet, Text, TouchableOpacity, TouchableHighlight, View, Image } f
 import { Flex, ActivityIndicator } from 'antd-mobile';
 import Camera from 'react-native-camera';
 import Video from 'react-native-video';
-import ImagePicker from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../styles';
 
@@ -48,41 +48,81 @@ class SubmissionCamera extends Component {
   }
 
   saveCapture() { // Callend when user taps save arrow button
-    this.setState({ loading: true });
     const name = this.makeid();
     var type = "image/png";
+    this.setState({ loading: true });
     if (this.state.captureType == "video") {
+
       type = "video/mp4"
+      const file = {
+        // `uri` can also be a file system path (i.e. file://)
+        uri: this.state.path,
+        name: `${this.props.gameID}-${name}`,
+        type: type
+      };
+
+      const options = {
+        keyPrefix: `posts/${this.state.captureType}s/`,
+        bucket: "shelfie-challenge",
+        region: "us-west-1",
+        accessKey: ACCESS_KEY,
+        secretKey: SECRET_ACCESS_KEY,
+        successActionStatus: 201
+      };
+
+      RNS3.put(file, options).then(response => {
+        if (response.status !== 201)
+          throw new Error("Failed to upload image to S3");
+        else {
+          this.setState({
+            handleSave: false, // Set the process of handling save to finished (* will be called after getting callback from database)
+            saved: true, // Acknowledge that a photo/video has been saved
+            loading: false,
+          });
+          this.props.mediaObject(response.body);
+          this.props.saved(true); // Pass saved to parent SubmissionPage
+        }
+      });
     }
-    const file = {
-      // `uri` can also be a file system path (i.e. file://)
-      uri: this.state.path,
-      name: `${this.props.gameID}-${name}`,
-      type: type
-    };
+    else {
+      ImagePicker.openCropper({
+        path: this.state.path
+      }).then(image => {
+        console.log(image);
+        const file = {
+          // `uri` can also be a file system path (i.e. file://)
+          uri: image.path,
+          name: `${this.props.gameID}-${name}`,
+          type: type
+        };
 
-    const options = {
-      keyPrefix: `posts/${this.state.captureType}s/`,
-      bucket: "shelfie-challenge",
-      region: "us-west-1",
-      accessKey: ACCESS_KEY,
-      secretKey: SECRET_ACCESS_KEY,
-      successActionStatus: 201
-    };
+        const options = {
+          keyPrefix: `posts/${this.state.captureType}s/`,
+          bucket: "shelfie-challenge",
+          region: "us-west-1",
+          accessKey: ACCESS_KEY,
+          secretKey: SECRET_ACCESS_KEY,
+          successActionStatus: 201
+        };
 
-    RNS3.put(file, options).then(response => {
-      if (response.status !== 201)
-        throw new Error("Failed to upload image to S3");
-      else {
-        this.setState({
-          handleSave: false, // Set the process of handling save to finished (* will be called after getting callback from database)
-          saved: true, // Acknowledge that a photo/video has been saved
-          loading: false,
+        RNS3.put(file, options).then(response => {
+          if (response.status !== 201)
+            throw new Error("Failed to upload image to S3");
+          else {
+            this.setState({
+              handleSave: false, // Set the process of handling save to finished (* will be called after getting callback from database)
+              saved: true, // Acknowledge that a photo/video has been saved
+              loading: false,
+            });
+            this.props.mediaObject(response.body);
+            this.props.saved(true); // Pass saved to parent SubmissionPage
+          }
         });
-        this.props.mediaObject(response.body);
-        this.props.saved(true); // Pass saved to parent SubmissionPage
-      }
-    });
+
+      });
+    }
+
+
 
 
   }
@@ -113,13 +153,16 @@ class SubmissionCamera extends Component {
   choosePhoto() { // Called when user taps the photo library button
     var options = {};
     this.setState({ loading: true });
-    ImagePicker.launchImageLibrary(options, (response)  => { // Launch photo library
+    ImagePicker.openPicker({
+      loadingLabelText: "Processing..."
+    }).then(image => {
+      console.log(image);
       this.setState({
         loading: false,
-        path: response.uri, // Record path of chosen photo
+        path: image.path, // Record path of chosen photo
         captureType: "photo" // Set type to photo
       });
-      this.props.path(response.uri); // Pass path to parent SubmissionPage
+      this.props.path(image.path); // Pass path to parent SubmissionPage
       this.props.type("photo"); // Pass type to parent SubmissionPage
     });
   }

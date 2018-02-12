@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
-import { Flex, WhiteSpace, WingBlank, Icon, ActivityIndicator } from 'antd-mobile';
+import { Flex, WhiteSpace, WingBlank, ActivityIndicator } from 'antd-mobile';
 import { Dimensions } from 'react-native';
 import Image from 'react-native-scalable-image';
 import Video from 'react-native-video';
+import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../styles';
 
 import { connect } from 'react-redux';
@@ -138,12 +139,18 @@ class ChallengeSubmission extends Component {
                   opacity: this.state.doubleTapOpacity,
                 }}
               />
+            <Icon
+              style={styles.iconBackground}
+              name="ios-play-outline"
+              size={70}
+              color="white"
+            />
             </View>
             :
             <Image
               source={{ uri: this.props.mediaUrl }}
               width={Dimensions.get('window').width}
-              height={(Dimensions.get('window').height * .4)}
+              height={(Dimensions.get('window').height * .6)}
               onLoad={this.onImageLoad}
               style={{ opacity: this.state.doubleTapOpacity }}
             />
@@ -156,7 +163,10 @@ class ChallengeSubmission extends Component {
           <Flex>
             <TouchableOpacity onPress={this.handleLikePress} style={{ width: 25}}>
               <View>
-                <Icon type={this.state.liked ? "\ue64c" : "\ue69d"} />
+                <Icon
+                  name={this.state.liked ? "ios-heart" : "ios-heart-outline"}
+                  size={24}
+                />
               </View>
             </TouchableOpacity>
             <Text>{this.props.likes.length + this.state.likes} likes</Text>
