@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ROOT_URL = `https://2e0f36eb.ngrok.io/`;
+const ROOT_URL = `https://b9541211.ngrok.io/`;
 
 export const CREATE_USER = 'CREATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';
@@ -16,7 +16,7 @@ export const CREATE_POST = 'CREATE_POST';
 export const JOIN_GAME = 'JOIN_GAME';
 
 export function createUser(firstName, lastName, username, email, password, confirmPassword) {
-  const url = `${ROOT_URL}api/v1/create-user/`;
+  const url = `${ROOT_URL}api/v1/create-user`;
   const request = axios.post(url, {
     first_name: firstName,
     last_name: lastName,
@@ -35,7 +35,7 @@ export function createUser(firstName, lastName, username, email, password, confi
 }
 
 export function loginUser(username, password) {
-  const url = `${ROOT_URL}api/v1/login/`;
+  const url = `${ROOT_URL}api/v1/login`;
   const request = axios.post(url, {
     username: username,
     password: password
@@ -48,7 +48,7 @@ export function loginUser(username, password) {
 }
 
 export function logoutUser(token) {
-  const url = `${ROOT_URL}api/v1/logout/`;
+  const url = `${ROOT_URL}api/v1/logout`;
   const request = axios.post(url, '', {headers: { Authorization: `Token ${token}` }}
   );
 
@@ -60,7 +60,7 @@ export function logoutUser(token) {
 
 
 export function fetchUser(token, userID) {
-  const url = `${ROOT_URL}api/v1/users/${userID}/`;
+  const url = `${ROOT_URL}api/v1/users/${userID}`;
   const request = axios.get(url,
     { headers: { Authorization: `Token ${token}` }}
   );
@@ -72,7 +72,7 @@ export function fetchUser(token, userID) {
 }
 
 export function fetchGames(token) {
-  const url = `${ROOT_URL}api/v1/games/`;
+  const url = `${ROOT_URL}api/v1/games`;
   const request = axios.get(url,
     { headers: { Authorization: `Token ${token}` }}
   );
@@ -84,7 +84,7 @@ export function fetchGames(token) {
 }
 
 export function fetchPosts(token, filterBy, gameID) {
-  const url = `${ROOT_URL}api/v1/posts/?${filterBy}=${gameID}`;
+  const url = `${ROOT_URL}api/v1/posts?${filterBy}=${gameID}`;
   const request =  axios.get(url,
     { headers: { Authorization: `Token ${token}` }}
   );
@@ -108,7 +108,7 @@ export function fetchLeaderboard(token, gameID) {
 }
 
 export function fetchPrizes(token, gameID) {
-  const url = `${ROOT_URL}api/v1/prizes/?game=${gameID}`;
+  const url = `${ROOT_URL}api/v1/prizes?game=${gameID}`;
   const request =  axios.get(url,
     { headers: { Authorization: `Token ${token}` }}
   );
@@ -120,7 +120,7 @@ export function fetchPrizes(token, gameID) {
 }
 
 export function addLike(token, random_user_id, random_post_id) {
-  const url = `${ROOT_URL}api/v1/posts/${random_post_id}/like/add/`;
+  const url = `${ROOT_URL}api/v1/posts/${random_post_id}/like/add`;
   const request =  axios.post(url,
     {
       headers: {
@@ -138,7 +138,7 @@ export function addLike(token, random_user_id, random_post_id) {
 }
 
 export function deleteLike(token, random_user_id, random_post_id) {
-  const url = `${ROOT_URL}api/v1/posts/${random_post_id}/like/delete/`;
+  const url = `${ROOT_URL}api/v1/posts/${random_post_id}/like/delete`;
   const request =  axios.post(url,
     {
       headers: {
@@ -164,7 +164,7 @@ export function createPost(
     media_url,
     caption,
   ) {
-  const url = `${ROOT_URL}api/v1/posts/create/`;
+  const url = `${ROOT_URL}api/v1/posts/create`;
   const request =  axios.post(url,
     {
       headers: {
@@ -186,7 +186,7 @@ export function createPost(
 }
 
 export function joinGame(token, random_user_id, random_game_id) {
-  const url = `${ROOT_URL}api/v1/games/${random_game_id}/`;
+  const url = `${ROOT_URL}api/v1/games/${random_game_id}`;
   const request =  axios.put(url,
     {
       headers: {
