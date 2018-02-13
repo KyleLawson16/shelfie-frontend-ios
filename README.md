@@ -1,4 +1,4 @@
-#ShelfieChallenge IOS Frontend
+# ShelfieChallenge IOS Frontend
 ### Built with React-Native and [Ant-Design-Mobile](https://mobile.ant.design/)
 
 ## Table of Contents:
