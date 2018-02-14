@@ -19,13 +19,16 @@ class ChallengeSubmission extends Component {
       likes: 0,
       doubleTapOpacity: 1,
       loaded: false,
+      playBtn: true,
       muted: true,
       paused: true,
-      screenWidth: Dimensions.get('window').width
+      screenWidth: Dimensions.get('window').width,
     };
 
     this.handleImagePress = this.handleImagePress.bind(this);
     this.handleLikePress = this.handleLikePress.bind(this);
+    this.handlePlayVideo = this.handlePlayVideo.bind(this);
+    this.handlePauseVideo = this.handlePauseVideo.bind(this);
     this.onImageLoad = this.onImageLoad.bind(this);
     this.handleUserPress = this.handleUserPress.bind(this);
   }
@@ -64,6 +67,22 @@ class ChallengeSubmission extends Component {
     } else {
       this.unlike();
     }
+  }
+
+  handlePlayVideo() {
+    this.setState({
+      playBtn: false,
+      paused: false,
+      muted: false,
+    });
+  }
+
+  handlePauseVideo() {
+    this.setState({
+      playBtn: true,
+      paused: true,
+      muted: true,
+    });
   }
 
   like() { // Change state of like to true and add to # of likes
@@ -139,12 +158,27 @@ class ChallengeSubmission extends Component {
                   opacity: this.state.doubleTapOpacity,
                 }}
               />
-            <Icon
-              style={styles.iconBackground}
-              name="ios-play-outline"
-              size={70}
-              color="white"
-            />
+            {this.state.playBtn
+              ?
+              <TouchableOpacity
+                style={{ position: 'absolute', top: '44%', left: '47%' }}
+                onPress={this.handlePlayVideo}
+              >
+                <Icon
+                  style={styles.iconBackground}
+                  name="ios-play"
+                  size={50}
+                  color="white"
+                />
+              </TouchableOpacity>
+              :
+              <TouchableOpacity
+                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+                onPress={this.handlePauseVideo}
+              >
+              </TouchableOpacity>
+            }
+
             </View>
             :
             <Image
