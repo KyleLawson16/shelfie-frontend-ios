@@ -144,7 +144,7 @@ class ChallengeSubmission extends Component {
                 repeat={true}
                 onLoad={response => {
                   const { width, height } = response.naturalSize;
-                  const heightScaled = 1.5 * height * (this.state.screenWidth / width);
+                  const heightScaled = 1.9 * height * (this.state.screenWidth / width);
 
                   this.setState({
                     heightScaled: heightScaled,
@@ -161,7 +161,7 @@ class ChallengeSubmission extends Component {
             {this.state.playBtn
               ?
               <TouchableOpacity
-                style={{ position: 'absolute', top: '44%', left: '47%' }}
+                style={{ position: 'absolute', top: '45%', left: '47%' }}
                 onPress={this.handlePlayVideo}
               >
                 <Icon

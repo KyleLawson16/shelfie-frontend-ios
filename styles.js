@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     width: 90,
     height: 90,
     borderWidth: 2,
-    borderRadius: 50,
+    borderRadius: 45,
     borderColor: '#fff',
     zIndex: 9999,
   },

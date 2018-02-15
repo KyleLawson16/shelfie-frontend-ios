@@ -10,6 +10,7 @@ import UserInfo from '../components/UserInfo';
 import UserSubmissions from '../components/UserSubmissions';
 import UserFormWrapper from '../components/UserForm';
 import ChallengeSubmission from '../components/ChallengeSubmission';
+import ProfilePicture from '../components/ProfilePicture';
 
 class UserPage extends Component {
   constructor(props) {
@@ -20,12 +21,15 @@ class UserPage extends Component {
       userPosts: false,
       totalPoints: 0,
       selectedPost: false,
+      profilePicture: false,
     };
 
     this.handleEditBtn = this.handleEditBtn.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.getSelectedPost = this.getSelectedPost.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.editProfilePicture = this.editProfilePicture.bind(this);
+    this.finishEdit = this.finishEdit.bind(this);
   }
 
   componentWillMount() {
@@ -57,6 +61,15 @@ class UserPage extends Component {
   handleLogout() {
     this.props.handleLogout();
   }
+  editProfilePicture() {
+    this.setState({ profilePicture: true });
+  }
+  getPath(path) {
+    this.setState({ profilePicturePath: path });
+  }
+  finishEdit() {
+    this.setState({ profilePicture: false });
+  }
 
   render() {
     if (this.props.selectedPost) {
@@ -76,6 +89,18 @@ class UserPage extends Component {
         </View>
       )
     }
+    else if (this.state.profilePicture) {
+      return (
+        <View style={styles.container}>
+          <ProfilePicture
+            token={this.props.token}
+            path={this.getPath.bind(this)}
+            userID={this.props.user.random_user_id}
+            finishEdit={this.finishEdit}
+          />
+        </View>
+      )
+    }
     else {
       return (
         <View style={styles.container}>
@@ -90,10 +115,12 @@ class UserPage extends Component {
                 <UserInfo
                   token={this.props.token}
                   user={this.props.user}
-                  handleEditBtn={this.handleEditBtn}
-                  handleLogout={this.handleLogout}
                   totalPoints={this.state.totalPoints}
                   other={this.props.other}
+                  handleEditBtn={this.handleEditBtn}
+                  handleLogout={this.handleLogout}
+                  editProfilePicture={this.editProfilePicture}
+                  profilePicturePath={this.state.profilePicturePath}
                 />
                 <WhiteSpace />
                 {this.state.userPosts

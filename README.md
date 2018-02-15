@@ -13,6 +13,7 @@
 ### Amazon S3
 * Bucket Name: "shelfie-challenge"
 * Region: US West (N. California)
+* Upload media using [react-native-aws3](https://github.com/benjreinhart/react-native-aws3)
 * File Tree:
    * shelfie-challenge
       * posts
@@ -22,10 +23,14 @@
          * logos
 
 ### Posts
-* Upload media using [react-native-aws3](https://github.com/benjreinhart/react-native-aws3)
 * Url stored in api [ShelfiePost.Post](https://github.com/KyleLawson16/shelfie-backend#shelfiepost)
 * Naming convention:
    * '<random_game_id>-<randomly_generated_id>'
+
+### Users
+* Url stored in api [ShelfieUser.User](https://github.com/KyleLawson16/shelfie-backend#shelfieuser)
+* Naming convention:
+   * '<random_user_id>-<randomly_generated_id>'
 
 
 
@@ -137,6 +142,7 @@ Uses:
    * UserInfo
    * UserSubmissions
    * UserSubmission
+   * ProfilePicture
 
 ##### Navigation
 * BottomNavbar
@@ -156,6 +162,7 @@ Uses:
 * deleteLike
 * createPost
 * joinGame
+* updateProfilePicture
 
 
 
