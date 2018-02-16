@@ -21,11 +21,8 @@ class ChallengeCarousel extends Component {
   render() {
     const totalChallenges = this.props.challenges.length;
     return (
-      <View>
-        <WhiteSpace size="lg" />
-        <WhiteSpace size="md" />
+      <View style={styles.backgroundOffColor}>
         <Text style={styles.challengePointHeading}>{this.props.ptValue} Points</Text>
-        <WhiteSpace size="md" />
         <Carousel
           frameOverflow="visible"
           cellSpacing={20}

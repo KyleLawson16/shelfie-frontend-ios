@@ -24,7 +24,6 @@ class GamePage extends Component {
   componentWillMount() {
     this.props.joinGame(this.props.token, this.props.user.random_user_id, this.props.game.random_game_id)
     .then((res) => {
-      console.log(res);
     });
     var challenges = this.props.game.challenges;
     var pt_values = [];
@@ -33,7 +32,8 @@ class GamePage extends Component {
         pt_values.push(challenges[i]['point_value']); // Add point value to pt_values
     }
     var sorted_challenges = [];
-
+    pt_values.sort(function(a, b){return b-a});
+    console.log(pt_values);
     pt_values.forEach(ptValue => { // for each point value
       var sorted_challenge = {}; // create an object with
       sorted_challenge['point_value'] = ptValue; // point value
@@ -47,6 +47,7 @@ class GamePage extends Component {
     })
     // console.log(sorted_challenges, 'sorted');
     this.setState({ sorted_challenges: sorted_challenges });
+    console.log(this.state.sorted_challenges, 'sorted challenges');
   }
 
   beginSubmission(submission) {

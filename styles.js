@@ -15,6 +15,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f9',
     height: WINDOW_HEIGHT
   },
+  backgroundOffColor: {
+    backgroundColor: '#fff',
+  },
   verticalCenter: {
     justifyContent: 'center',
   },
@@ -204,7 +207,9 @@ const styles = StyleSheet.create({
   challengePointHeading: {
     textAlign: 'center',
     fontSize: 18,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginTop: 20,
+    marginBottom: 10,
   },
   challengeCarouselName: {
     color: 'white',

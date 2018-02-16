@@ -37,7 +37,6 @@ class GameNavbar extends Component {
       this.props.inactiveTabColor
     ]; // Create array with all tabs set to inactive color
     tabColorList[index] = this.props.activeTabColor; // Change active tab color
-    console.log(tabColorList);
     this.setState({ activeIconColor: tabColorList }); // Add array of tab colors to state
   }
 

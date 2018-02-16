@@ -54,7 +54,7 @@ class FeedPage extends Component {
             />
           }
           keyExtractor={(item, index) => index}
-          style={{ marginBottom: 83}}
+          style={{ marginBottom: 32}}
         />
         <ActivityIndicator
           animating={this.state.loading}

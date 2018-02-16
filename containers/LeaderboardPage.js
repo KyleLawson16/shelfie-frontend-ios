@@ -18,7 +18,6 @@ class LeaderboardPage extends Component {
   componentDidMount() {
     this.props.fetchLeaderboard(this.props.token, this.props.gameID)
     .then((res) => {
-      console.log(res);
       this.setState({ leaderboard: res.payload.data.leaderboard, loading: false });
     });
   }
