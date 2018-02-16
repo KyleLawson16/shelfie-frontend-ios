@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
-import { Flex, WhiteSpace, WingBlank, ActivityIndicator } from 'antd-mobile';
+import { Flex, WhiteSpace, WingBlank } from 'antd-mobile';
+import ActivityIndicator from 'react-native-activity-indicator';
 import { Dimensions } from 'react-native';
 import Image from 'react-native-scalable-image';
 import Video from 'react-native-video';
@@ -124,7 +125,6 @@ class ChallengeSubmission extends Component {
         </WingBlank>
         <WhiteSpace size="xs" />
         <Flex justifyContent="center" style={{backgroundColor: 'darkgrey', opacity: this.state.doubleTapOpacity}}>
-          <ActivityIndicator animating={this.state.loaded ? false : true } />
           <TouchableWithoutFeedback
             onPress={this.handleImagePress}
           >

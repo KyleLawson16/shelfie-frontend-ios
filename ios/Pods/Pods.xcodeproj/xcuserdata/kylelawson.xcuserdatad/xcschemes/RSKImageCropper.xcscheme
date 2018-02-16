@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ECA4A071BC05938C4AAD46476082FDF0"
+               BlueprintIdentifier = "69753BC8241AC78037D88091F82273CE"
                BuildableName = "libRSKImageCropper.a"
                BlueprintName = "RSKImageCropper"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -47,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ECA4A071BC05938C4AAD46476082FDF0"
+            BlueprintIdentifier = "69753BC8241AC78037D88091F82273CE"
             BuildableName = "libRSKImageCropper.a"
             BlueprintName = "RSKImageCropper"
             ReferencedContainer = "container:Pods.xcodeproj">

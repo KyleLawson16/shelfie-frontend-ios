@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet, Text, View, Image } from 'react-native';
 
 let WINDOW_WIDTH = Dimensions.get('window').width;
 let WINDOW_HEIGHT = Dimensions.get('window').height;
-let THEME_COLOR = 'rgb(93,188,210)';
+let THEME_COLOR = 'rgb(0,206,202)';
 
 const styles = StyleSheet.create({
   container: {
@@ -152,6 +152,21 @@ const styles = StyleSheet.create({
     height: 25,
     marginRight: '4%',
     marginTop: -50
+  },
+  userFollowBtn: {
+    width: '40%',
+    height: 30,
+    marginRight: '14%',
+    marginTop: -45,
+    borderColor: THEME_COLOR,
+  },
+  userFollowedBtn: {
+    width: '40%',
+    height: 30,
+    marginRight: '14%',
+    marginTop: -45,
+    borderColor: THEME_COLOR,
+    backgroundColor: THEME_COLOR,
   },
   userName: {
     fontWeight: 'bold',

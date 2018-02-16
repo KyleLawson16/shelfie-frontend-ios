@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Image, View } from 'react-native';
-import { Flex, ActivityIndicator } from 'antd-mobile';
+import { Flex } from 'antd-mobile';
 import Video from 'react-native-video';
+import ActivityIndicator from 'react-native-activity-indicator';
 import styles from '../styles';
 
 class UserSubmission extends Component {
@@ -22,12 +23,17 @@ class UserSubmission extends Component {
   render() {
       return (
         <View>
-          <ActivityIndicator
-            animating={this.state.loading}
-            size="small"
-            color="rgb(93,188,210)"
-          />
-          <Flex>
+          {this.state.loading
+            ?
+            <ActivityIndicator
+              size={50}
+              thickness={1}
+              color="rgb(0,206,202)"
+            />
+            :
+            null
+          }
+          <Flex style={{ position: 'absolute', top: 0}}>
             {this.props.isVideo
             ?
             <Video source={{uri: this.props.path, mainVer: 1, patchVer: 0}}

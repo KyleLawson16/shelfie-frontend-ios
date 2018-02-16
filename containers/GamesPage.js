@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, FlatList, TouchableOpacity } from 'react-native';
-import { WhiteSpace, Flex, ActivityIndicator } from 'antd-mobile';
+import { WhiteSpace, Flex } from 'antd-mobile';
+import ActivityIndicator from 'react-native-activity-indicator';
 import styles from '../styles';
 
 import { connect } from 'react-redux';
@@ -54,8 +55,19 @@ class GamesPage extends Component {
     }
     else {
       return (
-        <ActivityIndicator toast text="loading" />
-
+        <View
+          style={{
+            alignItems: 'center',
+            flex: 0.6,
+            flexDirection: 'row',
+            justifyContent: 'space-around'
+          }}>
+          <ActivityIndicator
+            size={70}
+            thickness={1}
+            color="rgb(0,206,202)"
+          />
+        </View>
       )
     }
 

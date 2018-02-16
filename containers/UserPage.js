@@ -35,7 +35,6 @@ class UserPage extends Component {
   componentWillMount() {
     this.props.fetchPosts(this.props.token, 'user', this.props.user.random_user_id)
     .then((res) => {
-      console.log(res);
       var totalPoints = 0;
       res.payload.data.forEach(post => {
         totalPoints += post.challenge.point_value;
@@ -45,10 +44,7 @@ class UserPage extends Component {
   }
 
   handleEditBtn(editMode) {
-    if (this.props.other) {
-      console.log('follow user');
-    }
-    else {
+    if (!this.props.other) {
       this.setState({ editMode: editMode });
     }
   }

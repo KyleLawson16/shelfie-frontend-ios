@@ -1,15 +1,30 @@
 PODS:
   - QBImagePickerController (3.4.0)
+  - React/ART (0.50.3):
+    - React/Core
+  - React/Core (0.50.3):
+    - yoga (= 0.50.3.React)
   - RSKImageCropper (2.0.0)
+  - yoga (0.50.3.React)
 
 DEPENDENCIES:
   - QBImagePickerController
+  - React/ART (from `../node_modules/react-native`)
   - RSKImageCropper
+  - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
+
+EXTERNAL SOURCES:
+  React:
+    :path: ../node_modules/react-native
+  yoga:
+    :path: ../node_modules/react-native/ReactCommon/yoga
 
 SPEC CHECKSUMS:
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
+  React: 541ba768b9855e10cdc76f55427a5cd0653ca806
   RSKImageCropper: d9a1acbc0600bf8decc8f0d21895872c99a9e4cf
+  yoga: 17521bbb0dd54a47c0b3ac43253e78cdac7488e0
 
-PODFILE CHECKSUM: 1f54e22606a929efc2ad01858717773c4a6e2001
+PODFILE CHECKSUM: db746a98d654ba41e099d836d030ba29e232367d
 
 COCOAPODS: 1.4.0

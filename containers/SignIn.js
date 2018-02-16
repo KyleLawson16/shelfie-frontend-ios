@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
-import { List, InputItem, Button, ActivityIndicator, Flex } from 'antd-mobile';
+import { List, InputItem, Button, Flex } from 'antd-mobile';
+import ActivityIndicator from 'react-native-activity-indicator';
 import { createForm } from 'rc-form';
 import styles from '../styles';
 
@@ -108,7 +109,20 @@ class SignIn extends Component {
           <Text style={{textAlign: 'center'}}>Don&rsquo;t have an account? Tap here to create one</Text>
         </TouchableOpacity>
           {this.state.loading
-            ? <ActivityIndicator toast text="loading" />
+            ?
+            <View
+              style={{
+                alignItems: 'center',
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-around'
+              }}>
+              <ActivityIndicator
+                size={50}
+                thickness={1}
+                color="rgb(0,206,202)"
+              />
+            </View>
             : null
           }
       </View>

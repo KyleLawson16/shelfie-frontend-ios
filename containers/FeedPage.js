@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, ScrollView } from 'react-native';
-import { Flex, ActivityIndicator } from 'antd-mobile';
+import { Flex } from 'antd-mobile';
+import ActivityIndicator from 'react-native-activity-indicator';
 import styles from '../styles';
+
+
 
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions';
@@ -55,8 +58,9 @@ class FeedPage extends Component {
         />
         <ActivityIndicator
           animating={this.state.loading}
-          size="large"
-          color="rgb(93,188,210)"
+          size={50}
+          thickness={1}
+          color="rgb(0,206,202)"
         />
       </ScrollView>
     )

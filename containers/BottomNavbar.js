@@ -95,10 +95,8 @@ class BottomNavbar extends Component {
             unselectedTintColor="#000"
             tintColor="#000"
             barTintColor="white"
-            style={styles.bottomNavbar}
           >
             <TabBar.Item
-
               key="home"
               icon={require('../assets/images/home.png')}
               selected={this.state.selectedTab === 'homeTab'}

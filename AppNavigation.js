@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, AsyncStorage } from 'react-native';
-import { Button, ActivityIndicator, WhiteSpace } from 'antd-mobile';
+import { Button, WhiteSpace } from 'antd-mobile';
+import ActivityIndicator from 'react-native-activity-indicator';
 import styles from './styles.js';
 
 import { connect } from 'react-redux';
@@ -105,15 +106,30 @@ class AppNavigation extends React.Component {
 
   render() {
       if (!this.state.user) {
-        return (
-          <View style={styles.containerBackground}>
-            <LandingPage handleUser={this.getUser} />
-            {this.state.loading
-              ? <ActivityIndicator toast text="loading" />
-              : null
-            }
-          </View>
-        )
+        if (!this.state.loading) {
+          return (
+            <View style={styles.containerBackground}>
+              <LandingPage handleUser={this.getUser} />
+            </View>
+          )
+        }
+        else {
+          return (
+            <View
+              style={{
+                alignItems: 'center',
+                flex: 0.6,
+                flexDirection: 'row',
+                justifyContent: 'space-around'
+              }}>
+              <ActivityIndicator
+                size={70}
+                thickness={1}
+                color="rgb(0,206,202)"
+              />
+            </View>
+          )
+        }
       }
       else if (this.state.submission) {
         return (
