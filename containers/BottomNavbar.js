@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, AsyncStorage } from 'react-native';
 import { TabBar, Icon, Flex } from 'antd-mobile';
+import styles from '../styles';
 
 import GamesPage from './GamesPage';
 import GamePage from './GamePage';
@@ -94,7 +95,7 @@ class BottomNavbar extends Component {
             unselectedTintColor="#000"
             tintColor="#000"
             barTintColor="white"
-            style={{ backgroundColor: '#f9f9f9' }}
+            style={styles.bottomNavbar}
           >
             <TabBar.Item
 

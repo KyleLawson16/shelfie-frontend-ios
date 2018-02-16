@@ -121,6 +121,7 @@ class UserPage extends Component {
                   handleLogout={this.handleLogout}
                   editProfilePicture={this.editProfilePicture}
                   profilePicturePath={this.state.profilePicturePath}
+                  activeUser={this.props.activeUser}
                 />
                 <WhiteSpace />
                 {this.state.userPosts

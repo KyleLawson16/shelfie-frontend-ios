@@ -26,13 +26,22 @@ const styles = StyleSheet.create({
   },
   topNavbar: {
     backgroundColor: '#f9f9f9',
-    borderBottomColor: THEME_COLOR,
-    borderBottomWidth: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: .5 },
     shadowOpacity: 0.2,
     shadowRadius: 2,
     zIndex: 9999,
+    // transform: [{ skewY: '-1.5deg' }],
+  },
+  bottomNavbar: {
+    backgroundColor: '#f9f9f9',
+    borderTopWidth: 0,
+    borderColor: '#fff',
+    borderStyle: 'solid',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: .5 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
   },
 
   // Authentication Styles

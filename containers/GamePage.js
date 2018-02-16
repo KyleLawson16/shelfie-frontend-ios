@@ -68,6 +68,7 @@ class GamePage extends Component {
             user={this.props.postUser}
             selectedPost={this.props.selectedPost}
             getSelectedPost={this.getSelectedPost}
+            activeUser={this.props.user}
             other={true}
           />
         </View>

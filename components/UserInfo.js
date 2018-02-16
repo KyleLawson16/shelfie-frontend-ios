@@ -4,13 +4,14 @@ import { Flex, WhiteSpace, WingBlank, Button } from 'antd-mobile';
 import styles from '../styles';
 
 import { connect } from 'react-redux';
-import { logoutUser } from '../actions';
+import { logoutUser, addFollower } from '../actions';
 
 class UserInfo extends Component {
   constructor(props) {
     super(props);
 
     this.handleLogout = this.handleLogout.bind(this);
+    this.handleFollow = this.handleFollow.bind(this);
     this.editProfilePicture = this.editProfilePicture.bind(this);
   }
 
@@ -19,6 +20,13 @@ class UserInfo extends Component {
     .then((res) => {
       this.props.handleLogout();
     })
+  }
+
+  handleFollow() {
+    this.props.addFollower(this.props.token, this.props.activeUser.random_user_id, this.props.user.random_user_id)
+    .then((res) => {
+      console.log(res);
+    });
   }
 
   editProfilePicture() {
@@ -71,7 +79,7 @@ class UserInfo extends Component {
             justify="end"
           >
             <Button
-              onPressIn={() => {this.props.handleEditBtn(true);}}
+              onPressIn={this.handleFollow}
               style={styles.userEditBtn}
             >
               <Text style={{fontSize: 14}}>
@@ -174,4 +182,4 @@ function mapStateToProps(state) {
   return { pitches: state.pitches };
 }
 
-export default connect(mapStateToProps, { logoutUser })(UserInfo);
+export default connect(mapStateToProps, { logoutUser, addFollower })(UserInfo);

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ROOT_URL = `https://5feb5ef2.ngrok.io/`;
+const ROOT_URL = `https://4ead48e7.ngrok.io/`;
 
 export const CREATE_USER = 'CREATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';
@@ -15,6 +15,7 @@ export const DELETE_LIKE = 'DELETE_LIKE';
 export const CREATE_POST = 'CREATE_POST';
 export const JOIN_GAME = 'JOIN_GAME';
 export const UPDATE_PROFILE_PICTURE = 'UPDATE_PROFILE_PICTURE';
+export const ADD_FOLLOWER = 'ADD_FOLLOWER';
 
 export function createUser(firstName, lastName, username, email, password, confirmPassword) {
   const url = `${ROOT_URL}api/v1/create-user`;
@@ -216,6 +217,24 @@ export function updateProfilePicture(token, random_user_id, profile_picture) {
 
   return {
     type: UPDATE_PROFILE_PICTURE,
+    payload: request,
+  }
+}
+
+export function addFollower(token, random_user_id, followed_user_id) {
+  const url = `${ROOT_URL}api/v1/users/follow/add`;
+  const request =  axios.post(url,
+    {
+      headers: {
+        Authorization: `Token ${token}`
+      },
+      random_user_id: random_user_id,
+      followed_user_id: followed_user_id,
+    }
+  );
+
+  return {
+    type: ADD_FOLLOWER,
     payload: request,
   }
 }
