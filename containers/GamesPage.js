@@ -13,17 +13,16 @@ class GamesPage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { games: false };
+    this.state = { games: false, loading: true };
   }
   componentWillMount() {
     this.props.fetchGames(this.props.token)
     .then((res) => {
       console.log(res.payload.data);
-      this.setState({ games: res.payload.data });
+      this.setState({ games: res.payload.data, loading: false });
     });
   }
   render() {
-    if (this.state.games) {
       return (
         <ScrollView style={styles.containerBackground}>
           <Flex justify="center" style={styles.greyHeaderBar}>
@@ -50,27 +49,14 @@ class GamesPage extends Component {
             }
             keyExtractor={(item, index) => index}
           />
-        </ScrollView>
-      )
-    }
-    else {
-      return (
-        <View
-          style={{
-            alignItems: 'center',
-            flex: 0.6,
-            flexDirection: 'row',
-            justifyContent: 'space-around'
-          }}>
           <ActivityIndicator
-            size={70}
+            animating={this.state.loading}
+            size={50}
             thickness={1}
             color="rgb(0,206,202)"
           />
-        </View>
+        </ScrollView>
       )
-    }
-
   }
 }
 

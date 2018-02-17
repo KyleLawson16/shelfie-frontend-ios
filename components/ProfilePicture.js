@@ -1,7 +1,8 @@
 'use strict';
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, TouchableHighlight, View, Image } from 'react-native';
-import { Flex, ActivityIndicator, Button } from 'antd-mobile';
+import { Flex, Button, WhiteSpace } from 'antd-mobile';
+import ActivityIndicator from 'react-native-activity-indicator';
 import Camera from 'react-native-camera';
 import ImagePicker from 'react-native-image-crop-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -29,12 +30,6 @@ class ProfilePicture extends Component {
     };
 
     this.choosePhoto = this.choosePhoto.bind(this);
-    this.takePhoto = this.takePhoto.bind(this);
-  }
-
-  // Camera functions
-  deleteCapture() { // Called when user taps X button
-    this.setState({ path: false }); // Delete photo path
   }
 
   saveCapture() { // Callend when user taps save arrow button
@@ -49,7 +44,7 @@ class ProfilePicture extends Component {
         const file = {
           // `uri` can also be a file system path (i.e. file://)
           uri: image.path,
-          name: `${this.props.userID}-${name}`,
+          name: `${this.props.user.random_user_id}-${name}`,
           type: type
         };
 
@@ -71,7 +66,11 @@ class ProfilePicture extends Component {
               saved: true, // Acknowledge that a photo/video has been saved
               loading: false,
             });
-            this.props.updateProfilePicture(this.props.token, this.props.userID, response.body.postResponse.location)
+            this.props.updateProfilePicture(
+              this.props.token,
+              this.props.user.random_user_id,
+              response.body.postResponse.location
+            )
             .then((res) => {
               console.log(res);
               this.props.path(response.body.postResponse.location);
@@ -80,6 +79,9 @@ class ProfilePicture extends Component {
           }
         });
 
+      })
+      .catch((error) => {
+        this.setState({ loading: false });
       });
   }
 
@@ -89,19 +91,6 @@ class ProfilePicture extends Component {
     for (var i = 0; i < 7; i++)
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     return text;
-  }
-
-  // Photo functions
-  takePhoto() { // Called on a press of the capture button
-    const options = {};
-    this.camera.capture({metadata: options}) // Capture a photo
-      .then((data) => { // On image capture
-        this.setState({
-          path: data.path, // Save photo path to
-          captureType: "photo" // Set type to photo
-        });
-      })
-      .catch(err => console.error(err)); // Log an error
   }
 
   choosePhoto() { // Called when user taps the photo library button
@@ -115,75 +104,57 @@ class ProfilePicture extends Component {
         path: image.path, // Record path of chosen photo
       });
       this.saveCapture();
+    })
+    .catch((error) => {
+      this.setState({ loading: false });
     });
   }
 
   render() {
-    if (this.state.camera) {
-      return (
-        <View style={styles.cameraContainer}>
-          <Camera
-            ref={(cam) => {
-              this.camera = cam;
-            }}
-            type="front"
-            style={styles.cameraBox}
-            aspect={Camera.constants.Aspect.fill}
-            captureTarget={Camera.constants.CaptureTarget.disk}
-            captureMode={Camera.constants.CaptureMode.still}>
-            <View style={styles.cameraBottomNav}>
-              <TouchableHighlight
-                onPress={this.takePhoto}
-                activeOpacity={0.5}
-                underlayColor={'transparent'}
-              >
-                <Icon
-                  name="ios-radio-button-off"
-                  size={90}
-                  style={styles.iconBackground}
-                  color="white"
-                />
-              </TouchableHighlight>
-              <TouchableOpacity
-                style={{position: 'absolute', bottom: 15, left: 20}}
-                onPress={this.choosePhoto}
-              >
-                <Icon
-                  style={styles.iconBackground}
-                  name="ios-images"
-                  size={30}
-                  color="white"
-                />
-              </TouchableOpacity>
-            </View>
-          </Camera>
-          {this.state.loading
-            ? <ActivityIndicator toast text="loading" />
-            : null
-          }
-        </View>
-      )
-    }
-    else {
       return (
         <View>
-          <Text>Change Profile Picture</Text>
-          <Button
-            style={styles.authFormBtn}
-            onPressIn={() => this.setState({ camera: true })}
-            type="primary">
-            Take Photo
-          </Button>
-          <Button
-            style={styles.authFormBtn}
-            onPressIn={this.choosePhoto}
-            type="primary">
-            Choose Photo
-          </Button>
+          <WhiteSpace size="lg" />
+          <Flex
+            style={styles.landingContent}
+            align="center"
+            justify="center"
+          >
+            <Image
+              source={{ uri: this.props.user.profile_picture }}
+              style={styles.userPhotoEdit}
+            />
+          </Flex>
+          <WhiteSpace size="lg" />
+          <Flex
+            style={styles.landingContent}
+            align="center"
+            justify="center"
+          >
+            <Flex.Item>
+              <Text
+                style={styles.gameLocation}
+              >
+                Change Profile Picture
+              </Text>
+              <Button
+                style={styles.authFormBtn}
+                onPressIn={this.choosePhoto}
+                type="primary">
+                Choose Photo
+              </Button>
+            </Flex.Item>
+          </Flex>
+          <View style={{ position: 'absolute', top: '110%', left: '41%', zIndex: 9999 }}>
+            <ActivityIndicator
+              animating={this.state.loading}
+              size={80}
+              thickness={1}
+              color="rgb(0,206,202)"
+            />
+          </View>
         </View>
       );
     }
-  }
 }
 
 function mapStateToProps(state) {

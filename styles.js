@@ -15,6 +15,29 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f9',
     height: WINDOW_HEIGHT
   },
+  activityIndicatorCenter: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: WINDOW_WIDTH,
+    height: WINDOW_HEIGHT,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  },
+  activityIndicatorTopCenter: {
+    position: 'absolute',
+    top: '-15%',
+    left: 0,
+    width: WINDOW_WIDTH,
+    height: WINDOW_HEIGHT,
+    justifyContent: 'center',
+    flex: 1,
+  },
+  activityIndicatorBackground: {
+    backgroundColor: '#fff',
+    opacity: 0.7,
+  },
   backgroundOffColor: {
     backgroundColor: '#fff',
   },
@@ -138,6 +161,14 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
     zIndex: 9999,
   },
+  userPhotoEdit: {
+    width: 150,
+    height: 150,
+    borderWidth: 2,
+    borderRadius: 75,
+    borderColor: '#fff',
+    zIndex: 9999,
+  },
   userStats: {
     textAlign: 'center',
     marginTop: 10
@@ -185,12 +216,14 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     borderWidth: .5,
     borderColor: 'white',
+    backgroundColor: 'grey',
   },
   userSubmissionVideo: {
     width: WINDOW_WIDTH / 3,
     height: WINDOW_WIDTH / 3,
     borderWidth: .5,
     borderColor: 'white',
+    backgroundColor: 'grey',
   },
 
   // Challenge Styles

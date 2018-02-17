@@ -86,14 +86,17 @@ class SubmissionPost extends Component {
             onClick={() => this.handleSubmit()}
           >Submit Post</Button>
         </List>
-        <View style={{ position: 'absolute', top: '30%', left: '41%', zIndex: 9999 }}>
-        <ActivityIndicator
-          animating={this.state.loading}
-          size={80}
-          thickness={1}
-          color="rgb(0,206,202)"
-        />
-        </View>
+        {this.state.loading
+          ?
+          <View style={[styles.activityIndicatorCenter, styles.activityIndicatorBackground]}>
+            <ActivityIndicator
+              size={50}
+              thickness={1}
+              color="rgb(0,206,202)"
+            />
+          </View>
+          : null
+        }
       </ScrollView>
     )
   }

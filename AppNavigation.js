@@ -119,13 +119,7 @@ class AppNavigation extends React.Component {
         }
         else {
           return (
-            <View
-              style={{
-                alignItems: 'center',
-                flex: 0.6,
-                flexDirection: 'row',
-                justifyContent: 'space-around'
-              }}>
+            <View style={styles.activityIndicatorTopCenter}>
               <ActivityIndicator
                 size={70}
                 thickness={1}

@@ -110,13 +110,7 @@ class SignIn extends Component {
         </TouchableOpacity>
           {this.state.loading
             ?
-            <View
-              style={{
-                alignItems: 'center',
-                flex: 1,
-                flexDirection: 'row',
-                justifyContent: 'space-around'
-              }}>
+            <View style={[styles.activityIndicatorCenter, styles.activityIndicatorBackground]}>
               <ActivityIndicator
                 size={50}
                 thickness={1}

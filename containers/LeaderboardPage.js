@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView, FlatList, Text } from 'react-native';
-import { WhiteSpace, List, Flex, ActivityIndicator } from 'antd-mobile';
+import { WhiteSpace, List, Flex } from 'antd-mobile';
+import ActivityIndicator from 'react-native-activity-indicator';
 import styles from '../styles';
 
 import { connect } from 'react-redux';
@@ -41,10 +42,12 @@ class LeaderboardPage extends Component {
             keyExtractor={(item, index) => index}
           />
         </List>
-        {this.state.loading
-          ? <ActivityIndicator toast text="loading" />
-          : null
-        }
+        <ActivityIndicator
+          animating={this.state.loading}
+          size={50}
+          thickness={1}
+          color="rgb(0,206,202)"
+        />
       </ScrollView>
     )
   }

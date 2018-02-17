@@ -8,31 +8,11 @@ import styles from '../styles';
 class UserSubmission extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      loading: true
-    }
-  }
-
-  onLoad() { // On image load get rid of loading spinner
-    this.setState({
-      loading: false
-    })
   }
 
   render() {
       return (
         <View>
-          {this.state.loading
-            ?
-            <ActivityIndicator
-              size={50}
-              thickness={1}
-              color="rgb(0,206,202)"
-            />
-            :
-            null
-          }
           <Flex style={{ position: 'absolute', top: 0}}>
             {this.props.isVideo
             ?
@@ -47,13 +27,11 @@ class UserSubmission extends Component {
               resizeMode="cover"
               repeat={true}
               style={styles.userSubmissionVideo}
-              onLoad={this.onLoad.bind(this)}
             />
             :
             <Image
               source={{uri: this.props.path}}
               style={styles.userSubmissionPhoto}
-              onLoad={this.onLoad.bind(this)}
             />
             }
           </Flex>

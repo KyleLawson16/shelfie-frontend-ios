@@ -169,6 +169,8 @@ class SubmissionCamera extends Component {
       });
       this.props.path(image.path); // Pass path to parent SubmissionPage
       this.props.type("photo"); // Pass type to parent SubmissionPage
+    }).catch((error) => {
+      this.setState({ loading: false });
     });
   }
 
@@ -281,14 +283,17 @@ class SubmissionCamera extends Component {
               Save
             </Text>
           </TouchableOpacity>
-          <View style={{ position: 'absolute', top: '41%', left: '41%', zIndex: 9999 }}>
-          <ActivityIndicator
-            animating={this.state.loading}
-            size={80}
-            thickness={1}
-            color="rgb(0,206,202)"
-          />
-          </View>
+          {this.state.loading
+            ?
+            <View style={[styles.activityIndicatorCenter, styles.activityIndicatorBackground]}>
+              <ActivityIndicator
+                size={70}
+                thickness={1}
+                color="rgb(0,206,202)"
+              />
+            </View>
+            : null
+          }
         </View>
       )
     }
@@ -341,15 +346,6 @@ class SubmissionCamera extends Component {
                 </TouchableOpacity>
               </Flex.Item>
             </Flex>
-            <Flex style={{ position: 'absolute', top: '41%', left: '41%', zIndex: 9999 }}>
-            <ActivityIndicator
-
-              animating={this.state.loading}
-              size={80}
-              thickness={1}
-              color="rgb(0,206,202)"
-            />
-            </Flex>
             <View style={styles.cameraBottomNav}>
               <TouchableHighlight
                 onPress={this.takePhoto.bind(this)}
@@ -377,6 +373,17 @@ class SubmissionCamera extends Component {
                 />
               </TouchableOpacity>
             </View>
+            {this.state.loading
+              ?
+              <View style={[styles.activityIndicatorCenter, styles.activityIndicatorBackground]}>
+                <ActivityIndicator
+                  size={70}
+                  thickness={1}
+                  color="rgb(0,206,202)"
+                />
+              </View>
+              : null
+            }
           </Camera>
 
         </View>

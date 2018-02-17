@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
-import { List, InputItem, Button, ActivityIndicator } from 'antd-mobile';
+import { List, InputItem, Button } from 'antd-mobile';
+import ActivityIndicator from 'react-native-activity-indicator';
 import { createForm } from 'rc-form';
 import styles from '../styles';
 
@@ -200,7 +201,14 @@ class SignUp extends Component {
           <Text style={{textAlign: 'center'}}>Already have an account? Tap here to sign in</Text>
         </TouchableOpacity>
         {this.state.loading
-          ? <ActivityIndicator toast text="loading" />
+          ?
+          <View style={[styles.activityIndicatorCenter, styles.activityIndicatorBackground]}>
+            <ActivityIndicator
+              size={50}
+              thickness={1}
+              color="rgb(0,206,202)"
+            />
+          </View>
           : null
         }
       </View>

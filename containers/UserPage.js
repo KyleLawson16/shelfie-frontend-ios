@@ -91,7 +91,7 @@ class UserPage extends Component {
           <ProfilePicture
             token={this.props.token}
             path={this.getPath.bind(this)}
-            userID={this.props.user.random_user_id}
+            user={this.props.user}
             finishEdit={this.finishEdit}
           />
         </View>
