@@ -14,6 +14,8 @@ class LeaderboardPage extends Component {
     super(props);
 
     this.state = { leaderboard: false, loading: true };
+
+    this.getLeaderboardUser = this.getLeaderboardUser.bind(this);
   }
 
   componentDidMount() {
@@ -21,6 +23,10 @@ class LeaderboardPage extends Component {
     .then((res) => {
       this.setState({ leaderboard: res.payload.data.leaderboard, loading: false });
     });
+  }
+
+  getLeaderboardUser(user) {
+    this.props.getLeaderboardUser(user);
   }
 
   render() {
@@ -34,9 +40,9 @@ class LeaderboardPage extends Component {
             data={this.state.leaderboard}
             renderItem={({item}) =>
               <LeaderboardItem
-                key={item.random_user_id}
-                username={item.username}
-                points={item.points}
+                user={item}
+                activeUser={this.props.user}
+                getLeaderboardUser={this.getLeaderboardUser}
               />
             }
             keyExtractor={(item, index) => index}

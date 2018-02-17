@@ -50,7 +50,7 @@ class ProfilePicture extends Component {
 
         const options = {
           keyPrefix: `users/profile-photos/`,
-          bucket: "shelfie-challenge",
+          bucket: "shelfie-challenge-staging",
           region: "us-west-1",
           accessKey: ACCESS_KEY,
           secretKey: SECRET_ACCESS_KEY,

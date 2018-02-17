@@ -79,6 +79,7 @@ class BottomNavbar extends Component {
           selectedPost={this.props.selectedPost}
           getSelectedPost={this.getSelectedPost}
           handleLogout={this.handleLogout}
+          other={false}
         />
       )
     }

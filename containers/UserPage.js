@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
+import { Dimensions, View, ScrollView, RefreshControl } from 'react-native';
 import { WhiteSpace } from 'antd-mobile';
+import ActivityIndicator from 'react-native-activity-indicator';
 import styles from '../styles';
 
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions';
+import { fetchUser, fetchPosts } from '../actions';
 
 import UserInfo from '../components/UserInfo';
 import UserSubmissions from '../components/UserSubmissions';
@@ -17,11 +18,13 @@ class UserPage extends Component {
     super(props);
 
     this.state = {
+      user: false,
       editMode: false,
       userPosts: false,
       totalPoints: 0,
       selectedPost: false,
       profilePicture: false,
+      refreshing: false,
     };
 
     this.handleEditBtn = this.handleEditBtn.bind(this);
@@ -33,6 +36,10 @@ class UserPage extends Component {
   }
 
   componentWillMount() {
+    this.props.fetchUser(this.props.token, this.props.user.random_user_id)
+    .then((res) => {
+      this.setState({ user: res.payload.data });
+    });
     this.props.fetchPosts(this.props.token, 'user', this.props.user.random_user_id)
     .then((res) => {
       var totalPoints = 0;
@@ -40,6 +47,13 @@ class UserPage extends Component {
         totalPoints += post.challenge.point_value;
       })
       this.setState({ userPosts: res.payload.data, totalPoints: totalPoints });
+    });
+  }
+  _onRefresh() {
+    this.setState({refreshing: true });
+    this.props.fetchUser(this.props.token, this.props.user.random_user_id)
+    .then((res) => {
+      this.setState({ user: res.payload.data, refreshing: false });
     });
   }
 
@@ -100,6 +114,22 @@ class UserPage extends Component {
     else {
       return (
         <View style={styles.container}>
+        {this.state.refreshing
+        ?
+        <View
+          style={{position:'absolute', top: 10,
+            width:Dimensions.get('window').width, height:60,
+            alignItems:'center', justifyContent:'center'}}>
+            <ActivityIndicator
+              animating={true}
+              size={50}
+              thickness={1}
+              color="rgb(0,206,202)"
+            />
+        </View>
+        :
+        null
+        }
             {
               this.state.editMode
               ?
@@ -107,29 +137,44 @@ class UserPage extends Component {
                 <UserFormWrapper handleSave={this.handleSave} />
               </ScrollView>
               :
-              <ScrollView>
-                <UserInfo
-                  token={this.props.token}
-                  user={this.props.user}
-                  totalPoints={this.state.totalPoints}
-                  other={this.props.other}
-                  handleEditBtn={this.handleEditBtn}
-                  handleLogout={this.handleLogout}
-                  editProfilePicture={this.editProfilePicture}
-                  profilePicturePath={this.state.profilePicturePath}
-                  activeUser={this.props.activeUser}
-                />
+              <ScrollView
+                refreshControl={
+                  <RefreshControl
+                    tintColor="transparent"
+                    colors={['transparent']}
+                    style={{backgroundColor: 'transparent'}}
+                    refreshing={this.state.refreshing}
+                    onRefresh={this._onRefresh.bind(this)}
+                  />
+                }
+              >
+                {this.state.user
+                  ?
+                  <UserInfo
+                    token={this.props.token}
+                    user={this.state.user}
+                    totalPoints={this.state.totalPoints}
+                    other={this.props.other}
+                    handleEditBtn={this.handleEditBtn}
+                    handleLogout={this.handleLogout}
+                    editProfilePicture={this.editProfilePicture}
+                    profilePicturePath={this.state.profilePicturePath}
+                    activeUser={this.props.activeUser}
+                  />
+                  :
+                  null
+                }
                 <WhiteSpace />
                 {this.state.userPosts
-                ?
-                <UserSubmissions
-                  token={this.props.token}
-                  user={this.props.user}
-                  userPosts={this.state.userPosts}
-                  getSelectedPost={this.getSelectedPost}
-                />
-                :
-                null
+                  ?
+                  <UserSubmissions
+                    token={this.props.token}
+                    user={this.props.user}
+                    userPosts={this.state.userPosts}
+                    getSelectedPost={this.getSelectedPost}
+                  />
+                  :
+                  null
                 }
               </ScrollView>
             }
@@ -143,4 +188,4 @@ function mapStateToProps(state) {
   return { pitches: state.pitches };
 }
 
-export default connect(mapStateToProps, { fetchPosts })(UserPage);
+export default connect(mapStateToProps, { fetchUser, fetchPosts })(UserPage);

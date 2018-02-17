@@ -14,7 +14,7 @@ class GamePage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { sorted_challenges: false }
+    this.state = { sorted_challenges: false, other: true }
 
     this.beginSubmission = this.beginSubmission.bind(this);
     this.getPostUser = this.getPostUser.bind(this);
@@ -55,6 +55,9 @@ class GamePage extends Component {
   }
   getPostUser(user) {
     this.props.getPostUser(user);
+    if (user.random_user_id == this.props.user.random_user_id) {
+      this.setState({ other: false });
+    }
   }
   getSelectedPost(post) {
     this.props.getSelectedPost(post);
@@ -70,7 +73,7 @@ class GamePage extends Component {
             selectedPost={this.props.selectedPost}
             getSelectedPost={this.getSelectedPost}
             activeUser={this.props.user}
-            other={true}
+            other={this.state.other}
           />
         </View>
       )

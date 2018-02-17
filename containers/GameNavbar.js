@@ -81,7 +81,9 @@ class GameNavbar extends Component {
         <View style={styles.containerBackground}>
           <LeaderboardPage
             token={this.props.token}
+            user={this.props.user}
             gameID={this.props.gameID}
+            getLeaderboardUser={this.getPostUser}
           />
         </View>
 

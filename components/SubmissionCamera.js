@@ -64,7 +64,7 @@ class SubmissionCamera extends Component {
 
       const options = {
         keyPrefix: `posts/${this.state.captureType}s/`,
-        bucket: "shelfie-challenge",
+        bucket: "shelfie-challenge-staging",
         region: "us-west-1",
         accessKey: ACCESS_KEY,
         secretKey: SECRET_ACCESS_KEY,

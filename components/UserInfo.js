@@ -20,30 +20,12 @@ class UserInfo extends Component {
   componentDidMount() {
     console.log(this.props.activeUser);
     if (this.props.other) {
-      this.props.fetchUser(this.props.token, this.props.user.random_user_id)
-      .then((res) => {
-        console.log(res.payload.data, "this is the fetched user");
-        this.setState({
-          followers: res.payload.data.followers.length,
-          following: res.payload.data.following.length
-        });
-        var followers = res.payload.data.followers;
+        var followers = this.props.user.followers;
         followers.forEach(user => {
           if (user.random_user_id == this.props.activeUser.random_user_id) {
             this.setState({ followed: true });
           }
-        })
-      });
-    }
-    else {
-      this.props.fetchUser(this.props.token, this.props.user.random_user_id)
-      .then((res) => {
-        console.log(res.payload.data, "this is the fetched user");
-        this.setState({
-          followers: res.payload.data.followers.length,
-          following: res.payload.data.following.length
         });
-      });
     }
   }
 
@@ -59,14 +41,14 @@ class UserInfo extends Component {
       this.props.deleteFollower(this.props.token, this.props.activeUser.random_user_id, this.props.user.random_user_id)
       .then((res) => {
         console.log(res);
-        this.setState({ followed: false, followers: this.state.followers - 1 });
+        this.setState({ followed: false });
       });
     }
     else {
       this.props.addFollower(this.props.token, this.props.activeUser.random_user_id, this.props.user.random_user_id)
       .then((res) => {
         console.log(res);
-        this.setState({ followed: true, followers: this.state.followers + 1 });
+        this.setState({ followed: true });
       });
     }
   }
@@ -85,18 +67,10 @@ class UserInfo extends Component {
             align="start"
           >
             <Flex.Item style={{zIndex: 9999}}>
-              {this.props.user.profile_picture
-                ?
                 <Image
                   source={{ uri: this.props.user.profile_picture }}
                   style={styles.userPhoto}
                 />
-                :
-                <Image
-                  source={require('../assets/images/profile_photo.png')}
-                  style={styles.userPhoto}
-                />
-              }
             </Flex.Item>
             <Flex.Item>
               <Text style={styles.userStats}>
@@ -106,13 +80,13 @@ class UserInfo extends Component {
             </Flex.Item>
             <Flex.Item>
               <Text style={styles.userStats}>
-                <Text style={styles.userStatsNum}>{this.state.followers}{"\n"}</Text>
+                <Text style={styles.userStatsNum}>{this.props.user.followers.length}{"\n"}</Text>
                 <Text style={styles.userStatsLabel}>followers</Text>
               </Text>
             </Flex.Item>
             <Flex.Item>
               <Text style={styles.userStats}>
-                <Text style={styles.userStatsNum}>{this.state.following}{"\n"}</Text>
+                <Text style={styles.userStatsNum}>{this.props.user.following.length}{"\n"}</Text>
                 <Text style={styles.userStatsLabel}>following</Text>
               </Text>
             </Flex.Item>
@@ -164,18 +138,10 @@ class UserInfo extends Component {
               <TouchableOpacity
                 onPress={this.editProfilePicture}
               >
-              {this.props.user.profile_picture
-                ?
                 <Image
                   source={{ uri: this.props.user.profile_picture }}
                   style={styles.userPhoto}
                 />
-                :
-                <Image
-                  source={require('../assets/images/profile_photo.png')}
-                  style={styles.userPhoto}
-                />
-              }
               </TouchableOpacity>
             </Flex.Item>
             <Flex.Item>
@@ -186,13 +152,13 @@ class UserInfo extends Component {
             </Flex.Item>
             <Flex.Item>
               <Text style={styles.userStats}>
-                <Text style={styles.userStatsNum}>{this.state.followers}{"\n"}</Text>
+                <Text style={styles.userStatsNum}>{this.props.user.followers.length}{"\n"}</Text>
                 <Text style={styles.userStatsLabel}>followers</Text>
               </Text>
             </Flex.Item>
             <Flex.Item>
               <Text style={styles.userStats}>
-                <Text style={styles.userStatsNum}>{this.state.following}{"\n"}</Text>
+                <Text style={styles.userStatsNum}>{this.props.user.following.length}{"\n"}</Text>
                 <Text style={styles.userStatsLabel}>following</Text>
               </Text>
             </Flex.Item>

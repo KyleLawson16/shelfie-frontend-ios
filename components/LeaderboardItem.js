@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, FlatList, TouchableHighlight } from 'react-native';
-import { WhiteSpace, List, Icon } from 'antd-mobile';
+import { Text, View, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { WhiteSpace, List } from 'antd-mobile';
+import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../styles';
+
+import { connect } from 'react-redux';
+import { addFollower, deleteFollower } from '../actions';
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -18,34 +22,63 @@ class LeaderboardItem extends Component {
       followed: false
     }
     this.handleFollow = this.handleFollow.bind(this);
+    this.handleUserPress = this.handleUserPress.bind(this);
   }
+
+  componentDidMount() {
+    var followers = this.props.user.followers;
+    followers.forEach(user => {
+      if (user == this.props.activeUser.random_user_id) {
+        this.setState({ followed: true });
+      }
+    });
+  }
+
   handleFollow() {
     if (this.state.followed) {
-      this.setState({ followed: false });
-    } else {
-      this.setState({ followed: true });
+      this.props.deleteFollower(this.props.token, this.props.activeUser.random_user_id, this.props.user.random_user_id)
+      .then((res) => {
+        console.log(res);
+        this.setState({ followed: false });
+      });
+    }
+    else {
+      this.props.addFollower(this.props.token, this.props.activeUser.random_user_id, this.props.user.random_user_id)
+      .then((res) => {
+        console.log(res);
+        this.setState({ followed: true });
+      });
     }
   }
+
+  handleUserPress() {
+    this.props.getLeaderboardUser(this.props.user);
+  }
+
   render() {
     return (
       <Item
-        thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
+        thumb={this.props.user.profile_picture}
         extra={
-          <TouchableHighlight onPress={this.handleFollow}>
+          <TouchableOpacity onPress={this.handleFollow}>
             <Text>
-              <Icon type={this.state.followed ? '\ue6c0' : '\ue645'} size={28} />
+              <Icon name={this.state.followed ? 'ios-person-add' : 'ios-person-add-outline'} size={35} />
             </Text>
-          </TouchableHighlight>
+          </TouchableOpacity>
         }
-        onClick={() => {}}
+        onClick={this.handleUserPress}
       >
-        {this.props.username}
+        {this.props.user.username}
         <Brief>
-          {this.props.points} points
+          {this.props.user.points} points
         </Brief>
       </Item>
     )
   }
 }
 
-export default LeaderboardItem;
+function mapStateToProps(state) {
+  return { pitches: state.pitches };
+}
+
+export default connect(mapStateToProps, { addFollower, deleteFollower })(LeaderboardItem);
