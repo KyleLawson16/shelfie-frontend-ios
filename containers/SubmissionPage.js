@@ -46,6 +46,10 @@ class SubmissionPage extends Component {
     this.props.submitPost();
   }
 
+  endSubmission() {
+    this.props.endSubmission();
+  }
+
   render() {
     if (this.state.saved) {
       return (
@@ -75,6 +79,7 @@ class SubmissionPage extends Component {
             type={this.getType.bind(this)}
             saved={this.getSaved.bind(this)}
             mediaObject={this.getMedia.bind(this)}
+            endSubmission={this.endSubmission.bind(this)}
             gameID={this.props.gameID}
           />
         </View>

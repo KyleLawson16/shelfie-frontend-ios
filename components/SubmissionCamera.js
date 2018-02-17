@@ -1,7 +1,8 @@
 'use strict';
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, TouchableHighlight, View, Image } from 'react-native';
-import { Flex, ActivityIndicator } from 'antd-mobile';
+import { Flex, Icon as AntIcon } from 'antd-mobile';
+import ActivityIndicator from 'react-native-activity-indicator';
 import Camera from 'react-native-camera';
 import Video from 'react-native-video';
 import ImagePicker from 'react-native-image-crop-picker';
@@ -87,8 +88,9 @@ class SubmissionCamera extends Component {
     else {
       ImagePicker.openCropper({
         path: this.state.path
-      }).then(image => {
-        console.log(image);
+      })
+      .then(image => {
+        console.log(image, 'this is the image response');
         const file = {
           // `uri` can also be a file system path (i.e. file://)
           uri: image.path,
@@ -119,6 +121,9 @@ class SubmissionCamera extends Component {
           }
         });
 
+      })
+      .catch((error) => {
+        this.setState({ loading: false, saveCapture: false });
       });
     }
 
@@ -221,6 +226,11 @@ class SubmissionCamera extends Component {
     }
   }
 
+  // Navigation
+  endSubmission() {
+    this.props.endSubmission(false);
+  }
+
   render() {
     if (this.state.path) {
       return (
@@ -271,10 +281,14 @@ class SubmissionCamera extends Component {
               Save
             </Text>
           </TouchableOpacity>
-          {this.state.loading
-            ? <ActivityIndicator toast text="loading" />
-            : null
-          }
+          <View style={{ position: 'absolute', top: '41%', left: '41%', zIndex: 9999 }}>
+          <ActivityIndicator
+            animating={this.state.loading}
+            size={80}
+            thickness={1}
+            color="rgb(0,206,202)"
+          />
+          </View>
         </View>
       )
     }
@@ -292,7 +306,17 @@ class SubmissionCamera extends Component {
             captureAudio={true}
             captureMode={this.state.recording ? Camera.constants.CaptureMode.video : Camera.constants.CaptureMode.still}>
             <Flex alignItems="flex-start" direction="row" style={styles.cameraSwitch}>
-              <Flex.Item>
+              <Flex.Item alignItems="flex-start">
+                <TouchableOpacity
+                  onPress={this.endSubmission.bind(this)}
+                  style={[styles.iconBackground, {marginTop: 10}]}
+                >
+                  <AntIcon
+                    style={styles.iconBackground}
+                    type={"left"}
+                    color="white"
+                  />
+                </TouchableOpacity>
               </Flex.Item>
               <Flex.Item>
                 <Text style={{color: 'red', backgroundColor: 'transparent', textAlign: 'center', marginTop: 15, fontSize: 16}}>
@@ -316,6 +340,15 @@ class SubmissionCamera extends Component {
                   />
                 </TouchableOpacity>
               </Flex.Item>
+            </Flex>
+            <Flex style={{ position: 'absolute', top: '41%', left: '41%', zIndex: 9999 }}>
+            <ActivityIndicator
+
+              animating={this.state.loading}
+              size={80}
+              thickness={1}
+              color="rgb(0,206,202)"
+            />
             </Flex>
             <View style={styles.cameraBottomNav}>
               <TouchableHighlight
@@ -345,10 +378,7 @@ class SubmissionCamera extends Component {
               </TouchableOpacity>
             </View>
           </Camera>
-          {this.state.loading
-            ? <ActivityIndicator toast text="loading" />
-            : null
-          }
+
         </View>
       );
     }

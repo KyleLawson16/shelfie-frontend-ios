@@ -24,9 +24,7 @@ class ChallengeCarousel extends Component {
       <View style={styles.backgroundOffColor}>
         <Text style={styles.challengePointHeading}>{this.props.ptValue} Points</Text>
         <Carousel
-          frameOverflow="visible"
-          cellSpacing={20}
-          slideWidth={0.8}
+          slideWidth={1}
           dots={false}
           infinite
           beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}

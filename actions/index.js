@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ROOT_URL = `https://25b312a0.ngrok.io/`;
+const ROOT_URL = `https://shelfie-api-staging.herokuapp.com/`;
 
 export const CREATE_USER = 'CREATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';

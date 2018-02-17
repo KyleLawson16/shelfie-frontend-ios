@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, Image } from 'react-native';
-import { WhiteSpace, List, InputItem, Button, ActivityIndicator, Icon } from 'antd-mobile';
+import { WhiteSpace, List, InputItem, Button, Icon } from 'antd-mobile';
 import { createForm } from 'rc-form';
+import ActivityIndicator from 'react-native-activity-indicator';
 import Video from 'react-native-video';
 import styles from '../styles';
 
@@ -85,10 +86,14 @@ class SubmissionPost extends Component {
             onClick={() => this.handleSubmit()}
           >Submit Post</Button>
         </List>
-        {this.state.loading
-          ? <ActivityIndicator toast text="loading" />
-          : null
-        }
+        <View style={{ position: 'absolute', top: '30%', left: '41%', zIndex: 9999 }}>
+        <ActivityIndicator
+          animating={this.state.loading}
+          size={80}
+          thickness={1}
+          color="rgb(0,206,202)"
+        />
+        </View>
       </ScrollView>
     )
   }
