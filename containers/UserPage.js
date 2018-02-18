@@ -87,7 +87,7 @@ class UserPage extends Component {
         <View style={styles.container}>
           <ChallengeSubmission
             token={this.props.token}
-            user={this.props.user}
+            user={this.props.activeUser}
             postID={this.props.selectedPost.random_post_id}
             postUser={this.props.selectedPost.user}
             challenge={this.props.selectedPost.challenge.name}

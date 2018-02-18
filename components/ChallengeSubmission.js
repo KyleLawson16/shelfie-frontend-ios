@@ -173,10 +173,19 @@ class ChallengeSubmission extends Component {
           </Flex.Item>
           <Flex.Item alignItems="flex-end">
             <TouchableOpacity
-              onPress={() => operation([
-                { text: 'Edit Post', onPress: this.handleEditPost },
-                { text: 'Delete Post', onPress: this.handleDeletePost },
-              ])}
+              onPress={() => {
+                if (this.props.user.random_user_id == this.props.postUser.random_user_id) {
+                  operation([
+                    { text: 'Edit Post', onPress: this.handleEditPost },
+                    { text: 'Delete Post', onPress: this.handleDeletePost },
+                  ])
+                }
+                else {
+                  operation([
+                    { text: 'Report Post', onPress: () => console.log('report post') },
+                  ])
+                }
+              }}
             >
               <Icon name="ios-more" size={28} />
               </TouchableOpacity>

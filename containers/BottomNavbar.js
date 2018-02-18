@@ -76,6 +76,7 @@ class BottomNavbar extends Component {
         <UserPage
           token={this.props.token}
           user={this.props.user}
+          activeUser={this.props.user}
           selectedPost={this.props.selectedPost}
           getSelectedPost={this.getSelectedPost}
           handleLogout={this.handleLogout}

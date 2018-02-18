@@ -69,6 +69,7 @@ class GamePage extends Component {
         <View style={styles.container}>
           <UserPage
             token={this.props.token}
+            activeUser={this.props.user}
             user={this.props.postUser}
             selectedPost={this.props.selectedPost}
             getSelectedPost={this.getSelectedPost}
