@@ -68,7 +68,7 @@ class UserInfo extends Component {
           <Flex
             align="start"
           >
-            <Flex.Item style={{zIndex: 9999}}>
+            <Flex.Item style={{zIndex: 9999 }}>
                 <Image
                   source={{ uri: this.props.user.profile_picture }}
                   style={styles.userPhoto}

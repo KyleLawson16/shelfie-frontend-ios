@@ -4,6 +4,9 @@ import { List, InputItem, TextareaItem, Button } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import styles from '../styles';
 
+import { connect } from 'react-redux';
+import { updateUser } from '../actions';
+
 class UserForm extends Component {
   constructor(props) {
     super(props);
@@ -12,9 +15,23 @@ class UserForm extends Component {
   }
 
   handleSubmit() {
+    this.setState({ loading: true });
     this.props.form.validateFields((error, value) => {
-      console.log(value);
-      this.props.handleSave(value); // Pass user data to parent component (LandingPage)
+      var firstName = value.name.split(" ")[0]; // Separate first & last name from full name
+      var lastName = value.name.split(" ")[1];
+      this.props.updateUser( // Send new user to API
+        this.props.token,
+        this.props.user.random_user_id,
+        firstName,
+        lastName,
+        value.username,
+        value.email,
+        value.phone
+      ).then((res) => { // Get response
+        console.log(res);
+        this.setState({ loading: false });
+        this.props.handleSave(res); // Pass user data to parent component (LandingPage)
+      });
     });
   }
 
@@ -44,7 +61,7 @@ class UserForm extends Component {
   render() {
     let errors;
     const { getFieldProps, getFieldError } = this.props.form;
-
+    console.log(this.props.user.username);
     return (
       <View style={styles.container}>
         <Text style={styles.authFormHeader}>Edit Your Info</Text>
@@ -55,9 +72,9 @@ class UserForm extends Component {
                 {required: true, message: 'Please enter your full name'},
                 {validator: this.checkName}
               ],
+              initialValue: `${this.props.user.first_name} ${this.props.user.last_name}`,
             })}
             type="text"
-            placeholder="Johnny Appleseed"
             labelNumber={7}
             error={getFieldError('name')}
             onErrorClick={() => {
@@ -70,9 +87,9 @@ class UserForm extends Component {
                 {required: true, message: 'Please enter a username'},
                 {validator: this.checkUsername}
               ],
+              initialValue: this.props.user.username,
             })}
             type="text"
-            placeholder="Tough Guy"
             labelNumber={7}
             error={getFieldError('username')}
             onErrorClick={() => {
@@ -80,13 +97,32 @@ class UserForm extends Component {
             }}
           >Username</InputItem>
           <InputItem
-            {...getFieldProps('team', {
+            {...getFieldProps('email', {
+              rules: [
+                {required: true, message: 'Please enter your email address'},
+                {type: 'email', message: 'Please enter a valid email address'}
+              ],
+              initialValue: this.props.user.email,
             })}
-            type="text"
-            placeholder="Horned Toads"
+            type="email"
             labelNumber={7}
-            maxLength={30}
-          >Favorite Team</InputItem>
+            error={getFieldError('email')}
+            onErrorClick={() => {
+              alert(getFieldError('email'));
+            }}
+          >Email</InputItem>
+          <InputItem
+            {...getFieldProps('phone', {
+              rules: [
+                {required: true},
+              ],
+              initialValue: this.props.user.phone_number,
+            })}
+            type="phone"
+            placeholder="603 9724 367"
+            labelNumber={7}
+            maxLength={12}
+          >Phone Number</InputItem>
           <Button
             style={styles.authFormBtn}
             type="primary"
@@ -100,4 +136,8 @@ class UserForm extends Component {
 
 const UserFormWrapper = createForm()(UserForm);
 
-export default UserFormWrapper;
+function mapStateToProps(state) {
+  return { pitches: state.pitches };
+}
+
+export default connect(mapStateToProps, { updateUser })(UserFormWrapper);

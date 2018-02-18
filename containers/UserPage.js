@@ -60,13 +60,18 @@ class UserPage extends Component {
   handleEditBtn(editMode) {
     if (!this.props.other) {
       this.setState({ editMode: editMode });
+      this.props.handleEdit(true);
     }
   }
   handleSave(value) {
-    this.setState({ editMode: false });
+    this.props.handleEdit(false);
   }
   getSelectedPost(post) {
     this.props.getSelectedPost(post);
+  }
+  getPostUser(user) {
+    this.props.getPostUser(user);
+    this.props.getSelectedPost(false);
   }
   handleLogout() {
     this.props.handleLogout();
@@ -95,6 +100,7 @@ class UserPage extends Component {
             mediaUrl={this.props.selectedPost.media_url}
             isVideo={this.props.selectedPost.is_video}
             likes={this.props.selectedPost.likes}
+            getPostUser={this.getPostUser.bind(this)}
           />
         </View>
       )
@@ -114,27 +120,31 @@ class UserPage extends Component {
     else {
       return (
         <View style={styles.container}>
-        {this.state.refreshing
-        ?
-        <View
-          style={{position:'absolute', top: 10,
-            width:Dimensions.get('window').width, height:60,
-            alignItems:'center', justifyContent:'center'}}>
-            <ActivityIndicator
-              animating={true}
-              size={50}
-              thickness={1}
-              color="rgb(0,206,202)"
-            />
-        </View>
-        :
-        null
-        }
+          {this.state.refreshing
+          ?
+          <View
+            style={{position:'absolute', top: 10,
+              width:Dimensions.get('window').width, height:60,
+              alignItems:'center', justifyContent:'center' }}>
+              <ActivityIndicator
+                animating={true}
+                size={50}
+                thickness={1}
+                color="rgb(0,206,202)"
+              />
+          </View>
+          :
+          null
+          }
             {
-              this.state.editMode
+              this.props.editMode
               ?
               <ScrollView>
-                <UserFormWrapper handleSave={this.handleSave} />
+                <UserFormWrapper
+                  token={this.props.token}
+                  user={this.state.user}
+                  handleSave={this.handleSave}
+                />
               </ScrollView>
               :
               <ScrollView
@@ -148,6 +158,7 @@ class UserPage extends Component {
                   />
                 }
               >
+                <WhiteSpace />
                 {this.state.user
                   ?
                   <UserInfo

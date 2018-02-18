@@ -17,7 +17,7 @@ class AppNavigation extends React.Component {
     super(props);
 
     this.getUser = this.getUser.bind(this);
-    this.exitGame = this.exitGame.bind(this);
+    // this.exitGame = this.exitGame.bind(this);
     this.getGame = this.getGame.bind(this);
     this.handleBackBtn = this.handleBackBtn.bind(this);
     this.beginSubmission = this.beginSubmission.bind(this);
@@ -72,22 +72,29 @@ class AppNavigation extends React.Component {
   handleBackBtn(backBtn) {
     this.setState({ backBtn: backBtn });
   }
-  exitGame(game) {
-    if (this.state.postUser && this.state.selectedPost) {
-      this.setState({ selectedPost: false });
-    }
-    else if (this.state.postUser) {
-      this.setState({ postUser: false });
-    }
-    else if (this.state.selectedPost) {
-      this.setState({ selectedPost: false, backBtn: false });
-    }
-    else {
-      this.setState({ game: game, backBtn: false });
-    }
-  }
+  // exitGame(game) {
+  //   if (this.state.postUser && this.state.selectedPost) {
+  //     this.setState({ selectedPost: false });
+  //   }
+  //   else if (this.state.postUser) {
+  //     this.setState({ postUser: false });
+  //   }
+  //   else if (this.state.selectedPost) {
+  //     this.setState({ selectedPost: false, backBtn: false });
+  //   }
+  //   else {
+  //     this.setState({ game: game, backBtn: false });
+  //   }
+  // }
+  // <TopNavbar
+  //   token={this.state.token}
+  //   exitGame={this.exitGame}
+  //   backBtn={this.state.backBtn}
+  //   SearchBtn={this.state.searchBtn}
+  //   logoutBtn={true}
+  // />
   getGame(game) {
-    this.setState({ game: game, backBtn: true });
+    this.setState({ game: game });
   }
   beginSubmission(submission) {
     this.setState({ submission: submission });
@@ -99,7 +106,7 @@ class AppNavigation extends React.Component {
     this.setState({ postUser: value });
   }
   getSelectedPost(post) {
-    this.setState({ selectedPost: post, backBtn: true });
+    this.setState({ selectedPost: post });
   }
   handleLogout() {
     this.setState({ user: false });
@@ -144,13 +151,6 @@ class AppNavigation extends React.Component {
       else {
         return (
           <View style={styles.containerBackground}>
-            <TopNavbar
-              token={this.state.token}
-              exitGame={this.exitGame}
-              backBtn={this.state.backBtn}
-              SearchBtn={this.state.searchBtn}
-              logoutBtn={true}
-            />
             <BottomNavbar
               user={this.state.user}
               token={this.state.token}

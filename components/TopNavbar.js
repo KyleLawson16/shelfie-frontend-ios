@@ -14,8 +14,11 @@ class TopNavbar extends Component {
   }
 
   handleBack() {
-    this.props.exitGame(false);
+    this.props.handleBack();
     console.log('working');
+  }
+  handleSave() {
+    this.props.handleSave();
   }
 
   render() {
@@ -28,15 +31,20 @@ class TopNavbar extends Component {
           <Flex>
             <Flex.Item>
               {this.props.backBtn ?
-              <TouchableOpacity onPress={() => {this.handleBack()}}>
+              <TouchableOpacity onPress={this.handleBack}>
                 <Icon type={"left"} />
+              </TouchableOpacity>
+              : false}
+              {this.props.exitBtn ?
+              <TouchableOpacity onPress={this.handleBack}>
+                <Icon type={"cross"} />
               </TouchableOpacity>
               : false}
             </Flex.Item>
             <Flex.Item>
               <Text style={{ textAlign: 'center' }}>SHELFIE</Text>
             </Flex.Item>
-            <Flex.Item>
+            <Flex.Item alignItems="flex-end">
             </Flex.Item>
           </Flex>
         </WingBlank>

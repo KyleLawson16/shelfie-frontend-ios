@@ -12,8 +12,12 @@ const styles = StyleSheet.create({
   },
   containerBackground: {
     flex: 1,
+    marginTop: -1,
     backgroundColor: '#f5f5f9',
     height: WINDOW_HEIGHT
+  },
+  containerPaddingTop: {
+    paddingTop: 45
   },
   activityIndicatorCenter: {
     position: 'absolute',
@@ -57,6 +61,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 2,
     zIndex: 9999,
+    height: 75,
     // transform: [{ skewY: '-1.5deg' }],
   },
   bottomNavbar: {

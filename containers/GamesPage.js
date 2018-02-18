@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { fetchGames } from '../actions';
 
 import GameItem from '../components/GameItem';
+import TopNavbar from '../components/TopNavbar';
 
 class GamesPage extends Component {
   constructor(props) {
@@ -24,6 +25,12 @@ class GamesPage extends Component {
   }
   render() {
       return (
+        <View style={styles.container}>
+        <TopNavbar
+          token={this.state.token}
+          handleBack={this.handleBack}
+          backBtn={false}
+        />
         <ScrollView style={styles.containerBackground}>
           <Flex justify="center" style={styles.greyHeaderBar}>
             <Text style={styles.challengeHeader}>Games</Text>
@@ -56,6 +63,7 @@ class GamesPage extends Component {
             color="rgb(0,206,202)"
           />
         </ScrollView>
+        </View>
       )
   }
 }

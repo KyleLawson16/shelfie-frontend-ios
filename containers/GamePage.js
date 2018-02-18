@@ -9,6 +9,7 @@ import { joinGame } from '../actions';
 import GameInfo from '../components/GameInfo';
 import GameNavbar from './GameNavbar';
 import UserPage from './UserPage';
+import TopNavbar from '../components/TopNavbar';
 
 class GamePage extends Component {
   constructor(props) {
@@ -19,6 +20,8 @@ class GamePage extends Component {
     this.beginSubmission = this.beginSubmission.bind(this);
     this.getPostUser = this.getPostUser.bind(this);
     this.getSelectedPost = this.getSelectedPost.bind(this);
+    this.handleBack = this.handleBack.bind(this);
+    this.handleBackGame = this.handleBackGame.bind(this);
   }
 
   componentWillMount() {
@@ -54,6 +57,9 @@ class GamePage extends Component {
     this.props.submission(submission);
   }
   getPostUser(user) {
+    if (this.props.selectedPost) {
+      this.props.getSelectedPost(false);
+    }
     this.props.getPostUser(user);
     if (user.random_user_id == this.props.user.random_user_id) {
       this.setState({ other: false });
@@ -62,17 +68,33 @@ class GamePage extends Component {
   getSelectedPost(post) {
     this.props.getSelectedPost(post);
   }
+  handleBack() {
+    if (this.props.selectedPost) {
+      this.props.getSelectedPost(false);
+    }
+    else {
+      this.props.getPostUser(false);
+    }
+  }
+  handleBackGame() {
+    this.props.leaveGame(false);
+  }
 
   render() {
     if (this.props.postUser) {
       return (
         <View style={styles.container}>
+          <TopNavbar
+            token={this.state.token}
+            handleBack={this.handleBack}
+            backBtn={true}
+          />
           <UserPage
             token={this.props.token}
-            activeUser={this.props.user}
             user={this.props.postUser}
             selectedPost={this.props.selectedPost}
             getSelectedPost={this.getSelectedPost}
+            getPostUser={this.getPostUser}
             activeUser={this.props.user}
             other={this.state.other}
           />
@@ -82,6 +104,11 @@ class GamePage extends Component {
     else {
       return (
         <View style={styles.container}>
+          <TopNavbar
+            token={this.state.token}
+            handleBack={this.handleBackGame}
+            backBtn={true}
+          />
           <WhiteSpace size="lg" />
           <GameInfo
             awayTeam={this.props.game.away_team.name}

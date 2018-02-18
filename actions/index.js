@@ -1,11 +1,12 @@
 import axios from 'axios';
 
-const ROOT_URL = `https://shelfie-api-staging.herokuapp.com/`;
+const ROOT_URL = `https://657d7c0c.ngrok.io/`;
 
 export const CREATE_USER = 'CREATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const FETCH_USER = 'FETCH_USER';
+export const UPDATE_USER = 'UPDATE_USER';
 export const FETCH_GAMES = 'FETCH_GAMES';
 export const CREATE_POST = 'CREATE_POST';
 export const FETCH_POSTS = 'FETCH_POSTS';
@@ -74,6 +75,33 @@ export function fetchUser(token, userID) {
     type: FETCH_USER,
     payload: request
   };
+}
+
+export function updateUser(
+    token,
+    random_user_id,
+    first_name,
+    last_name,
+    username,
+    email,
+    phone_number,
+  ) {
+  const url = `${ROOT_URL}api/v1/users/${random_user_id}`;
+  const request =  axios.put(url,
+    {
+      headers: { Authorization: `Token ${token}` },
+      first_name: first_name,
+      last_name: last_name,
+      username: username,
+      email: email,
+      phone_number: phone_number,
+    },
+  );
+
+  return {
+    type: UPDATE_USER,
+    payload: request,
+  }
 }
 
 export function fetchGames(token) {

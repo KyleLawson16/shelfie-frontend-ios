@@ -6,6 +6,7 @@ import styles from '../styles';
 import GamesPage from './GamesPage';
 import GamePage from './GamePage';
 import UserPage from './UserPage';
+import TopNavbar from '../components/TopNavbar';
 
 // Props
 // game : ID of the active game
@@ -18,12 +19,16 @@ class BottomNavbar extends Component {
       selectedTab: 'homeTab',
       hidden: false,
       fullScreen: false,
+      backBtn: false,
+      editMode: false,
     };
 
     this.getGame = this.getGame.bind(this);
     this.beginSubmission = this.beginSubmission.bind(this);
     this.getPostUser = this.getPostUser.bind(this);
     this.getSelectedPost = this.getSelectedPost.bind(this);
+    this.handleBack = this.handleBack.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
   }
 
@@ -41,8 +46,20 @@ class BottomNavbar extends Component {
 
   getSelectedPost(post) {
     this.props.getSelectedPost(post);
+    this.setState({ backBtn: true });
   }
-
+  handleBack() {
+    if (this.state.editMode == true) {
+      this.setState({ editMode: false, exitBtn: false });
+    }
+    else {
+      this.props.getSelectedPost(false);
+      this.setState({ exitBtn: false });
+    }
+  }
+  handleEdit(value) {
+    this.setState({ exitBtn: value, editMode: value });
+  }
   handleLogout() {
     this.props.handleLogout();
   }
@@ -53,7 +70,8 @@ class BottomNavbar extends Component {
         return (
           <GamesPage
             token={this.props.token}
-            handleGame={this.getGame} />
+            handleGame={this.getGame}
+          />
         );
       }
       else {
@@ -67,21 +85,33 @@ class BottomNavbar extends Component {
             getPostUser={this.getPostUser}
             selectedPost={this.props.selectedPost}
             getSelectedPost={this.getSelectedPost}
+            leaveGame={this.getGame}
           />
         );
       }
     }
     else if (pageKey == 'user') {
       return (
-        <UserPage
-          token={this.props.token}
-          user={this.props.user}
-          activeUser={this.props.user}
-          selectedPost={this.props.selectedPost}
-          getSelectedPost={this.getSelectedPost}
-          handleLogout={this.handleLogout}
-          other={false}
-        />
+        <View style={styles.container}>
+          <TopNavbar
+            token={this.state.token}
+            handleBack={this.handleBack}
+            backBtn={this.state.backBtn}
+            exitBtn={this.state.exitBtn}
+          />
+          <UserPage
+            token={this.props.token}
+            user={this.props.user}
+            activeUser={this.props.user}
+            selectedPost={this.props.selectedPost}
+            editMode={this.state.editMode}
+            getSelectedPost={this.getSelectedPost}
+            getPostUser={this.getPostUser}
+            handleEdit={this.handleEdit}
+            handleLogout={this.handleLogout}
+            other={false}
+          />
+        </View>
       )
     }
     else if (pageKey == 'notification') {
@@ -107,7 +137,8 @@ class BottomNavbar extends Component {
                 this.setState({
                   selectedTab: 'homeTab',
                 });
-                this.props.handleBackBtn(this.props.game);
+                this.props.getSelectedPost(false);
+                this.props.getPostUser(false);
               }}
             >
               {this.renderContent('home')}
@@ -122,7 +153,8 @@ class BottomNavbar extends Component {
                 this.setState({
                   selectedTab: 'userTab',
                 });
-                this.props.handleBackBtn(false);
+                this.props.getSelectedPost(false);
+                this.props.getPostUser(false);
               }}
             >
               {this.renderContent('user')}
