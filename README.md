@@ -155,12 +155,16 @@ Uses:
 * logoutUser
 * fetchUser
 * fetchGames
+* createPost
 * fetchPosts
+* updatePost
+* deletePost
 * fetchLeaderboard
 * fetchPrizes
 * addLike
 * deleteLike
-* createPost
+* addFollower 
+* deleteFollower
 * joinGame
 * updateProfilePicture
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
-import { Flex, WhiteSpace, WingBlank } from 'antd-mobile';
+import { Flex, WhiteSpace, WingBlank, Modal } from 'antd-mobile';
 import ActivityIndicator from 'react-native-activity-indicator';
 import { Dimensions } from 'react-native';
 import Image from 'react-native-scalable-image';
@@ -9,7 +9,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../styles';
 
 import { connect } from 'react-redux';
-import { addLike, deleteLike } from '../actions';
+import { addLike, deleteLike, updatePost, deletePost } from '../actions';
+
+const operation = Modal.operation;
+const prompt = Modal.prompt;
+const alert = Modal.alert;
 
 class ChallengeSubmission extends Component {
   constructor(props) {
@@ -24,6 +28,7 @@ class ChallengeSubmission extends Component {
       muted: true,
       paused: true,
       screenWidth: Dimensions.get('window').width,
+      newCaption: false,
     };
 
     this.handleImagePress = this.handleImagePress.bind(this);
@@ -32,6 +37,8 @@ class ChallengeSubmission extends Component {
     this.handlePauseVideo = this.handlePauseVideo.bind(this);
     this.onImageLoad = this.onImageLoad.bind(this);
     this.handleUserPress = this.handleUserPress.bind(this);
+    this.handleEditPost = this.handleEditPost.bind(this);
+    this.handleDeletePost = this.handleDeletePost.bind(this);
   }
 
   componentDidMount() {
@@ -111,17 +118,70 @@ class ChallengeSubmission extends Component {
     this.props.getPostUser(this.props.postUser);
   }
 
+  handleEditPost() {
+    console.log('working...');
+    setTimeout(() => prompt(
+      'Edit Post',
+      'Update the caption of your post',
+      [
+        { text: 'Cancel', onPress: () => console.log('cancel') },
+        { text: 'Ok',
+          onPress: (caption) => {
+            console.log(caption);
+            this.props.updatePost(this.props.token, this.props.postID, caption)
+            .then((res) => {
+              console.log(res);
+            });
+          }
+        },
+      ],
+      'caption',
+      null,
+      [this.props.caption],
+    ), 600)
+  }
+
+  handleDeletePost() {
+    setTimeout(() => alert(
+      '',
+      'Are you sure you want to delete this post?',
+      [
+        { text: 'Cancel', onPress: () => console.log('cancel') },
+        { text: 'Ok',
+          onPress: () => {
+            this.props.deletePost(this.props.token, this.props.postID)
+            .then((res) => {
+              console.log(res);
+            });
+          }
+        },
+      ],
+    ), 600)
+  }
+
   render() {
     return (
       <View style={{ backgroundColor: '#fff' }}>
         <WhiteSpace size="lg" />
         <WingBlank size="md">
-          <View>
+          <Flex>
+          <Flex.Item>
             <TouchableOpacity onPress={this.handleUserPress}>
               <Text style={styles.userName}>{this.props.postUser.username}</Text>
             </TouchableOpacity>
             <Text style={styles.challengeName}>{this.props.challenge}</Text>
-          </View>
+          </Flex.Item>
+          <Flex.Item alignItems="flex-end">
+            <TouchableOpacity
+              onPress={() => operation([
+                { text: 'Edit Post', onPress: this.handleEditPost },
+                { text: 'Delete Post', onPress: this.handleDeletePost },
+              ])}
+            >
+              <Icon name="ios-more" size={28} />
+              </TouchableOpacity>
+          </Flex.Item>
+          </Flex>
         </WingBlank>
         <WhiteSpace size="xs" />
         <Flex justifyContent="center" style={{backgroundColor: 'darkgrey', opacity: this.state.doubleTapOpacity}}>
@@ -219,4 +279,4 @@ function mapStateToProps(state) {
   return { pitches: state.pitches };
 }
 
-export default connect(mapStateToProps, { addLike, deleteLike })(ChallengeSubmission);
+export default connect(mapStateToProps, { addLike, deleteLike, updatePost, deletePost })(ChallengeSubmission);

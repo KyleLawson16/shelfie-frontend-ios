@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
-import { Flex, WhiteSpace, WingBlank, Button } from 'antd-mobile';
+import { Flex, WhiteSpace, WingBlank, Button, Modal } from 'antd-mobile';
 import styles from '../styles';
 
 import { connect } from 'react-redux';
 import { logoutUser, addFollower, deleteFollower, fetchUser } from '../actions';
+
+const alert = Modal.alert;
 
 class UserInfo extends Component {
   constructor(props) {
@@ -175,7 +177,10 @@ class UserInfo extends Component {
               </Text>
             </Button>
             <Button
-              onPressIn={this.handleLogout}
+              onPressIn={() => alert('', 'Logout of Shelfie?', [
+                { text: 'Cancel', onPress: () => console.log('cancel') },
+                { text: 'Ok', onPress: this.handleLogout },
+              ])}
               style={styles.userEditBtn}
             >
               <Text style={{fontSize: 14}}>

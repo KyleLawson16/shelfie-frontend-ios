@@ -1,18 +1,20 @@
 import axios from 'axios';
 
-const ROOT_URL = `https://shelfie-api-staging.herokuapp.com/`;
+const ROOT_URL = `https://657d7c0c.ngrok.io/`;
 
 export const CREATE_USER = 'CREATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const FETCH_USER = 'FETCH_USER';
 export const FETCH_GAMES = 'FETCH_GAMES';
+export const CREATE_POST = 'CREATE_POST';
 export const FETCH_POSTS = 'FETCH_POSTS';
+export const UPDATE_POST = 'UPDATE_POST';
+export const DELETE_POST = 'DELETE_POST';
 export const FETCH_PRIZES = 'FETCH_PRIZES';
 export const FETCH_LEADERBOARD = 'FETCH_LEADERBOARD';
 export const ADD_LIKE = 'ADD_LIKE';
 export const DELETE_LIKE = 'DELETE_LIKE';
-export const CREATE_POST = 'CREATE_POST';
 export const JOIN_GAME = 'JOIN_GAME';
 export const UPDATE_PROFILE_PICTURE = 'UPDATE_PROFILE_PICTURE';
 export const ADD_FOLLOWER = 'ADD_FOLLOWER';
@@ -86,6 +88,36 @@ export function fetchGames(token) {
   };
 }
 
+export function createPost(
+    token,
+    random_user_id,
+    random_game_id,
+    random_challenge_id,
+    is_video,
+    media_url,
+    caption,
+  ) {
+  const url = `${ROOT_URL}api/v1/posts/create`;
+  const request =  axios.post(url,
+    {
+      headers: {
+        Authorization: `Token ${token}`
+      },
+      user: random_user_id,
+      game: random_game_id,
+      challenge: random_challenge_id,
+      is_video: is_video,
+      media_url: media_url,
+      caption: caption,
+    }
+  );
+
+  return {
+    type: CREATE_POST,
+    payload: request,
+  }
+}
+
 export function fetchPosts(token, filterBy, gameID) {
   const url = `${ROOT_URL}api/v1/posts?${filterBy}=${gameID}`;
   const request =  axios.get(url,
@@ -94,6 +126,33 @@ export function fetchPosts(token, filterBy, gameID) {
 
   return {
     type: FETCH_POSTS,
+    payload: request,
+  }
+}
+
+export function updatePost(token, random_post_id, caption) {
+  const url = `${ROOT_URL}api/v1/posts/${random_post_id}`;
+  const request =  axios.put(url,
+    {
+      headers: { Authorization: `Token ${token}` },
+      caption: caption,
+    },
+  );
+
+  return {
+    type: UPDATE_POST,
+    payload: request,
+  }
+}
+
+export function deletePost(token, random_post_id) {
+  const url = `${ROOT_URL}api/v1/posts/${random_post_id}`;
+  const request =  axios.delete(url,
+    { headers: { Authorization: `Token ${token}` } },
+  );
+
+  return {
+    type: DELETE_POST,
     payload: request,
   }
 }
@@ -154,36 +213,6 @@ export function deleteLike(token, random_user_id, random_post_id) {
 
   return {
     type: DELETE_LIKE,
-    payload: request,
-  }
-}
-
-export function createPost(
-    token,
-    random_user_id,
-    random_game_id,
-    random_challenge_id,
-    is_video,
-    media_url,
-    caption,
-  ) {
-  const url = `${ROOT_URL}api/v1/posts/create`;
-  const request =  axios.post(url,
-    {
-      headers: {
-        Authorization: `Token ${token}`
-      },
-      user: random_user_id,
-      game: random_game_id,
-      challenge: random_challenge_id,
-      is_video: is_video,
-      media_url: media_url,
-      caption: caption,
-    }
-  );
-
-  return {
-    type: CREATE_POST,
     payload: request,
   }
 }
