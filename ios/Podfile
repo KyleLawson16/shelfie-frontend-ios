@@ -12,5 +12,6 @@ target 'antmshelfie' do
   pod 'React', path: '../node_modules/react-native', subspecs: [
     'ART',
   ]
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
 end

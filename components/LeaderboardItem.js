@@ -20,7 +20,7 @@ class LeaderboardItem extends Component {
 
     this.state = {
       followed: false
-    }
+    };
     this.handleFollow = this.handleFollow.bind(this);
     this.handleUserPress = this.handleUserPress.bind(this);
   }
@@ -62,7 +62,10 @@ class LeaderboardItem extends Component {
         extra={
           <TouchableOpacity onPress={this.handleFollow}>
             <Text>
-              <Icon name={this.state.followed ? 'ios-person-add' : 'ios-person-add-outline'} size={35} />
+              <Icon
+                name="md-person-add"
+                size={25}
+                color={this.state.followed ? '#000' : '#ccc'}  />
             </Text>
           </TouchableOpacity>
         }

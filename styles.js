@@ -7,14 +7,17 @@ let THEME_COLOR = 'rgb(0,206,202)';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: '#fff',
-    height: WINDOW_HEIGHT
   },
   containerBackground: {
     flex: 1,
     marginTop: -1,
     backgroundColor: '#f5f5f9',
     height: WINDOW_HEIGHT
+  },
+  flex1: {
+    flex: 1
   },
   containerPaddingTop: {
     paddingTop: 45
@@ -65,14 +68,12 @@ const styles = StyleSheet.create({
     // transform: [{ skewY: '-1.5deg' }],
   },
   bottomNavbar: {
-    backgroundColor: '#f9f9f9',
-    borderTopWidth: 0,
-    borderColor: '#fff',
-    borderStyle: 'solid',
+    borderTopColor: "red",
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: .5 },
+    shadowOffset: { width: 0, height: -.5 },
     shadowOpacity: 0.2,
     shadowRadius: 2,
+    zIndex: 99999,
   },
 
   // Authentication Styles

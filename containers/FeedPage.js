@@ -13,7 +13,7 @@ class FeedPage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { posts: false, loading: true, refreshing: false }
+    this.state = { posts: false, loading: true, refreshing: false };
   }
 
   componentWillMount() {

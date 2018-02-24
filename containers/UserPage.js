@@ -23,7 +23,6 @@ class UserPage extends Component {
       userPosts: false,
       totalPoints: 0,
       selectedPost: false,
-      profilePicture: false,
       refreshing: false,
     };
 
@@ -77,13 +76,13 @@ class UserPage extends Component {
     this.props.handleLogout();
   }
   editProfilePicture() {
-    this.setState({ profilePicture: true });
+    this.props.editProfilePicture();
   }
   getPath(path) {
     this.setState({ profilePicturePath: path });
   }
   finishEdit() {
-    this.setState({ profilePicture: false });
+    this.props.finishEdit();
   }
 
   render() {
@@ -105,7 +104,7 @@ class UserPage extends Component {
         </View>
       )
     }
-    else if (this.state.profilePicture) {
+    else if (this.props.profilePicture) {
       return (
         <View style={styles.container}>
           <ProfilePicture

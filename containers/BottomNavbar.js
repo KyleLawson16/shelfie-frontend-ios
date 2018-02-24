@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, AsyncStorage } from 'react-native';
-import { TabBar, Icon, Flex } from 'antd-mobile';
+import { Text, View, AsyncStorage, TabBarIOS } from 'react-native';
+import { TabBar, Flex } from 'antd-mobile';
+import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../styles';
 
 import GamesPage from './GamesPage';
@@ -21,6 +22,7 @@ class BottomNavbar extends Component {
       fullScreen: false,
       backBtn: false,
       editMode: false,
+      profilePicture: false,
     };
 
     this.getGame = this.getGame.bind(this);
@@ -30,6 +32,8 @@ class BottomNavbar extends Component {
     this.handleBack = this.handleBack.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.editProfilePicture = this.editProfilePicture.bind(this);
+    this.finishEdit = this.finishEdit.bind(this);
   }
 
   getGame(game) {
@@ -52,6 +56,9 @@ class BottomNavbar extends Component {
     if (this.state.editMode == true) {
       this.setState({ editMode: false, exitBtn: false });
     }
+    else if (this.state.profilePicture) {
+      this.setState({ profilePicture: false, exitBtn: false });
+    }
     else {
       this.props.getSelectedPost(false);
       this.setState({ exitBtn: false });
@@ -62,6 +69,12 @@ class BottomNavbar extends Component {
   }
   handleLogout() {
     this.props.handleLogout();
+  }
+  editProfilePicture() {
+    this.setState({ exitBtn: true, profilePicture: true });
+  }
+  finishEdit() {
+    this.setState({ profilePicture: false, exitBtn: false });
   }
 
   renderContent(pageKey) {
@@ -86,6 +99,7 @@ class BottomNavbar extends Component {
             selectedPost={this.props.selectedPost}
             getSelectedPost={this.getSelectedPost}
             leaveGame={this.getGame}
+            handleLogout={this.handleLogout}
           />
         );
       }
@@ -105,10 +119,13 @@ class BottomNavbar extends Component {
             activeUser={this.props.user}
             selectedPost={this.props.selectedPost}
             editMode={this.state.editMode}
+            profilePicture={this.state.profilePicture}
             getSelectedPost={this.getSelectedPost}
             getPostUser={this.getPostUser}
             handleEdit={this.handleEdit}
             handleLogout={this.handleLogout}
+            editProfilePicture={this.editProfilePicture}
+            finishEdit={this.finishEdit}
             other={false}
           />
         </View>
@@ -123,59 +140,58 @@ class BottomNavbar extends Component {
 
   render() {
     return (
-        <TabBar
-            unselectedTintColor="#000"
-            tintColor="#000"
-            barTintColor="white"
+        <TabBarIOS
+          tintColor="#000"
+          barTintColor="#f9f9f9"
+          unselectedItemTintColor="#ccc"
+          translucent={false}
+          style={styles.bottomNavbar}
+        >
+          <Icon.TabBarItem
+            iconName="md-home"
+            selectedIconName="md-home"
+            selected={this.state.selectedTab === 'homeTab'}
+
+            onPress={() => {
+              this.setState({
+                selectedTab: 'homeTab',
+              });
+              this.props.getSelectedPost(false);
+              this.props.getPostUser(false);
+            }}
           >
-            <TabBar.Item
-              key="home"
-              icon={require('../assets/images/home.png')}
-              selected={this.state.selectedTab === 'homeTab'}
+            {this.renderContent('home')}
+          </Icon.TabBarItem>
+          <Icon.TabBarItem
+            iconName="md-person"
+            selectedIconName="md-person"
+            selected={this.state.selectedTab === 'userTab'}
 
-              onPress={() => {
-                this.setState({
-                  selectedTab: 'homeTab',
-                });
-                this.props.getSelectedPost(false);
-                this.props.getPostUser(false);
-              }}
-            >
-              {this.renderContent('home')}
-            </TabBar.Item>
-            <TabBar.Item
+            onPress={() => {
+              this.setState({
+                selectedTab: 'userTab',
+              });
+              this.props.getSelectedPost(false);
+              this.props.getPostUser(false);
+            }}
+          >
+            {this.renderContent('user')}
+          </Icon.TabBarItem>
+          <Icon.TabBarItem
+            iconName="md-notifications"
+            selectedIconName="md-notifications"
+            selected={this.state.selectedTab === 'notificationTab'}
 
-              key="user"
-              icon={require('../assets/images/user.png')}
-              selected={this.state.selectedTab === 'userTab'}
-
-              onPress={() => {
-                this.setState({
-                  selectedTab: 'userTab',
-                });
-                this.props.getSelectedPost(false);
-                this.props.getPostUser(false);
-              }}
-            >
-              {this.renderContent('user')}
-            </TabBar.Item>
-            <TabBar.Item
-
-              key="notification"
-              icon={require('../assets/images/notification.png')}
-              selected={this.state.selectedTab === 'notificationTab'}
-
-              onPress={() => {
-                this.setState({
-                  selectedTab: 'notificationTab',
-                });
-                this.props.handleBackBtn(false);
-              }}
-            >
-              {this.renderContent('notification')}
-            </TabBar.Item>
-          </TabBar>
-
+            onPress={() => {
+              this.setState({
+                selectedTab: 'notificationTab',
+              });
+              this.props.handleBackBtn(false);
+            }}
+          >
+            {this.renderContent('notification')}
+          </Icon.TabBarItem>
+        </TabBarIOS>
     )
   }
 }

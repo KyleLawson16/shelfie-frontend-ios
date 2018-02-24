@@ -15,13 +15,24 @@ class GamePage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { sorted_challenges: false, other: true }
+    this.state = {
+      sorted_challenges: false,
+      other: true,
+      backBtn: true,
+      exitBtn: false,
+      editMode: false,
+      profilePicture: false
+    }
 
     this.beginSubmission = this.beginSubmission.bind(this);
     this.getPostUser = this.getPostUser.bind(this);
     this.getSelectedPost = this.getSelectedPost.bind(this);
     this.handleBack = this.handleBack.bind(this);
     this.handleBackGame = this.handleBackGame.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.editProfilePicture = this.editProfilePicture.bind(this);
+    this.finishEdit = this.finishEdit.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   componentWillMount() {
@@ -64,6 +75,9 @@ class GamePage extends Component {
     if (user.random_user_id == this.props.user.random_user_id) {
       this.setState({ other: false });
     }
+    else {
+      this.setState({ other: true });
+    }
   }
   getSelectedPost(post) {
     this.props.getSelectedPost(post);
@@ -72,12 +86,35 @@ class GamePage extends Component {
     if (this.props.selectedPost) {
       this.props.getSelectedPost(false);
     }
+    else if (this.state.editMode == true) {
+      this.setState({ editMode: false, exitBtn: false, backBtn: true });
+    }
+    else if (this.state.profilePicture) {
+      this.setState({ profilePicture: false, exitBtn: false, backBtn: true });
+    }
     else {
       this.props.getPostUser(false);
     }
   }
   handleBackGame() {
     this.props.leaveGame(false);
+  }
+  handleEdit(value) {
+    if (value) {
+      this.setState({ exitBtn: value, editMode: value, backBtn: false });
+    }
+    else {
+      this.setState({ exitBtn: value, editMode: value, backBtn: true });
+    }
+  }
+  editProfilePicture() {
+    this.setState({ exitBtn: true, profilePicture: true, backBtn: false });
+  }
+  finishEdit() {
+    this.setState({ profilePicture: false, exitBtn: false, backBtn: true });
+  }
+  handleLogout() {
+    this.props.handleLogout();
   }
 
   render() {
@@ -87,14 +124,21 @@ class GamePage extends Component {
           <TopNavbar
             token={this.state.token}
             handleBack={this.handleBack}
-            backBtn={true}
+            backBtn={this.state.backBtn}
+            exitBtn={this.state.exitBtn}
           />
           <UserPage
             token={this.props.token}
             user={this.props.postUser}
             selectedPost={this.props.selectedPost}
+            editMode={this.state.editMode}
+            profilePicture={this.state.profilePicture}
             getSelectedPost={this.getSelectedPost}
             getPostUser={this.getPostUser}
+            handleEdit={this.handleEdit}
+            editProfilePicture={this.editProfilePicture}
+            finishEdit={this.finishEdit}
+            handleLogout={this.handleLogout}
             activeUser={this.props.user}
             other={this.state.other}
           />

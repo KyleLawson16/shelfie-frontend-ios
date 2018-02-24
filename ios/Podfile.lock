@@ -1,30 +1,38 @@
 PODS:
   - QBImagePickerController (3.4.0)
+  - React (0.50.3):
+    - React/Core (= 0.50.3)
   - React/ART (0.50.3):
     - React/Core
   - React/Core (0.50.3):
     - yoga (= 0.50.3.React)
+  - RNVectorIcons (4.5.0):
+    - React
   - RSKImageCropper (2.0.0)
   - yoga (0.50.3.React)
 
 DEPENDENCIES:
   - QBImagePickerController
   - React/ART (from `../node_modules/react-native`)
+  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - RSKImageCropper
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 EXTERNAL SOURCES:
   React:
     :path: ../node_modules/react-native
+  RNVectorIcons:
+    :path: ../node_modules/react-native-vector-icons
   yoga:
     :path: ../node_modules/react-native/ReactCommon/yoga
 
 SPEC CHECKSUMS:
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   React: 541ba768b9855e10cdc76f55427a5cd0653ca806
+  RNVectorIcons: c0dbfbf6068fefa240c37b0f71bd03b45dddac44
   RSKImageCropper: d9a1acbc0600bf8decc8f0d21895872c99a9e4cf
   yoga: 17521bbb0dd54a47c0b3ac43253e78cdac7488e0
 
-PODFILE CHECKSUM: db746a98d654ba41e099d836d030ba29e232367d
+PODFILE CHECKSUM: a56331d90ff306b7748070dc4ea794cf5a687a49
 
 COCOAPODS: 1.4.0
