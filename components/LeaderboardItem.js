@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, FlatList, TouchableOpacity, Image } from 'react-native';
 import { WhiteSpace, List } from 'antd-mobile';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../styles';
@@ -58,7 +58,7 @@ class LeaderboardItem extends Component {
   render() {
     return (
       <Item
-        thumb={this.props.user.profile_picture}
+        thumb={<Image style={styles.notificationPhoto} source={{ uri: this.props.user.profile_picture}} />}
         extra={
           <TouchableOpacity onPress={this.handleFollow}>
             <Text>

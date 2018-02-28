@@ -318,7 +318,15 @@ const styles = StyleSheet.create({
   cameraBottomNav: {
     alignItems: 'center',
     height: 120,
-  }
+  },
+
+  // Notification styles
+  notificationPhoto: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 10
+  },
 });
 
 export default styles;

@@ -143,6 +143,8 @@ Uses:
    * UserSubmissions
    * UserSubmission
    * ProfilePicture
+* NotificationsPage
+   * NotificationItem
 
 ##### Navigation
 * BottomNavbar
@@ -163,10 +165,11 @@ Uses:
 * fetchPrizes
 * addLike
 * deleteLike
-* addFollower 
+* addFollower
 * deleteFollower
 * joinGame
 * updateProfilePicture
+* fetchNotifications
 
 
 

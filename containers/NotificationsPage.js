@@ -32,7 +32,7 @@ class NotificationsPage extends Component {
             data={this.props.notifications}
             renderItem={({item}) =>
               <NotificationItem
-                actor={item.actor}
+                actorPhoto={item.actor.profile_picture}
                 message={item.message}
                 category={item.category}
                 getNotificationUser={this.getNotificationUser}

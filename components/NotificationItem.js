@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import { List } from 'antd-mobile';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../styles';
@@ -27,6 +27,8 @@ class NotificationItem extends Component {
       <Item
         arrow="horizontal"
         multipleLine
+        thumb={<Image style={styles.notificationPhoto} source={{ uri: this.props.actorPhoto}} />}
+        radius={40}
         onClick={this.handleUserPress}
       >
         {this.props.message}
