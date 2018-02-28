@@ -267,7 +267,7 @@ class ChallengeSubmission extends Component {
             <TouchableOpacity onPress={this.handleLikePress} style={{ width: 25}}>
               <View>
                 <Icon
-                  name={this.state.liked ? "ios-heart" : "ios-heart-outline"}
+                  name={this.state.liked ? "md-heart" : "md-heart-outline"}
                   size={24}
                 />
               </View>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ROOT_URL = `https://shelfie-api-staging.herokuapp.com/`;
+const ROOT_URL = `https://294bf9d6.ngrok.io/`;
 
 export const CREATE_USER = 'CREATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';
@@ -20,6 +20,7 @@ export const JOIN_GAME = 'JOIN_GAME';
 export const UPDATE_PROFILE_PICTURE = 'UPDATE_PROFILE_PICTURE';
 export const ADD_FOLLOWER = 'ADD_FOLLOWER';
 export const DELETE_FOLLOWER = 'DELETE_FOLLOWER';
+export const FETCH_NOTIFICATIONS = 'FETCH_NOTIFICATIONS';
 
 export function createUser(firstName, lastName, username, email, password, confirmPassword) {
   const url = `${ROOT_URL}api/v1/create-user`;
@@ -311,6 +312,18 @@ export function deleteFollower(token, random_user_id, followed_user_id) {
 
   return {
     type: DELETE_FOLLOWER,
+    payload: request,
+  }
+}
+
+export function fetchNotifications(token, recipient) {
+  const url = `${ROOT_URL}api/v1/notifications?recipient=${recipient}`;
+  const request =  axios.get(url,
+    { headers: { Authorization: `Token ${token}` }}
+  );
+
+  return {
+    type: FETCH_NOTIFICATIONS,
     payload: request,
   }
 }

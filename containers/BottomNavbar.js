@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { Text, View, AsyncStorage, TabBarIOS } from 'react-native';
-import { TabBar, Flex } from 'antd-mobile';
+import { TabBar, Flex, Badge } from 'antd-mobile';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../styles';
+
+import { connect } from 'react-redux';
+import { fetchNotifications } from '../actions';
 
 import GamesPage from './GamesPage';
 import GamePage from './GamePage';
 import UserPage from './UserPage';
+import NotificationsPage from './NotificationsPage';
 import TopNavbar from '../components/TopNavbar';
 
 // Props
@@ -23,6 +27,8 @@ class BottomNavbar extends Component {
       backBtn: false,
       editMode: false,
       profilePicture: false,
+      notifications: false,
+      activeNotifications: 0,
     };
 
     this.getGame = this.getGame.bind(this);
@@ -34,6 +40,20 @@ class BottomNavbar extends Component {
     this.handleLogout = this.handleLogout.bind(this);
     this.editProfilePicture = this.editProfilePicture.bind(this);
     this.finishEdit = this.finishEdit.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.fetchNotifications(this.props.token, this.props.user.random_user_id)
+    .then((res) => {
+      console.log(res);
+      activeNotifications = 0;
+      res.payload.data.forEach(notification => {
+        if (notification['active'] == true) {
+          activeNotifications += 1;
+        }
+      })
+      this.setState({ notifications: res.payload.data, activeNotifications: activeNotifications });
+    });
   }
 
   getGame(game) {
@@ -133,7 +153,18 @@ class BottomNavbar extends Component {
     }
     else if (pageKey == 'notification') {
       return (
-        <Text>Notifications</Text>
+        <View style={styles.container}>
+          <TopNavbar
+            token={this.state.token}
+            handleBack={this.handleBack}
+            backBtn={this.state.backBtn}
+            exitBtn={this.state.exitBtn}
+          />
+          <NotificationsPage
+            notifications={this.state.notifications}
+            getNotificationUser={this.getPostUser}
+          />
+      </View>
       )
     }
   }
@@ -181,6 +212,7 @@ class BottomNavbar extends Component {
             iconName="md-notifications"
             selectedIconName="md-notifications"
             selected={this.state.selectedTab === 'notificationTab'}
+            badge={this.state.activeNotifications}
 
             onPress={() => {
               this.setState({
@@ -190,10 +222,15 @@ class BottomNavbar extends Component {
             }}
           >
             {this.renderContent('notification')}
+
           </Icon.TabBarItem>
         </TabBarIOS>
     )
   }
 }
 
-export default BottomNavbar;
+function mapStateToProps(state) {
+  return { pitches: state.pitches };
+}
+
+export default connect(mapStateToProps, { fetchNotifications })(BottomNavbar);
