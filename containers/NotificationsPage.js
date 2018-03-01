@@ -100,8 +100,6 @@ class NotificationsPage extends Component {
             }
             keyExtractor={(item, index) => index}
           />
-        </List>
-        <List>
           <FlatList
             data={this.props.notifications}
             renderItem={({item}) =>
