@@ -28,7 +28,7 @@ class BottomNavbar extends Component {
       editMode: false,
       profilePicture: false,
       notifications: false,
-      activeNotifications: 0,
+      activeNotifications: false,
     };
 
     this.getGame = this.getGame.bind(this);
@@ -40,19 +40,42 @@ class BottomNavbar extends Component {
     this.handleLogout = this.handleLogout.bind(this);
     this.editProfilePicture = this.editProfilePicture.bind(this);
     this.finishEdit = this.finishEdit.bind(this);
+    this.refreshNotifications = this.refreshNotifications.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchNotifications(this.props.token, this.props.user.random_user_id)
     .then((res) => {
       console.log(res);
-      activeNotifications = 0;
+      activeNotifications = [];
+      notifications = [];
       res.payload.data.forEach(notification => {
         if (notification['active'] == true) {
-          activeNotifications += 1;
+          activeNotifications.push(notification);
+        }
+        else {
+          notifications.push(notification);
+        }
+      });
+      this.setState({ notifications: notifications, activeNotifications: activeNotifications });
+    });
+  }
+
+  refreshNotifications() {
+    this.props.fetchNotifications(this.props.token, this.props.user.random_user_id)
+    .then((res) => {
+      console.log(res);
+      activeNotifications = [];
+      notifications = [];
+      res.payload.data.forEach(notification => {
+        if (notification['active'] == true) {
+          activeNotifications.push(notification);
+        }
+        else {
+          notifications.push(notification);
         }
       })
-      this.setState({ notifications: res.payload.data, activeNotifications: activeNotifications });
+      this.setState({ notifications: notifications, activeNotifications: activeNotifications });
     });
   }
 
@@ -161,8 +184,11 @@ class BottomNavbar extends Component {
             exitBtn={this.state.exitBtn}
           />
           <NotificationsPage
+            token={this.props.token}
             notifications={this.state.notifications}
+            activeNotifications={this.state.activeNotifications}
             getNotificationUser={this.getPostUser}
+            refreshNotifications={this.refreshNotifications}
           />
       </View>
       )
@@ -208,11 +234,12 @@ class BottomNavbar extends Component {
           >
             {this.renderContent('user')}
           </Icon.TabBarItem>
+          {this.state.activeNotifications.length == 0
+            ?
           <Icon.TabBarItem
             iconName="md-notifications"
             selectedIconName="md-notifications"
             selected={this.state.selectedTab === 'notificationTab'}
-            badge={this.state.activeNotifications}
 
             onPress={() => {
               this.setState({
@@ -224,6 +251,24 @@ class BottomNavbar extends Component {
             {this.renderContent('notification')}
 
           </Icon.TabBarItem>
+          :
+          <Icon.TabBarItem
+            iconName="md-notifications"
+            selectedIconName="md-notifications"
+            selected={this.state.selectedTab === 'notificationTab'}
+            badge={this.state.activeNotifications.length}
+
+            onPress={() => {
+              this.setState({
+                selectedTab: 'notificationTab',
+              });
+              this.props.handleBackBtn(false);
+            }}
+          >
+            {this.renderContent('notification')}
+
+          </Icon.TabBarItem>
+        }
         </TabBarIOS>
     )
   }

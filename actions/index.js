@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ROOT_URL = `https://22b63ced.ngrok.io/`;
+const ROOT_URL = `https://401f03ef.ngrok.io/`;
 
 export const CREATE_USER = 'CREATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';
@@ -21,6 +21,7 @@ export const UPDATE_PROFILE_PICTURE = 'UPDATE_PROFILE_PICTURE';
 export const ADD_FOLLOWER = 'ADD_FOLLOWER';
 export const DELETE_FOLLOWER = 'DELETE_FOLLOWER';
 export const FETCH_NOTIFICATIONS = 'FETCH_NOTIFICATIONS';
+export const UPDATE_NOTIFICATIONS = 'UPDATE_NOTIFICATIONS';
 
 export function createUser(firstName, lastName, username, email, password, confirmPassword) {
   const url = `${ROOT_URL}api/v1/create-user`;
@@ -324,6 +325,23 @@ export function fetchNotifications(token, recipient) {
 
   return {
     type: FETCH_NOTIFICATIONS,
+    payload: request,
+  }
+}
+
+export function updateNotifications(token, random_notification_ids) {
+  const url = `${ROOT_URL}api/v1/notifications/read`;
+  const request =  axios.put(url,
+    {
+      headers: {
+        Authorization: `Token ${token}`
+      },
+      random_notification_ids: random_notification_ids,
+    }
+  );
+
+  return {
+    type: UPDATE_NOTIFICATIONS,
     payload: request,
   }
 }

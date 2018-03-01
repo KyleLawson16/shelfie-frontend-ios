@@ -23,20 +23,38 @@ class NotificationItem extends Component {
   }
 
   render() {
-    return (
-      <Item
-        arrow="horizontal"
-        multipleLine
-        thumb={<Image style={styles.notificationPhoto} source={{ uri: this.props.actorPhoto}} />}
-        radius={40}
-        onClick={this.handleUserPress}
-      >
-        {this.props.message}
-        <Brief>
-          Example subtitle
-        </Brief>
-      </Item>
-    )
+    if (this.props.active) {
+      return (
+        <Item
+          arrow="horizontal"
+          multipleLine
+          thumb={<Image style={styles.notificationPhoto} source={{ uri: this.props.actorPhoto}} />}
+          radius={40}
+          onClick={this.handleUserPress}
+        >
+          <Text style={{ fontWeight: 'bold', fontSize: 18}}>{this.props.message}</Text>
+          <Brief style={{ fontWeight: 'bold'}}>
+            Example subtitle
+          </Brief>
+        </Item>
+      )
+    }
+    else {
+      return (
+        <Item
+          arrow="horizontal"
+          multipleLine
+          thumb={<Image style={styles.notificationPhoto} source={{ uri: this.props.actorPhoto}} />}
+          radius={40}
+          onClick={this.handleUserPress}
+        >
+          {this.props.message}
+          <Brief>
+            Example subtitle
+          </Brief>
+        </Item>
+      )
+    }
   }
 }
 
