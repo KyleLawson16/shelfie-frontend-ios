@@ -58,7 +58,7 @@ class LeaderboardItem extends Component {
   render() {
     return (
       <Item
-        thumb={<Image style={styles.notificationPhoto} source={{ uri: this.props.user.profile_picture}} />}
+        thumb={<Image style={styles.leaderboardPhoto} source={{ uri: this.props.user.profile_picture}} />}
         extra={
           <TouchableOpacity onPress={this.handleFollow}>
             <Text>
@@ -71,7 +71,10 @@ class LeaderboardItem extends Component {
         }
         onClick={this.handleUserPress}
       >
-        {this.props.user.username}
+        <Text>
+          <Text style={styles.leaderboardPosition}>{this.props.number + 1}. </Text>
+          <Text style={styles.leaderboardName}>{this.props.user.username}</Text>
+        </Text>
         <Brief>
           {this.props.user.points} points
         </Brief>

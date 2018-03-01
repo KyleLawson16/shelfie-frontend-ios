@@ -28,12 +28,12 @@ class NotificationItem extends Component {
         <Item
           arrow="horizontal"
           multipleLine
+          wrap
+          align="middle"
           thumb={<Image style={styles.notificationPhoto} source={{ uri: this.props.actorPhoto}} />}
-          radius={40}
           onClick={this.handleUserPress}
-          style={{ paddingTop: 15 }}
         >
-          <Text style={{ fontWeight: 'bold', fontSize: 16}}>{this.props.message}</Text>
+          <Text style={[styles.notificationContent, { fontWeight: 'bold', fontSize: 16}]}>{this.props.message}</Text>
         </Item>
       )
     }
@@ -42,12 +42,12 @@ class NotificationItem extends Component {
         <Item
           arrow="horizontal"
           multipleLine
+          wrap
+          align="middle"
           thumb={<Image style={styles.notificationPhoto} source={{ uri: this.props.actorPhoto}} />}
-          radius={40}
           onClick={this.handleUserPress}
-          style={{ paddingTop: 15 }}
         >
-          <Text style={{ fontSize: 14 }}>{this.props.message}</Text>
+          <Text style={[styles.notificationContent, { fontSize: 14 }]}>{this.props.message}</Text>
         </Item>
       )
     }

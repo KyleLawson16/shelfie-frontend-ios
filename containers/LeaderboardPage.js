@@ -38,8 +38,9 @@ class LeaderboardPage extends Component {
         <List>
           <FlatList
             data={this.state.leaderboard}
-            renderItem={({item}) =>
+            renderItem={({item, index}) =>
               <LeaderboardItem
+                number={index}
                 user={item}
                 activeUser={this.props.user}
                 getLeaderboardUser={this.getLeaderboardUser}

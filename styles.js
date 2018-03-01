@@ -320,12 +320,33 @@ const styles = StyleSheet.create({
     height: 120,
   },
 
+  // Leaderboard styles
+  leaderboardPhoto: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 10,
+  },
+  leaderboardPosition: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  leaderboardName: {
+    fontSize: 16,
+  },
+
   // Notification styles
   notificationPhoto: {
     width: 40,
     height: 40,
     borderRadius: 20,
     marginRight: 10,
+    marginBottom: 10,
+    marginTop: 10,
+  },
+  notificationContent: {
+    paddingTop: 14,
+    paddingBottom: 15,
   },
 });
 
