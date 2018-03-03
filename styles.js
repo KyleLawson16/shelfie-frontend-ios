@@ -248,18 +248,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 20,
     marginBottom: 10,
+    backgroundColor: 'transparent',
   },
   challengeCarouselName: {
     color: 'white',
     fontSize: 25,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 40
+    marginTop: 40,
+    backgroundColor: 'transparent',
   },
   challengeCarouselDescription: {
     color: 'white',
     fontSize: 16,
     textAlign: 'center',
+    backgroundColor: 'transparent',
   },
   challengeCarouselNumber: {
     color: 'white',
@@ -267,7 +270,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'right',
     marginTop: 2,
-    marginRight: 5
+    marginRight: 5,
+    backgroundColor: 'transparent',
   },
   challengeSubmissionBtn: {
     width: '50%',
@@ -279,20 +283,22 @@ const styles = StyleSheet.create({
 
   // Prize styles
   prizeCarousel: {
-    height: WINDOW_HEIGHT,
-    backgroundColor: 'rgba(0,0,0,.3)'
+    width: '100%',
+    height: WINDOW_HEIGHT - 310,
   },
   prizeCarouselName: {
     color: 'white',
     fontSize: 25,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: (WINDOW_HEIGHT / 2) - 220
+    marginTop: (WINDOW_HEIGHT / 2) - 220,
+    backgroundColor: 'transparent',
   },
   prizeCarouselDescription: {
     color: 'white',
     fontSize: 16,
     textAlign: 'center',
+    backgroundColor: 'transparent',
   },
 
   // Submission styles

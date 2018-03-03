@@ -24,10 +24,7 @@ class PrizeCarousel extends Component {
           frameOverflow="visible"
           cellSpacing={20}
           slideWidth={0.8}
-          dots={false}
-          autoplay
-          autoplayInterval={4000}
-          infinite
+          dots={true}
           beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
           afterChange={index => this.setState({ slideIndex: index })}
         >
@@ -39,9 +36,11 @@ class PrizeCarousel extends Component {
                 justify="center"
                 style={{width: '100%'}}
               >
-                <Flex.Item
-                  style={styles.prizeCarousel}
-                >
+              <Image
+                style={styles.prizeCarousel}
+                source={{ uri: prize.background_photo }}
+              />
+                <Flex.Item style={[styles.prizeCarousel, { position: 'absolute' }]}>
                   <Text style={styles.challengeCarouselNumber}>{this.state.slideIndex + 1} / {totalPrizes}</Text>
                   <Text style={styles.prizeCarouselName}>{prize.name}</Text>
                   <Text style={styles.prizeCarouselDescription}>{prize.description}</Text>

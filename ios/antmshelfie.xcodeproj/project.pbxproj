@@ -40,7 +40,6 @@
 		2D52018C20186F5D006F1FB3 /* anticon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D52018B20186F5D006F1FB3 /* anticon.ttf */; };
 		2D57A9B02031198400BEFB0B /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* antmshelfieTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* antmshelfieTests.m */; };
-		32A7EAFF32AE4454A4ACA75D /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D08B1616C39B4A49A6EE87BA /* libRNImagePicker.a */; };
 		3ADEB2ABD1984D287C72231B /* libPods-antmshelfie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C883D2029B394EBE9D37E9DA /* libPods-antmshelfie.a */; };
 		41DCE9238F1C4E0BA4F3CC32 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66EE45D07F1246E48B496F06 /* MaterialIcons.ttf */; };
 		4B6A35902A8545EEA75BC02B /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E1EE5D26B54E4EC89E78A3A3 /* SimpleLineIcons.ttf */; };
@@ -248,13 +247,6 @@
 			remoteGlobalIDString = 641E28441F0EEC8500443AF6;
 			remoteInfo = "RCTVideo-tvOS";
 		};
-		2DA74785201A5F3800774182 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C51D10C060734DC0B5F7EFFA /* RNImagePicker.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
-			remoteInfo = RNImagePicker;
-		};
 		3DAD3E831DF850E9000B6D8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */;
@@ -411,6 +403,7 @@
 		2D02E47B1E0B4A5D006451C7 /* antmshelfie-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "antmshelfie-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* antmshelfie-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "antmshelfie-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D37F8D32036CC17005A48C9 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
+		2D3EED142049E3C1007FB13E /* antmshelfie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = antmshelfie.entitlements; path = antmshelfie/antmshelfie.entitlements; sourceTree = "<group>"; };
 		2D52018B20186F5D006F1FB3 /* anticon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = anticon.ttf; path = ../assets/fonts/anticon.ttf; sourceTree = "<group>"; };
 		39637695018F442B8C191225 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		56AB4EB34C9943F197B91CCB /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
@@ -430,7 +423,6 @@
 		B29296DC8AC24764A25561BE /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		BBF3678148B1048002672326 /* Pods-antmshelfie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-antmshelfie.release.xcconfig"; path = "Pods/Target Support Files/Pods-antmshelfie/Pods-antmshelfie.release.xcconfig"; sourceTree = "<group>"; };
 		C358208708084A329BA94C57 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
-		C51D10C060734DC0B5F7EFFA /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		C883D2029B394EBE9D37E9DA /* libPods-antmshelfie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-antmshelfie.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D08B1616C39B4A49A6EE87BA /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
 		D10280007F77568067EB94DB /* libPods-antmshelfie-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-antmshelfie-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -468,7 +460,6 @@
 				EAC9CA82554946F09E8D3C97 /* libRCTCamera.a in Frameworks */,
 				AC706247D4A94BB8B63968C7 /* RNVectorIcons.xcodeproj in Frameworks */,
 				F7412BBC70204B839E14B4C6 /* libRCTVideo.a in Frameworks */,
-				32A7EAFF32AE4454A4ACA75D /* libRNImagePicker.a in Frameworks */,
 				3ADEB2ABD1984D287C72231B /* libPods-antmshelfie.a in Frameworks */,
 				F85743B743BD40BE94950BC9 /* libimageCropPicker.a in Frameworks */,
 			);
@@ -581,6 +572,7 @@
 		13B07FAE1A68108700A75B9A /* antmshelfie */ = {
 			isa = PBXGroup;
 			children = (
+				2D3EED142049E3C1007FB13E /* antmshelfie.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -675,14 +667,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2DA74782201A5F3700774182 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2DA74786201A5F3800774182 /* libRNImagePicker.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		3533859905464B15A3F5CA17 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -747,7 +731,6 @@
 				C358208708084A329BA94C57 /* RCTCamera.xcodeproj */,
 				56AB4EB34C9943F197B91CCB /* RNVectorIcons.xcodeproj */,
 				5B6E3583D9F346F2B5BA884B /* RCTVideo.xcodeproj */,
-				C51D10C060734DC0B5F7EFFA /* RNImagePicker.xcodeproj */,
 				778C14CAB2C74A64835CC4BC /* imageCropPicker.xcodeproj */,
 				2D37F8D32036CC17005A48C9 /* ART.xcodeproj */,
 			);
@@ -906,6 +889,17 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = AZXNJ6RXK2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.HomeKit = {
+								enabled = 0;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -995,10 +989,6 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
-				},
-				{
-					ProductGroup = 2DA74782201A5F3700774182 /* Products */;
-					ProjectRef = C51D10C060734DC0B5F7EFFA /* RNImagePicker.xcodeproj */;
 				},
 				{
 					ProductGroup = 2D5200632018537D006F1FB3 /* Products */;
@@ -1193,13 +1183,6 @@
 			fileType = archive.ar;
 			path = libRCTVideo.a;
 			remoteRef = 2DA747482019C88300774182 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2DA74786201A5F3800774182 /* libRNImagePicker.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNImagePicker.a;
-			remoteRef = 2DA74785201A5F3800774182 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */ = {
@@ -1621,6 +1604,8 @@
 			baseConfigurationReference = 0EFFA6AB29631ECEE9C656AB /* Pods-antmshelfie.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1634,14 +1619,15 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 				);
-				INFOPLIST_FILE = antmshelfie/Info.plist;
+				INFOPLIST_FILE = "antmshelfie/Internal-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shelfie-challenge.ShelfieChallenge";
 				PRODUCT_NAME = antmshelfie;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1653,6 +1639,8 @@
 			baseConfigurationReference = BBF3678148B1048002672326 /* Pods-antmshelfie.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1666,13 +1654,14 @@
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 				);
 				INFOPLIST_FILE = antmshelfie/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shelfie-challenge.ShelfieChallenge";
 				PRODUCT_NAME = antmshelfie;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";

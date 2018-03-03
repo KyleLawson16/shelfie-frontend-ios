@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../styles';
 
 import { connect } from 'react-redux';
-import { addLike, deleteLike, updatePost, deletePost } from '../actions';
+import { addLike, deleteLike, updatePost, deletePost, reportPost } from '../actions';
 
 const operation = Modal.operation;
 const prompt = Modal.prompt;
@@ -37,6 +37,7 @@ class ChallengeSubmission extends Component {
     this.handlePauseVideo = this.handlePauseVideo.bind(this);
     this.onImageLoad = this.onImageLoad.bind(this);
     this.handleUserPress = this.handleUserPress.bind(this);
+    this.handleReportPost = this.handleReportPost.bind(this);
     this.handleEditPost = this.handleEditPost.bind(this);
     this.handleDeletePost = this.handleDeletePost.bind(this);
   }
@@ -118,6 +119,29 @@ class ChallengeSubmission extends Component {
     this.props.getPostUser(this.props.postUser);
   }
 
+  handleReportPost() {
+    console.log('working...');
+    setTimeout(() => prompt(
+      'Report Post',
+      'Please provide a reason for reporting.',
+      [
+        { text: 'Cancel', onPress: () => console.log('cancel') },
+        { text: 'Ok',
+          onPress: (message) => {
+            console.log(message);
+            this.props.reportPost(this.props.token, this.props.postID, this.props.user.random_user_id, message)
+            .then((res) => {
+              console.log(res);
+            });
+          }
+        },
+      ],
+      'message',
+      null,
+      [this.props.message],
+    ), 600)
+  }
+
   handleEditPost() {
     console.log('working...');
     setTimeout(() => prompt(
@@ -182,7 +206,7 @@ class ChallengeSubmission extends Component {
                 }
                 else {
                   operation([
-                    { text: 'Report Post', onPress: () => console.log('report post') },
+                    { text: 'Report Post', onPress: this.handleReportPost },
                   ])
                 }
               }}
@@ -288,4 +312,4 @@ function mapStateToProps(state) {
   return { pitches: state.pitches };
 }
 
-export default connect(mapStateToProps, { addLike, deleteLike, updatePost, deletePost })(ChallengeSubmission);
+export default connect(mapStateToProps, { addLike, deleteLike, updatePost, deletePost, reportPost })(ChallengeSubmission);

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ROOT_URL = `https://663fb549.ngrok.io/`;
+const ROOT_URL = `https://ac8e138d.ngrok.io/`;
 
 export const CREATE_USER = 'CREATE_USER';
 export const LOGIN_USER = 'LOGIN_USER';
@@ -12,6 +12,7 @@ export const CREATE_POST = 'CREATE_POST';
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const UPDATE_POST = 'UPDATE_POST';
 export const DELETE_POST = 'DELETE_POST';
+export const REPORT_POST = 'REPORT_POST';
 export const FETCH_PRIZES = 'FETCH_PRIZES';
 export const FETCH_LEADERBOARD = 'FETCH_LEADERBOARD';
 export const ADD_LIKE = 'ADD_LIKE';
@@ -183,6 +184,22 @@ export function deletePost(token, random_post_id) {
 
   return {
     type: DELETE_POST,
+    payload: request,
+  }
+}
+
+export function reportPost(token, random_post_id, random_user_id, message) {
+  const url = `${ROOT_URL}api/v1/posts/${random_post_id}/report`;
+  const request =  axios.post(url,
+    {
+      headers: { Authorization: `Token ${token}` },
+      user: random_user_id,
+      message: message,
+    },
+  );
+
+  return {
+    type: REPORT_POST,
     payload: request,
   }
 }

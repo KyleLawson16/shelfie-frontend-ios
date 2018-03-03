@@ -2,10 +2,14 @@ PODS:
   - QBImagePickerController (3.4.0)
   - React (0.50.3):
     - React/Core (= 0.50.3)
-  - React/ART (0.50.3):
+  - React/BatchedBridge (0.50.3):
     - React/Core
+    - React/cxxreact_legacy
   - React/Core (0.50.3):
     - yoga (= 0.50.3.React)
+  - React/cxxreact_legacy (0.50.3):
+    - React/jschelpers_legacy
+  - React/jschelpers_legacy (0.50.3)
   - RNVectorIcons (4.5.0):
     - React
   - RSKImageCropper (2.0.0)
@@ -13,7 +17,7 @@ PODS:
 
 DEPENDENCIES:
   - QBImagePickerController
-  - React/ART (from `../node_modules/react-native`)
+  - React/BatchedBridge (from `../node_modules/react-native`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - RSKImageCropper
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -33,6 +37,6 @@ SPEC CHECKSUMS:
   RSKImageCropper: d9a1acbc0600bf8decc8f0d21895872c99a9e4cf
   yoga: 17521bbb0dd54a47c0b3ac43253e78cdac7488e0
 
-PODFILE CHECKSUM: a56331d90ff306b7748070dc4ea794cf5a687a49
+PODFILE CHECKSUM: c6e87b5d8c4aa374a1d110b68948d1b0b3100cad
 
 COCOAPODS: 1.4.0

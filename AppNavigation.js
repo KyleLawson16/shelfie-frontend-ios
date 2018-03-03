@@ -52,7 +52,9 @@ class AppNavigation extends React.Component {
           console.log(res.payload.data);
           this.setState({ user: res.payload.data, loading: false });
         })
-
+      }
+      else {
+        this.setState({ loading: false });
       }
     } catch (error) {
       // Error retrieving data

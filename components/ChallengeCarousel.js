@@ -25,8 +25,7 @@ class ChallengeCarousel extends Component {
         <Text style={styles.challengePointHeading}>{this.props.ptValue} Points</Text>
         <Carousel
           slideWidth={1}
-          dots={false}
-          infinite
+          dots={true}
           beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
           afterChange={index => this.setState({ slideIndex: index })}
         >
@@ -34,16 +33,15 @@ class ChallengeCarousel extends Component {
             <View
               key={challenge.name}
             >
-              <Flex
-                justify="center"
-                style={{width: '100%'}}
-              >
-                <Flex.Item
-                  style={{
-                    height: 220,
-                    backgroundColor: 'rgba(0,0,0,.3)'
-                  }}
-                >
+              <Flex>
+              <Image
+                style={{
+                  width: '100%',
+                  height: 220,
+                }}
+                source={{ uri: challenge.background_photo }}
+              />
+                <Flex.Item style={{ position: 'absolute', width: '100%', height: 220}}>
                   <Text style={styles.challengeCarouselNumber}>{this.state.slideIndex + 1} / {totalChallenges}</Text>
                   <Text style={styles.challengeCarouselName}>{challenge.name}</Text>
                   <Text style={styles.challengeCarouselDescription}>{challenge.description}</Text>
