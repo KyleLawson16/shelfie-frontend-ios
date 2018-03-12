@@ -129,11 +129,7 @@ class AppNavigation extends React.Component {
         else {
           return (
             <View style={styles.activityIndicatorTopCenter}>
-              <ActivityIndicator
-                size={70}
-                thickness={1}
-                color="rgb(0,206,202)"
-              />
+
             </View>
           )
         }

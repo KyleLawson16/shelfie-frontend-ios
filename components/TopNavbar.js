@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { Flex, Icon, WingBlank, WhiteSpace } from 'antd-mobile';
 import styles from '../styles';
 
@@ -25,8 +25,8 @@ class TopNavbar extends Component {
     return (
       <View style={styles.topNavbar}>
         <WhiteSpace size="lg"/>
-        <WhiteSpace size="lg"/>
-        <WhiteSpace size="lg"/>
+        <WhiteSpace size="md"/>
+        <WhiteSpace size="md"/>
         <WingBlank size="md">
           <Flex>
             <Flex.Item>
@@ -42,7 +42,7 @@ class TopNavbar extends Component {
               : false}
             </Flex.Item>
             <Flex.Item>
-              <Text style={{ textAlign: 'center' }}>SHELFIE</Text>
+              <Image source={require('../assets/images/logo.png')} style={styles.topNavbarLogo} />
             </Flex.Item>
             <Flex.Item alignItems="flex-end">
             </Flex.Item>

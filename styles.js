@@ -67,6 +67,11 @@ const styles = StyleSheet.create({
     height: 75,
     // transform: [{ skewY: '-1.5deg' }],
   },
+  topNavbarLogo:  {
+    width: '140%',
+    resizeMode: 'contain',
+    left: '-20%'
+  },
   bottomNavbar: {
     shadowColor: '#000',
     shadowOffset: { width: 0, height: -.5 },
@@ -79,6 +84,18 @@ const styles = StyleSheet.create({
   landingContent: {
     width: '90%',
     marginLeft: '5%',
+  },
+  landingFoamFinger:  {
+    width: '40%',
+    height: '40%',
+    left: '30%',
+    resizeMode: 'contain',
+  },
+  landingLogo:  {
+    width: '65%',
+    left: '17.5%',
+    resizeMode: 'contain',
+    marginBottom: 100,
   },
   authForm: {
     width: '90%',

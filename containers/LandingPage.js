@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Button, Flex, WhiteSpace } from 'antd-mobile';
 import styles from '../styles';
 
@@ -49,7 +49,8 @@ class LandingPage extends Component {
             justify="center"
           >
             <Flex.Item>
-              <Text>SHELFIE</Text>
+              <Image source={require('../assets/images/shelfie_foam_finger.png')} style={styles.landingFoamFinger} />
+              <Image source={require('../assets/images/logo.png')} style={styles.landingLogo} />
               <Button
                 style={styles.authFormBtn}
                 onPressIn={this.handleSignIn}
