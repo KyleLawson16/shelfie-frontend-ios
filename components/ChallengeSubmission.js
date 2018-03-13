@@ -190,9 +190,14 @@ class ChallengeSubmission extends Component {
         <WingBlank size="md">
           <Flex>
           <Flex.Item>
-            <TouchableOpacity onPress={this.handleUserPress}>
+            {this.props.userPage
+              ?
               <Text style={styles.userName}>{this.props.postUser.username}</Text>
-            </TouchableOpacity>
+              :
+              <TouchableOpacity onPress={this.handleUserPress}>
+                <Text style={styles.userName}>{this.props.postUser.username}</Text>
+              </TouchableOpacity>
+            }
             <Text style={styles.challengeName}>{this.props.challenge}</Text>
           </Flex.Item>
           <Flex.Item alignItems="flex-end">

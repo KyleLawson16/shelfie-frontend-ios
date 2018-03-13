@@ -100,6 +100,7 @@ class UserPage extends Component {
             isVideo={this.props.selectedPost.is_video}
             likes={this.props.selectedPost.likes}
             getPostUser={this.getPostUser.bind(this)}
+            userPage={true}
           />
         </View>
       )

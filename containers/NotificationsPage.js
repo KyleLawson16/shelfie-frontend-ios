@@ -7,15 +7,17 @@ import styles from '../styles';
 import { connect } from 'react-redux';
 import { updateNotifications } from '../actions';
 
+import TopNavbar from '../components/TopNavbar';
+import UserPage from '../containers/UserPage';
 import NotificationItem from '../components/NotificationItem';
 
 class NotificationsPage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { refreshing: false, };
+    this.state = { refreshing: false, backBtn: false, exitBtn: false };
     this.getNotificationUser = this.getNotificationUser.bind(this);
-
+    this.getSelectedPost = this.getSelectedPost.bind(this);
   }
 
   componentDidMount() {
@@ -49,11 +51,35 @@ class NotificationsPage extends Component {
 
   getNotificationUser(user) {
     this.props.getNotificationUser(user);
+    this.props.showBackBtn();
+  }
+  getSelectedPost(post) {
+    this.props.getSelectedPost(post);
   }
 
   render() {
     console.log(this.props.activeNotifications, "active notifications");
     console.log(this.props.notifications, "cool");
+
+    if (this.props.notificationUser) {
+      return (
+        <View style={styles.container}>
+          <UserPage
+            token={this.props.token}
+            user={this.props.notificationUser}
+            selectedPost={this.props.selectedPost}
+            editMode={false}
+            profilePicture={false}
+            getSelectedPost={this.getSelectedPost}
+            selectedPost={this.props.selectedPost}
+            getNotificationUser={this.getNotificationUser}
+            activeUser={this.props.user}
+            other={true}
+          />
+        </View>
+      )
+    }
+    else {
     return (
       <ScrollView
         style={styles.containerBackground}
@@ -91,6 +117,7 @@ class NotificationsPage extends Component {
             data={this.props.activeNotifications}
             renderItem={({item}) =>
               <NotificationItem
+                actor={item.actor}
                 actorPhoto={item.actor.profile_picture}
                 message={item.message}
                 category={item.category}
@@ -104,6 +131,7 @@ class NotificationsPage extends Component {
             data={this.props.notifications}
             renderItem={({item}) =>
               <NotificationItem
+                actor={item.actor}
                 actorPhoto={item.actor.profile_picture}
                 message={item.message}
                 category={item.category}
@@ -115,6 +143,7 @@ class NotificationsPage extends Component {
         </List>
       </ScrollView>
     )
+  }
   }
 }
 

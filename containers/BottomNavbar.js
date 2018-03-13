@@ -29,6 +29,7 @@ class BottomNavbar extends Component {
       profilePicture: false,
       notifications: false,
       activeNotifications: false,
+      notificationUser: false,
     };
 
     this.getGame = this.getGame.bind(this);
@@ -41,6 +42,8 @@ class BottomNavbar extends Component {
     this.editProfilePicture = this.editProfilePicture.bind(this);
     this.finishEdit = this.finishEdit.bind(this);
     this.refreshNotifications = this.refreshNotifications.bind(this);
+    this.showBackBtn = this.showBackBtn.bind(this);
+    this.getNotificationUser = this.getNotificationUser.bind(this);
   }
 
   componentWillMount() {
@@ -90,6 +93,9 @@ class BottomNavbar extends Component {
   getPostUser(value) {
     this.props.getPostUser(value);
   }
+  getNotificationUser(value) {
+    this.setState({ notificationUser: value });
+  }
 
   getSelectedPost(post) {
     this.props.getSelectedPost(post);
@@ -102,9 +108,13 @@ class BottomNavbar extends Component {
     else if (this.state.profilePicture) {
       this.setState({ profilePicture: false, exitBtn: false });
     }
+    else if (this.state.notificationUser && this.props.selectedPost) {
+      this.props.getSelectedPost(false);
+    }
     else {
       this.props.getSelectedPost(false);
-      this.setState({ exitBtn: false });
+      this.getNotificationUser(false);
+      this.setState({ exitBtn: false, backBtn: false });
     }
   }
   handleEdit(value) {
@@ -118,6 +128,9 @@ class BottomNavbar extends Component {
   }
   finishEdit() {
     this.setState({ profilePicture: false, exitBtn: false });
+  }
+  showBackBtn() {
+    this.setState({ backBtn: true });
   }
 
   renderContent(pageKey) {
@@ -185,10 +198,15 @@ class BottomNavbar extends Component {
           />
           <NotificationsPage
             token={this.props.token}
+            user={this.props.user}
             notifications={this.state.notifications}
+            notificationUser={this.state.notificationUser}
             activeNotifications={this.state.activeNotifications}
-            getNotificationUser={this.getPostUser}
+            getNotificationUser={this.getNotificationUser}
             refreshNotifications={this.refreshNotifications}
+            getSelectedPost={this.getSelectedPost}
+            selectedPost={this.props.selectedPost}
+            showBackBtn={this.showBackBtn}
           />
       </View>
       )
@@ -212,6 +230,7 @@ class BottomNavbar extends Component {
             onPress={() => {
               this.setState({
                 selectedTab: 'homeTab',
+                backBtn: false
               });
               this.props.getSelectedPost(false);
               this.props.getPostUser(false);
@@ -227,6 +246,7 @@ class BottomNavbar extends Component {
             onPress={() => {
               this.setState({
                 selectedTab: 'userTab',
+                backBtn: false,
               });
               this.props.getSelectedPost(false);
               this.props.getPostUser(false);
@@ -244,6 +264,7 @@ class BottomNavbar extends Component {
             onPress={() => {
               this.setState({
                 selectedTab: 'notificationTab',
+                backBtn: false,
               });
               this.props.handleBackBtn(false);
             }}
