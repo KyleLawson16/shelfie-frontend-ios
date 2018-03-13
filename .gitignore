@@ -19,3 +19,5 @@ yarn-error.log*
 /ios/build
 /android/build
 /security
+
+keys.txt

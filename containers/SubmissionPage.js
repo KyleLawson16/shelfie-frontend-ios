@@ -81,6 +81,7 @@ class SubmissionPage extends Component {
             mediaObject={this.getMedia.bind(this)}
             endSubmission={this.endSubmission.bind(this)}
             gameID={this.props.gameID}
+            token={this.props.token}
           />
         </View>
       )

@@ -23,6 +23,7 @@ export const ADD_FOLLOWER = 'ADD_FOLLOWER';
 export const DELETE_FOLLOWER = 'DELETE_FOLLOWER';
 export const FETCH_NOTIFICATIONS = 'FETCH_NOTIFICATIONS';
 export const UPDATE_NOTIFICATIONS = 'UPDATE_NOTIFICATIONS';
+export const FETCH_AMAZONS3 = 'FETCH_AMAZONS3';
 
 export function createUser(firstName, lastName, username, email, password, confirmPassword) {
   const url = `${ROOT_URL}api/v1/create-user`;
@@ -359,6 +360,18 @@ export function updateNotifications(token, random_notification_ids) {
 
   return {
     type: UPDATE_NOTIFICATIONS,
+    payload: request,
+  }
+}
+
+export function fetchAmazonS3(token) {
+  const url = `${ROOT_URL}api/v1/keys/amazons3`;
+  const request =  axios.get(url,
+    { headers: { Authorization: `Token ${token}` }}
+  );
+
+  return {
+    type: FETCH_AMAZONS3,
     payload: request,
   }
 }

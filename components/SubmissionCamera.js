@@ -9,13 +9,13 @@ import ImagePicker from 'react-native-image-crop-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../styles';
 
+import { connect } from 'react-redux';
+import { fetchAmazonS3 } from '../actions';
+
 import SubmissionPostWrapper from './SubmissionPost';
 import TopNavbar from './TopNavbar';
 
 import { RNS3 } from 'react-native-aws3';
-
-const ACCESS_KEY = 'AKIAJJ2VBIDH6Z4LWTEA';
-const SECRET_ACCESS_KEY = '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';
 
 class SubmissionCamera extends Component {
   constructor(props) {
@@ -33,6 +33,13 @@ class SubmissionCamera extends Component {
       saved: false,
       loading: false,
     };
+  }
+
+  componentWillMount() {
+    this.props.fetchAmazonS3(this.props.token)
+    .then((res) => {
+      this.setState({ amazonS3: res.payload.data[0] });
+    });
   }
 
   // Camera functions
@@ -64,10 +71,10 @@ class SubmissionCamera extends Component {
 
       const options = {
         keyPrefix: `posts/${this.state.captureType}s/`,
-        bucket: "shelfie-challenge-staging",
-        region: "us-west-1",
-        accessKey: ACCESS_KEY,
-        secretKey: SECRET_ACCESS_KEY,
+        bucket: this.state.amazonS3.bucket,
+        region: this.state.amazonS3.region,
+        accessKey: this.state.amazonS3.access_key,
+        secretKey: this.state.amazonS3.secret_access_key,
         successActionStatus: 201
       };
 
@@ -100,10 +107,10 @@ class SubmissionCamera extends Component {
 
         const options = {
           keyPrefix: `posts/${this.state.captureType}s/`,
-          bucket: "shelfie-challenge",
-          region: "us-west-1",
-          accessKey: ACCESS_KEY,
-          secretKey: SECRET_ACCESS_KEY,
+          bucket: this.state.amazonS3.bucket,
+          region: this.state.amazonS3.region,
+          accessKey: this.state.amazonS3.access_key,
+          secretKey: this.state.amazonS3.secret_access_key,
           successActionStatus: 201
         };
 
@@ -392,4 +399,8 @@ class SubmissionCamera extends Component {
   }
 }
 
-export default SubmissionCamera;
+function mapStateToProps(state) {
+  return { pitches: state.pitches };
+}
+
+export default connect(mapStateToProps, { fetchAmazonS3 })(SubmissionCamera);

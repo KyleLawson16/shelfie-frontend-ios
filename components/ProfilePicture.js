@@ -9,12 +9,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../styles';
 
 import { connect } from 'react-redux';
-import { updateProfilePicture } from '../actions';
+import { updateProfilePicture, fetchAmazonS3 } from '../actions';
 
 import { RNS3 } from 'react-native-aws3';
-
-const ACCESS_KEY = 'AKIAJJ2VBIDH6Z4LWTEA';
-const SECRET_ACCESS_KEY = '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';
 
 class ProfilePicture extends Component {
   constructor(props) {
@@ -27,9 +24,17 @@ class ProfilePicture extends Component {
       handleSave: false,
       saved: false,
       loading: false,
+      amazonS3: false,
     };
 
     this.choosePhoto = this.choosePhoto.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.fetchAmazonS3(this.props.token)
+    .then((res) => {
+      this.setState({ amazonS3: res.payload.data[0] });
+    });
   }
 
   saveCapture() { // Callend when user taps save arrow button
@@ -50,12 +55,13 @@ class ProfilePicture extends Component {
 
         const options = {
           keyPrefix: `users/profile-photos/`,
-          bucket: "shelfie-challenge-staging",
-          region: "us-west-1",
-          accessKey: ACCESS_KEY,
-          secretKey: SECRET_ACCESS_KEY,
+          bucket: this.state.amazonS3.bucket,
+          region: this.state.amazonS3.region,
+          accessKey: this.state.amazonS3.access_key,
+          secretKey: this.state.amazonS3.secret_access_key,
           successActionStatus: 201
         };
+        console.log(options);
 
         RNS3.put(file, options).then(response => {
           if (response.status !== 201)
@@ -161,4 +167,4 @@ function mapStateToProps(state) {
   return { pitches: state.pitches };
 }
 
-export default connect(mapStateToProps, { updateProfilePicture })(ProfilePicture);
+export default connect(mapStateToProps, { updateProfilePicture, fetchAmazonS3 })(ProfilePicture);
