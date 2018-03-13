@@ -265,6 +265,7 @@ class BottomNavbar extends Component {
               this.setState({
                 selectedTab: 'notificationTab',
                 backBtn: false,
+                notificationUser: false,
               });
               this.props.handleBackBtn(false);
             }}
@@ -282,6 +283,8 @@ class BottomNavbar extends Component {
             onPress={() => {
               this.setState({
                 selectedTab: 'notificationTab',
+                backBtn: false,
+                notificationUser: false,
               });
               this.props.handleBackBtn(false);
             }}
