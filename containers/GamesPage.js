@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, FlatList, TouchableOpacity, RefreshControl, Dimensions } from 'react-native';
 import { WhiteSpace, Flex } from 'antd-mobile';
 import ActivityIndicator from 'react-native-activity-indicator';
 import styles from '../styles';
@@ -14,13 +14,21 @@ class GamesPage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { games: false, loading: true };
+    this.state = { games: false, loading: true, refreshing: false };
   }
   componentWillMount() {
     this.props.fetchGames(this.props.token)
     .then((res) => {
       console.log(res.payload.data);
       this.setState({ games: res.payload.data, loading: false });
+    });
+  }
+  _onRefresh() {
+    this.setState({refreshing: true });
+    this.props.fetchGames(this.props.token)
+    .then((res) => {
+      // console.log(res);
+      this.setState({ games: res.payload.data, refreshing: false });
     });
   }
   render() {
@@ -31,7 +39,34 @@ class GamesPage extends Component {
           handleBack={this.handleBack}
           backBtn={false}
         />
-        <ScrollView style={styles.containerBackground}>
+        <ScrollView
+          style={styles.containerBackground}
+          refreshControl={
+            <RefreshControl
+              tintColor="transparent"
+              colors={['transparent']}
+              style={{backgroundColor: 'transparent'}}
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh.bind(this)}
+            />
+          }
+        >
+          {this.state.refreshing
+          ?
+          <View
+            style={{position:'absolute', top: -55,
+              width:Dimensions.get('window').width, height:60,
+              alignItems:'center', justifyContent:'center'}}>
+              <ActivityIndicator
+                animating={true}
+                size={50}
+                thickness={1}
+                color="rgb(0,206,202)"
+              />
+          </View>
+          :
+          null
+          }
           <Flex justify="center" style={styles.greyHeaderBar}>
             <Text style={styles.challengeHeader}>Games</Text>
           </Flex>

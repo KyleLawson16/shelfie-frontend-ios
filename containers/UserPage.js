@@ -37,15 +37,19 @@ class UserPage extends Component {
   componentWillMount() {
     this.props.fetchUser(this.props.token, this.props.user.random_user_id)
     .then((res) => {
-      this.setState({ user: res.payload.data });
+      if (res.payload.data) {
+        this.setState({ user: res.payload.data });
+      }
     });
     this.props.fetchPosts(this.props.token, 'user', this.props.user.random_user_id)
     .then((res) => {
-      var totalPoints = 0;
-      res.payload.data.forEach(post => {
-        totalPoints += post.challenge.point_value;
-      })
-      this.setState({ userPosts: res.payload.data, totalPoints: totalPoints });
+      if (res.payload.data) {
+        var totalPoints = 0;
+        res.payload.data.forEach(post => {
+          totalPoints += post.challenge.point_value;
+        })
+        this.setState({ userPosts: res.payload.data, totalPoints: totalPoints });
+      }
     });
   }
   _onRefresh() {

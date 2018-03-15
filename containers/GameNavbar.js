@@ -49,8 +49,8 @@ class GameNavbar extends Component {
 
   render() {
     const tabs = [
-      { title: <Text><Icon type={'\ue695'} color={this.state.activeIconColor[0]} /></Text> },
-      { title: <Text><Icon type={'\ue639'} color={this.state.activeIconColor[1]} /></Text> },
+      { title: <Text><Icon type={'\ue639'} color={this.state.activeIconColor[0]} /></Text> },
+      { title: <Text><Icon type={'\ue695'} color={this.state.activeIconColor[1]} /></Text> },
       { title: <Text><Icon type={'\ue638'} color={this.state.activeIconColor[2]} /></Text> },
       { title: <Text><Icon type={'\ue661'} color={this.state.activeIconColor[3]} /></Text> },
     ];
@@ -62,19 +62,20 @@ class GameNavbar extends Component {
         tabBarUnderlineStyle={{ backgroundColor: this.props.activeTabColor, borderColor: this.props.activeTabColor }}
         onChange={(tab, index) => this.updateIconColor(tab, index)}
       >
+
+        <View style={styles.containerBackground}>
+          <ChallengePage
+            challenges={this.props.challenges}
+            submission={this.beginSubmission}
+          />
+        </View>
+
         <View style={styles.containerBackground}>
           <FeedPage
             token={this.props.token}
             user={this.props.user}
             gameID={this.props.gameID}
             getPostUser={this.props.getPostUser.bind(this)}
-          />
-        </View>
-
-        <View style={styles.containerBackground}>
-          <ChallengePage
-            challenges={this.props.challenges}
-            submission={this.beginSubmission}
           />
         </View>
 

@@ -21,7 +21,7 @@ class UserSubmissions extends Component {
     if (!this.props.userPosts[0]) {
       return (
         <View>
-          <Text>No posts yet</Text>
+          <Text style={styles.userNoPosts}>No posts yet</Text>
         </View>
       )
     }

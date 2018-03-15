@@ -39,7 +39,8 @@
 		2D37F9052036CC62005A48C9 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D37F8D92036CC17005A48C9 /* libART.a */; };
 		2D52018C20186F5D006F1FB3 /* anticon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D52018B20186F5D006F1FB3 /* anticon.ttf */; };
 		2D57A9B02031198400BEFB0B /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
-		2D97A1FD205715950013B35F /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D97A1FC205715950013B35F /* Images-2.xcassets */; };
+		2D97A2402058EF340013B35F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D97A23F2058EF340013B35F /* Launch Screen.storyboard */; };
+		2D97A2442058F49D0013B35F /* shelfie_icon_logo_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D97A2432058F49C0013B35F /* shelfie_icon_logo_white.png */; };
 		2DCD954D1E0B4F2C00145EB5 /* antmshelfieTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* antmshelfieTests.m */; };
 		3ADEB2ABD1984D287C72231B /* libPods-antmshelfie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C883D2029B394EBE9D37E9DA /* libPods-antmshelfie.a */; };
 		41DCE9238F1C4E0BA4F3CC32 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66EE45D07F1246E48B496F06 /* MaterialIcons.ttf */; };
@@ -406,7 +407,8 @@
 		2D37F8D32036CC17005A48C9 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		2D3EED142049E3C1007FB13E /* antmshelfie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = antmshelfie.entitlements; path = antmshelfie/antmshelfie.entitlements; sourceTree = "<group>"; };
 		2D52018B20186F5D006F1FB3 /* anticon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = anticon.ttf; path = ../assets/fonts/anticon.ttf; sourceTree = "<group>"; };
-		2D97A1FC205715950013B35F /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-2.xcassets"; path = "antmshelfie/Images-2.xcassets"; sourceTree = "<group>"; };
+		2D97A23F2058EF340013B35F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		2D97A2432058F49C0013B35F /* shelfie_icon_logo_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shelfie_icon_logo_white.png; path = ../../../../Downloads/shelfie_icon_logo_white.png; sourceTree = "<group>"; };
 		39637695018F442B8C191225 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		56AB4EB34C9943F197B91CCB /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		5ABCBF7F008B4991BAA40F48 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
@@ -581,8 +583,9 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
+				2D97A23F2058EF340013B35F /* Launch Screen.storyboard */,
+				2D97A2432058F49C0013B35F /* shelfie_icon_logo_white.png */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				2D97A1FC205715950013B35F /* Images-2.xcassets */,
 			);
 			name = antmshelfie;
 			sourceTree = "<group>";
@@ -1331,9 +1334,10 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				2D52018C20186F5D006F1FB3 /* anticon.ttf in Resources */,
-				2D97A1FD205715950013B35F /* Images-2.xcassets in Resources */,
+				2D97A2402058EF340013B35F /* Launch Screen.storyboard in Resources */,
 				6AC624F251DB499EA679DC52 /* Ionicons.ttf in Resources */,
 				1A0510204D1C4E7DAB998659 /* Entypo.ttf in Resources */,
+				2D97A2442058F49D0013B35F /* shelfie_icon_logo_white.png in Resources */,
 				76A2D83C08AA4309B2C3B684 /* EvilIcons.ttf in Resources */,
 				672A0AF0FC5345A08742FAB8 /* Feather.ttf in Resources */,
 				1643569349E24165B92802D9 /* FontAwesome.ttf in Resources */,

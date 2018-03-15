@@ -55,7 +55,7 @@ class SubmissionPage extends Component {
       return (
         <View style={styles.container}>
           <TopNavbar
-            exitGame={this.deleteSaved.bind(this)}
+            handleBack={this.deleteSaved.bind(this)}
             backBtn={true}
           />
           <SubmissionPostWrapper

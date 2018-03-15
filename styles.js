@@ -248,6 +248,12 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     backgroundColor: 'grey',
   },
+  userNoPosts: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 30,
+  },
 
   // Challenge Styles
   challengeSubmissionPhoto: {
@@ -334,7 +340,7 @@ const styles = StyleSheet.create({
   cameraSwitch: {
     justifyContent: 'flex-start',
     alignItems: 'flex-end',
-    marginTop: 25,
+    marginTop: 45,
     marginRight: 15,
     marginLeft: 15,
     flex: 1,

@@ -265,7 +265,7 @@ class SubmissionCamera extends Component {
             />
           }
           <TouchableOpacity
-            style={{position: 'absolute', top: 25, left: 20}}
+            style={{position: 'absolute', top: 35, left: 20}}
             onPress={this.deleteCapture.bind(this)}
           >
             <Icon
@@ -321,7 +321,7 @@ class SubmissionCamera extends Component {
               <Flex.Item alignItems="flex-start">
                 <TouchableOpacity
                   onPress={this.endSubmission.bind(this)}
-                  style={[styles.iconBackground, {marginTop: 10}]}
+                  style={[styles.iconBackground, {marginTop: 13}]}
                 >
                   <AntIcon
                     style={styles.iconBackground}

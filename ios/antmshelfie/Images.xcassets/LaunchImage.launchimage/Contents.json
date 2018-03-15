@@ -3,12 +3,14 @@
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
+      "filename" : "shelfie_icon_logo_white.png",
       "minimum-system-version" : "7.0",
       "scale" : "2x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
+      "filename" : "shelfie_icon_logo_white-1.png",
       "minimum-system-version" : "7.0",
       "subtype" : "retina4",
       "scale" : "2x"
