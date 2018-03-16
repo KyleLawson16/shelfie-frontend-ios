@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+  Dimensions,
+  AppRegistry,
+  Clipboard,
+  ToastAndroid,
+  AlertIOS,
+  Platform
+} from 'react-native';
 import { Flex, WhiteSpace, WingBlank, Modal } from 'antd-mobile';
 import ActivityIndicator from 'react-native-activity-indicator';
-import { Dimensions } from 'react-native';
+import Share, {ShareSheet, Button} from 'react-native-share';
 import Image from 'react-native-scalable-image';
 import Video from 'react-native-video';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -29,6 +40,7 @@ class ChallengeSubmission extends Component {
       paused: true,
       screenWidth: Dimensions.get('window').width,
       newCaption: false,
+      shareVisible: false,
     };
 
     this.handleImagePress = this.handleImagePress.bind(this);
@@ -40,6 +52,7 @@ class ChallengeSubmission extends Component {
     this.handleReportPost = this.handleReportPost.bind(this);
     this.handleEditPost = this.handleEditPost.bind(this);
     this.handleDeletePost = this.handleDeletePost.bind(this);
+    this.handleSharePress = this.handleSharePress.bind(this);
   }
 
   componentDidMount() {
@@ -183,7 +196,22 @@ class ChallengeSubmission extends Component {
     ), 600)
   }
 
+  handleSharePress() {
+    this.setState({ shareVisible: true });
+  }
+  onCancel() {
+    console.log("CANCEL")
+    this.setState({ shareVisible: false });
+  }
+
   render() {
+    let shareOptions = {
+      title: "Shelfie Challenge",
+      message: "This is a test.",
+      url: `${this.props.mediaUrl}`,
+      subject: "Share Link" //  for email
+    };
+
     return (
       <View style={{ backgroundColor: '#fff' }}>
         <WhiteSpace size="lg" />
@@ -293,25 +321,64 @@ class ChallengeSubmission extends Component {
         <WhiteSpace size="sm" />
         <WingBlank size="md">
           <Flex>
-            <TouchableOpacity onPress={this.handleLikePress} style={{ width: 25}}>
-              <View>
-                <Icon
-                  name={this.state.liked ? "md-heart" : "md-heart-outline"}
-                  size={24}
-                />
-              </View>
-            </TouchableOpacity>
-            <Text>{this.props.likes.length + this.state.likes} likes</Text>
+            <Flex.Item style={{flexDirection: "row"}}>
+              <TouchableOpacity onPress={this.handleLikePress} style={{ width: 25}}>
+                <View>
+                  <Icon
+                    name={this.state.liked ? "md-heart" : "md-heart-outline"}
+                    size={24}
+                  />
+                </View>
+              </TouchableOpacity>
+              <Text style={{marginTop: 3}}>{this.props.likes.length + this.state.likes} likes</Text>
+            </Flex.Item>
+            <Flex.Item alignItems="flex-end">
+              <TouchableOpacity onPress={this.handleSharePress} style={{ width: 20 }}>
+                <View>
+                  <Icon
+                    name={"md-share"}
+                    size={20}
+                  />
+                </View>
+              </TouchableOpacity>
+            </Flex.Item>
           </Flex>
           <Flex>
             <Text>{this.props.caption}</Text>
           </Flex>
         </WingBlank>
         <WhiteSpace size="lg" />
+          <ShareSheet visible={this.state.shareVisible} onCancel={this.onCancel.bind(this)}>
+            <Button iconSrc={{ uri: TWITTER_ICON }}
+                    onPress={()=>{
+                this.onCancel();
+                setTimeout(() => {
+                  Share.shareSingle(Object.assign(shareOptions, {
+                    "social": "twitter"
+                  }));
+                },300);
+              }}>Twitter</Button>
+            <Button iconSrc={{ uri: FACEBOOK_ICON }}
+                    onPress={()=>{
+                this.onCancel();
+                setTimeout(() => {
+                  Share.shareSingle(Object.assign(shareOptions, {
+                    "social": "facebook"
+                  }));
+                },300);
+              }}>Facebook</Button>
+          </ShareSheet>
       </View>
     )
   }
 }
+
+//  twitter icon
+const TWITTER_ICON = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAMAAAANIilAAAABvFBMVEUAAAAA//8AnuwAnOsAneoAm+oAm+oAm+oAm+oAm+kAnuwAmf8An+0AqtUAku0AnesAm+oAm+oAnesAqv8An+oAnuoAneoAnOkAmOoAm+oAm+oAn98AnOoAm+oAm+oAmuoAm+oAmekAnOsAm+sAmeYAnusAm+oAnOoAme0AnOoAnesAp+0Av/8Am+oAm+sAmuoAn+oAm+oAnOoAgP8Am+sAm+oAmuoAm+oAmusAmucAnOwAm+oAmusAm+oAm+oAm+kAmusAougAnOsAmukAn+wAm+sAnesAmeoAnekAmewAm+oAnOkAl+cAm+oAm+oAmukAn+sAmukAn+0Am+oAmOoAmesAm+oAm+oAm+kAme4AmesAm+oAjuMAmusAmuwAm+kAm+oAmuoAsesAm+0Am+oAneoAm+wAmusAm+oAm+oAm+gAnewAm+oAle0Am+oAm+oAmeYAmeoAmukAoOcAmuoAm+oAm+wAmuoAneoAnOkAgP8Am+oAm+oAn+8An+wAmusAnuwAs+YAmegAm+oAm+oAm+oAmuwAm+oAm+kAnesAmuoAmukAm+sAnukAnusAm+oAmuoAnOsAmukAqv9m+G5fAAAAlHRSTlMAAUSj3/v625IuNwVVBg6Z//J1Axhft5ol9ZEIrP7P8eIjZJcKdOU+RoO0HQTjtblK3VUCM/dg/a8rXesm9vSkTAtnaJ/gom5GKGNdINz4U1hRRdc+gPDm+R5L0wnQnUXzVg04uoVSW6HuIZGFHd7WFDxHK7P8eIbFsQRhrhBQtJAKN0prnKLvjBowjn8igenQfkQGdD8A7wAAAXRJREFUSMdjYBgFo2AUDCXAyMTMwsrGzsEJ5nBx41HKw4smwMfPKgAGgkLCIqJi4nj0SkhKoRotLSMAA7Jy8gIKing0KwkIKKsgC6gKIAM1dREN3Jo1gSq0tBF8HV1kvax6+moG+DULGBoZw/gmAqjA1Ay/s4HA3MISyrdC1WtthC9ebGwhquzsHRxBfCdUzc74Y9UFrtDVzd3D0wtVszd+zT6+KKr9UDX749UbEBgULIAbhODVHCoQFo5bb0QkXs1RAvhAtDFezTGx+DTHEchD8Ql4NCcSyoGJYTj1siQRzL/JKeY4NKcSzvxp6RmSWPVmZhHWnI3L1TlEFDu5edj15hcQU2gVqmHTa1pEXJFXXFKKqbmM2ALTuLC8Ak1vZRXRxa1xtS6q3ppaYrXG1NWjai1taCRCG6dJU3NLqy+ak10DGImx07LNFCOk2js6iXVyVzcLai7s6SWlbnIs6rOIbi8ViOifIDNx0uTRynoUjIIRAgALIFStaR5YjgAAAABJRU5ErkJggg==";
+
+//  facebook icon
+const FACEBOOK_ICON = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAMAAAANIilAAAAAYFBMVEUAAAAAQIAAWpwAX5kAX5gAX5gAX5gAXJwAXpgAWZ8AX5gAXaIAX5gAXpkAVaoAX5gAXJsAX5gAX5gAYJkAYJkAXpoAX5gAX5gAX5kAXpcAX5kAX5gAX5gAX5YAXpoAYJijtTrqAAAAIHRSTlMABFis4vv/JL0o4QvSegbnQPx8UHWwj4OUgo7Px061qCrcMv8AAAB0SURBVEjH7dK3DoAwDEVRqum9BwL//5dIscQEEjFiCPhubziTbVkc98dsx/V8UGnbIIQjXRvFQMZJCnScAR3nxQNcIqrqRqWHW8Qd6cY94oGER8STMVioZsQLLnEXw1mMr5OqFdGGS378wxgzZvwO5jiz2wFnjxABOufdfQAAAABJRU5ErkJggg==";
+
 
 function mapStateToProps(state) {
   return { pitches: state.pitches };

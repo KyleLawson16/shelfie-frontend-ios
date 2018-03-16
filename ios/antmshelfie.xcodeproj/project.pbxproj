@@ -39,6 +39,9 @@
 		2D37F9052036CC62005A48C9 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D37F8D92036CC17005A48C9 /* libART.a */; };
 		2D52018C20186F5D006F1FB3 /* anticon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D52018B20186F5D006F1FB3 /* anticon.ttf */; };
 		2D57A9B02031198400BEFB0B /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		2D815E07205B340600CAED7C /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D815E04205B33CA00CAED7C /* libRNShare.a */; };
+		2D815E09205B342E00CAED7C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D815E08205B342E00CAED7C /* Social.framework */; };
+		2D815E0B205B343C00CAED7C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D815E0A205B343C00CAED7C /* MessageUI.framework */; };
 		2D97A2402058EF340013B35F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D97A23F2058EF340013B35F /* Launch Screen.storyboard */; };
 		2D97A2442058F49D0013B35F /* shelfie_icon_logo_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D97A2432058F49C0013B35F /* shelfie_icon_logo_white.png */; };
 		2DCD954D1E0B4F2C00145EB5 /* antmshelfieTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* antmshelfieTests.m */; };
@@ -228,6 +231,13 @@
 			remoteGlobalIDString = 3400A8081CEB54A6008A0BC7;
 			remoteInfo = imageCropPicker;
 		};
+		2D815E03205B33CA00CAED7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D815DD6205B33CA00CAED7C /* RNShare.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNShare;
+		};
 		2D9E4FA020192A9900A2A98C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7CDF0555599C4FAB88D2F1AC /* RNVectorIcons.xcodeproj */;
@@ -407,6 +417,9 @@
 		2D37F8D32036CC17005A48C9 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		2D3EED142049E3C1007FB13E /* antmshelfie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = antmshelfie.entitlements; path = antmshelfie/antmshelfie.entitlements; sourceTree = "<group>"; };
 		2D52018B20186F5D006F1FB3 /* anticon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = anticon.ttf; path = ../assets/fonts/anticon.ttf; sourceTree = "<group>"; };
+		2D815DD6205B33CA00CAED7C /* RNShare.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNShare.xcodeproj; path = "../node_modules/react-native-share/ios/RNShare.xcodeproj"; sourceTree = "<group>"; };
+		2D815E08205B342E00CAED7C /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		2D815E0A205B343C00CAED7C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		2D97A23F2058EF340013B35F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		2D97A2432058F49C0013B35F /* shelfie_icon_logo_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shelfie_icon_logo_white.png; path = ../../../../Downloads/shelfie_icon_logo_white.png; sourceTree = "<group>"; };
 		39637695018F442B8C191225 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
@@ -448,6 +461,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D815E0B205B343C00CAED7C /* MessageUI.framework in Frameworks */,
+				2D815E09205B342E00CAED7C /* Social.framework in Frameworks */,
+				2D815E07205B340600CAED7C /* libRNShare.a in Frameworks */,
 				2D37F9052036CC62005A48C9 /* libART.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				2D57A9B02031198400BEFB0B /* libRCTAnimation.a in Frameworks */,
@@ -656,6 +672,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2D815DD7205B33CA00CAED7C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2D815E04205B33CA00CAED7C /* libRNShare.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2D9E4F7820192A9800A2A98C /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -694,6 +718,8 @@
 		4C9871E76B09499515128200 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2D815E0A205B343C00CAED7C /* MessageUI.framework */,
+				2D815E08205B342E00CAED7C /* Social.framework */,
 				C883D2029B394EBE9D37E9DA /* libPods-antmshelfie.a */,
 				D10280007F77568067EB94DB /* libPods-antmshelfie-tvOSTests.a */,
 				5D2536496093A7A256331D48 /* libPods-antmshelfieTests.a */,
@@ -722,6 +748,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				2D815DD6205B33CA00CAED7C /* RNShare.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -997,6 +1024,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = 2D815DD7205B33CA00CAED7C /* Products */;
+					ProjectRef = 2D815DD6205B33CA00CAED7C /* RNShare.xcodeproj */;
+				},
+				{
 					ProductGroup = 2D5200632018537D006F1FB3 /* Products */;
 					ProjectRef = 56AB4EB34C9943F197B91CCB /* RNVectorIcons.xcodeproj */;
 				},
@@ -1168,6 +1199,13 @@
 			fileType = archive.ar;
 			path = libimageCropPicker.a;
 			remoteRef = 2D57AA6720311D1900BEFB0B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2D815E04205B33CA00CAED7C /* libRNShare.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNShare.a;
+			remoteRef = 2D815E03205B33CA00CAED7C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		2D9E4FA120192A9900A2A98C /* libRNVectorIcons.a */ = {
